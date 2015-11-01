@@ -19,58 +19,6 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        # This solution is not accepted by leetcode because of time limit.
-        keys = []
-        # sorts the list.
-        nums.append(0)
-        nums.sort()
-        # determine the number of zeros in the list.
-        neg_num = nums.index(0)
-        neg = nums[0:neg_num]
-        nums.reverse()
-        posi_num = nums.index(0)
-        posi = nums[0:posi_num]
-        posi.sort()
-        zero_num = len(nums) - posi_num - neg_num -1
-        nums.sort()
-        # more than three zeros.
-        if zero_num >= 3:
-            keys.append([0, 0, 0])
-        elif zero_num > 0 and zero_num < 3:
-            # search for (-n, 0, n) solutions.
-            for i in neg:
-                if -i in posi:
-                    temp_key = [i, 0, -i]
-                    temp_key.sort()
-                    if temp_key not in keys:
-                        keys.append(temp_key)
-        # no zero solutions, the problem becomes a + b = -c.
-        # case 1: two negative numbers and one positive number
-        for i in posi:
-            for j in neg:
-                if (j != (-i-j) and (-i-j) in neg) or \
-                   (j == (-i-j) and neg[neg.index(j)+1] == j):
-                    temp_key = [j, -i-j, i]
-                    temp_key.sort()
-                    if temp_key not in keys:
-                        keys.append(temp_key)
-
-        # case 2: one negative number and two positive number
-        for i in neg:
-            for j in posi:
-                if ((-i-j) in posi and j != (-i-j)) or \
-                   (j == (-i-j) and posi[posi.index(j)+1] == j):
-                    temp_key = [i, j, -i-j]
-                    temp_key.sort()
-                    if temp_key not in keys:
-                        keys.append(temp_key)
-        return keys
-
-    def threeSum2(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
         # Accepted by leetcode.
         keys = []
         if len(nums) < 3:
