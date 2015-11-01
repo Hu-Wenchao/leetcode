@@ -49,3 +49,17 @@ class Solution(object):
         index1 = 0
         index2 = 0
         return [index1, index2]
+
+    def twoSum2(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        d = {}
+        for i, n in enumerate(nums):
+            if d.has_key(n):
+                return [d[n]+1, i+1]
+            else:
+                d[target-n] = i
+        return [0, 0]
