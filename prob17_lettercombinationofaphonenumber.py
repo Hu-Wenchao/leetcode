@@ -17,7 +17,7 @@ class Solution(object):
         """
         if len(digits) == 0:
             return []
-        solution = []
+        solution = [""]
         for i in range(len(digits)):
             templist = []
             for string in solution:
