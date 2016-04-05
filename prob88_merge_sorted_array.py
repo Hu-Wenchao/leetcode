@@ -32,6 +32,7 @@ class Solution(object):
         :rtype: void Do not return anything, 
         :modify nums1 in-place instead.
         """
+        # temp = nums1 is wrong because temp will changed when nums1 changed.
         temp = nums1[:m]
         i = 0
         j = 0
@@ -44,6 +45,6 @@ class Solution(object):
                 j += 1
         if i == m:
             nums1[i+j:m+n] = nums2[j:n]
-        if j == n:
+        elif j == n:
             nums1[i+j:m+n] = temp[i:m]
         return

@@ -20,6 +20,7 @@ class Solution(object):
         while fast and fast.next:
             pre, slow, fast = slow, slow.next, fast.next.next
         pre.next = None
+        # return self.merge(self.sortList(head), self.sortList(slow))
         return self.merge(*map(self.sortList, (head, slow)))
 
     def merge(self, h1, h2):
