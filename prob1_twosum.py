@@ -22,44 +22,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        # sort nums
-        temp = sorted(nums)
-
-        index1 = 0
-        index2 = 1
-        if temp[index1] + temp[index2] > target:
-            index1 = 0
-            index2 = 0
-            print("No solution exist!")
-            return [index1, index2]
-        for index1 in range(0,(len(temp)-1)):
-            for index2 in range((index1+1),len(temp)):
-                if temp[index1] + temp[index2] < target:
-                    continue
-                elif temp[index1] + temp[index2] == target:
-                    index1 = nums.index(temp[index1]) + 1
-                    index2 = nums.index(temp[index2]) + 1
-                    # Equal value case
-                    if index1 == index2:
-                        index2 = nums.index(temp[index2], index1) + 1
-                    return [min(index1, index2), max(index1, index2)]
-                elif temp[index1] + temp[index2] > target:
-                    break
-        print("No solution found!")
-        index1 = 0
-        index2 = 0
-        return [index1, index2]
-
-    def twoSum2(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
         d = {}
-        for i, n in enumerate(nums):
-            if d.has_key(n):
-                return [d[n]+1, i+1]
+        for i, num in enumerate(nums):
+            if num in d:
+                return [d[num], i]
             else:
-                d[target-n] = i
+                d[target - num] = i
         return [0, 0]

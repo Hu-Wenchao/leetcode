@@ -8,6 +8,8 @@ Sort a linked list using insertion sort.
 #         self.val = x
 #         self.next = None
 
+# According to the comments, a better way to sort a linked list is
+# to copy them into a array and use quicksort to do the sort.
 class Solution(object):
     def insertionSortList(self, head):
         """
@@ -36,5 +38,26 @@ class Solution(object):
                 cur = cur.next
         return dummy.next
             
-# According to the comments, a better way to sort a linked list is
-# to copy them into a array and use quicksort to do the sort.
+
+    def insetionSortList2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        p = dummy = ListNode(None)
+        cur = dummy.next = head
+        while cur and cur.next:
+            val = cur.next.val
+            if cur.val < val:
+                cur = cur.next
+                continue
+            if p.next.val > val:
+                p = dummy
+            while p.next.val < val:
+                p = p.next
+            temp = cur.next
+            cur.next = temp.next
+            temp.next = p.next
+            p.next = temp
+        return dummy.next
+

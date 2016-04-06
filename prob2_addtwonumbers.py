@@ -20,26 +20,48 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        if l1 == None:
-            return l2
-        if l2 == None:
-            return l1
-        head = l1
-        carry = (l1.val + l2.val) // 10
-        l1.val = (l1.val + l2.val) % 10
-        while l1.next != None and l2.next != None:
-            carry += l1.next.val + l2.next.val
-            l1.next.val = carry % 10
-            carry = carry // 10
+        dummy = ListNode(None)
+        ptr1 = l1
+        ptr2 = l2
+        ptr = dummy
+        carry = 0
+        while ptr1 or ptr2:
+            carry /= 10
+            if ptr1:
+                carry += ptr1.val
+                ptr1 = ptr1.next
+            if ptr2:
+                carry += ptr2.val
+                ptr2 = ptr2.next
+            ptr.next = ListNode(carry % 10)
+            ptr = ptr.next
+        if carry / 10 == 1:
+            ptr.next = ListNode(1)
+        return dummy.next
+
+    def addTwoNumbers2(self, l1, l2):
+        """
+        :type l1: ListNode
+        :typ2 l2: ListNode
+        :rtype: ListNode
+        """
+        num1 = ''
+        while l1:
+            num1 += str(l1.val)
             l1 = l1.next
+        num2 = ''
+        while l2:
+            num2 += str(l2.val)
             l2 = l2.next
-        if l1.next == None:
-            l1.next = l2.next
-        while l1.next != None:
-            carry += l1.next.val
-            l1.next.val = carry % 10
-            carry = carry // 10
-            l1 = l1.next
-        if carry:
-            l1.next = ListNode(carry)
-        return head
+        num = int(num1[::-1]) + int(num2[::-1])
+        dummy = ListNode(None)
+        ptr = dummy
+        if num == 0:
+            return ListNode(0)
+        while num > 0:
+            ptr.next = ListNode(num % 10)
+            ptr = ptr.next
+            num /= 10
+        return dummy.next
+
+    

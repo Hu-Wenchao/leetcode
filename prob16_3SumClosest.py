@@ -19,27 +19,27 @@ class Solution(object):
         if len(nums) < 3:
             return
         nums.sort()
-        result = sum(nums[0:3])
+        result = sum(nums[:3])
         gap = abs(result - target)
-        for i in range(0, len(nums)-2):
-            new_target = target - nums[i]
-            start = i + 1
-            end = len(nums) - 1
+        for i in range(len(nums) - 2):
             if i == 0 or nums[i] > nums[i-1]:
-                while(start < end):
-                    if nums[start] + nums[end] == new_target:
-                        result = target
-                        return result
-                    elif nums[start] + nums[end] < new_target:
-                        new_gap = abs(nums[start] + nums[end] - new_target)
-                        if new_gap < gap:
-                            gap = new_gap
-                            result = nums[start] + nums[end] + nums[i]
-                        start += 1
+                newTarget = target - nums[i]
+                l = i + 1
+                r = len(nums) - 1
+                while l < r:
+                    s = nums[l] + nums[r]
+                    if s == newTarget:
+                        return target
+                    elif s < newTarget:
+                        newGap = abs(s - newTarget)
+                        if newGap < gap:
+                            gap = newGap
+                            result = s + nums[i]
+                        l += 1
                     else:
-                        new_gap = abs(nums[start] + nums[end] - new_target)
-                        if new_gap < gap:
-                            gap = new_gap
-                            result = nums[start] + nums[end] + nums[i]
-                        end -= 1
+                        newGap = abs(s - newTarget)
+                        if newGap < gap:
+                            gap = newGap
+                            result = s + nums[i]
+                        r -= 1
         return result
