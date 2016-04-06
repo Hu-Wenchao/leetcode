@@ -32,7 +32,7 @@ class Solution(object):
                 prev = i[1]
         return res
 
-    def maximumGap(self, nums):
+    def maximumGap2(self, nums):
         """
         :type nums: List[int]
         :rtype: int

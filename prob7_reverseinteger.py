@@ -11,22 +11,19 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        flag = 1
-        result = 0
-        if x < 0:
-            x *= -1
-            flag = -1
-        if x == 0:
-            return 0
+        sign = 1 if x >= 0 else -1
+        x = abs(x)
+        ret = 0
         while x > 0:
-            result = result * 10 + x % 10
-            if x > 10:
-                if flag < 0 and result > (2**31 // 10):
-                    return 0
-                elif flag > 0 and result > (2**31 - 1) // 10:
-                    return 0
-            x = x // 10
-        if flag < 0:
-            return -1 * result
-        else:
-            return result
+            ret = 10 * ret + x % 10
+            x //= 10
+        return sign * ret if ret < 2**31 - 1 else 0
+
+    def reverse2(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        sign = 1 if x >= 0 else -1
+        ret = int(str(abs(x))[::-1])
+        return sign * ret if ret < 2**31 - 1 else 0

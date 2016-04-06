@@ -15,18 +15,38 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        n = len(nums)
-        if n == 0:
-            return 1
-        m = max(nums)
-        if m <= 0:
-            return 1
-        temp = list(range(1, m+2))
-        print(temp)
-        for i in range(n):
-            if nums[i] > 0:
-                temp[nums[i]-1] = 0
-        print(temp)
-        for i in range(m+1):
-            if temp[i] != 0:
+        temp = [0] * len(nums)
+        for num in nums:
+            if num <= 0 or num > len(nums):
+                continue
+            else:
+                temp[num-1] = 1
+        for i in range(len(nums)):
+            if temp[i] != 1:
                 return i + 1
+        return len(nums) + 1
+
+    def firstMissingPositive2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        from heapq import heapify, heappop
+        h = [n for n in nums if n > 0]
+        if not h:
+            return 1
+        heapify(h)
+        if h[0] != 1:
+            return 1
+        i = 1
+        while h:
+            a = heappop(h)
+            if a == i:
+                continue
+            elif a = i + 1:
+                i += 1
+                continue
+            else:
+                return i + 1
+        return i + 1
+

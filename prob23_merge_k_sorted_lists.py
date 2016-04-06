@@ -44,3 +44,18 @@ class Solution(object):
         else:
             ptr.next = l2
         return dummy.next
+
+    def mergeKLists2(self, lists):
+        from heapq import heappop, heapreplace, heapify
+        dummy = node = ListNode(None)
+        h = [(n.val, n) for n in lists if n]
+        heapify(h)
+        while h:
+            v, n = h[0]
+            if not n.next:
+                heappop(h)
+            else:
+                heapreplace(h, (n.next.val, n.next))
+            node.next = n
+            node = node.next
+        return dummy.next
