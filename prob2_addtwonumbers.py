@@ -26,7 +26,6 @@ class Solution(object):
         ptr = dummy
         carry = 0
         while ptr1 or ptr2:
-            carry /= 10
             if ptr1:
                 carry += ptr1.val
                 ptr1 = ptr1.next
@@ -35,7 +34,9 @@ class Solution(object):
                 ptr2 = ptr2.next
             ptr.next = ListNode(carry % 10)
             ptr = ptr.next
-        if carry / 10 == 1:
+            carry /= 10
+        if carry != 0:
+            # The extra highest digit can only be 1
             ptr.next = ListNode(1)
         return dummy.next
 

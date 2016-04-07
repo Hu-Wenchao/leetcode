@@ -33,3 +33,17 @@ class Solution(object):
             ret.append(root.val)
             self.helper(root.left, ret)
             self.helper(root.right, ret)
+
+    def preorderTraversal2(self, root):
+        ret, stack = [], [root]
+        while stack:
+            tmp = stack.pop()
+            if tmp:
+                ret.append(tmp.val)
+                stack.append(tmp.left)
+                stack.append(tmp.right)
+        return ret
+
+    def preorderTraversal3(self, root):
+        return [root.val] + self.preorderTraversal3(root.left) + \
+            self.preorderTraversal3(root.right) if root else []

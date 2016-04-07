@@ -24,3 +24,19 @@ class Solution(object):
             self.read(root.left, ret)
             ret.append(root.val)
             self.read(root.right, ret)
+
+    def inorderTraversal2(self, root):
+        ret, stack = [], []
+        while root or stack:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                tmp = stack.pop()
+                ret.append(tmp.val)
+                root = tmp.right
+        return ret
+
+    def inorderTraversal3(self, root):
+        return self.inorderTraversal3(root.left) + \
+            [root.val] + self.inorderTraversal3(root.right) if root else []

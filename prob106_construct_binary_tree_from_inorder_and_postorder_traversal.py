@@ -17,8 +17,8 @@ class Solution(object):
         :rtype: TreeNode
         """
         if inorder:
-            ind = inorder.index(postorder.pop(-1))
-            root = TreeNode(inorder[ind])
-            root.right = self.buildTree(inorder[ind+1:], postorder)
-            root.left = self.buildTree(inorder[0:ind], postorder)
+            index = inorder.index(postorder.pop())
+            root = TreeNode(inorder[index])
+            root.right = self.buildTree(inorder[index+1:], postorder)
+            root.left = self.buildTree(inorder[:index], postorder)
             return root

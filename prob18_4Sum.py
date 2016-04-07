@@ -50,7 +50,7 @@ class Solution(object):
             for i in range(len(nums)-n+1):
                 if target < nums[i] * n or target > nums[-1] * n:
                     break
-                if i == 0 or (i > 0 and nums[i-1] != nums[i]):
+                if i == 0 or nums[i] > nums[i-1]:
                     self.nSum(nums[i+1:], target-nums[i], n-1,
                               result+[nums[i]], results)
 
