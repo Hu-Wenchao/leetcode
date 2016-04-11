@@ -11,42 +11,59 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: float
         """
-        m = len(nums1)
-        n = len(nums2)
+        m, n = len(nums1), len(nums2)
+        if m > n:
+            nums1, nums2, m, n = nums2, nums1, n, m
         
-        if ((m + n) % 2 != 0):
-            return self.findKth(nums1, nums2, (m + n) / 2, 0, m-1, 0, n-1)
+        imin, imax, half_len = 0, m, (m + n + 1) / 2
+        while imin <= imax:
+            i = (imin + imax) / 2
+            j = half_len - i
+            if j > 0 and i < m and nums2[j-1] > nums1[i]:
+                # i is too small
+                imin = i + 1
+            elif i > 0 and j < n and nums1[i-1] > nums2[j]:
+                # i is too big
+                imax = i - 1
+            else:
+                # i is perfect
+                if i == 0: max_of_left = nums2[j-1]
+                elif j == 0: max_of_left = nums1[i-1]
+                else: max_of_left = max(nums1[i-1], nums2[j-1])
+                
+                if (m + n) % 2 == 1:
+                    return max_of_left
+
+                if i == m: min_of_right = nums2[j]
+                elif j == n: min_of_right = nums1[i]
+                else: min_of_right = min(nums1[i], nums2[j])
+                
+                return (max_of_left, min_of_right) / 2.0
+
+    def findMedianSortedArrays2(self, nums1, nums2):
+        l = len(nums1) + len(nums2)
+        if l % 2 == 1:
+            return self.kth(nums1, nums2, l / 2)
         else:
-            return (self.findKth(nums1, nums2, (m + n) / 2, 0, m-1, 0, n-1) +
-                    self.findKth(nums1, nums2, (m + n) / 2 - 1, 0,
-                                 m-1, 0, n-1)) * 0.5
+            return (self.kth(nums1, nums2, l / 2) + 
+                    self.kth(nums1, nums2, l / 2 - 1)) / 2.0
+            
+    def kth(self, nums1, nums2, k):
+        if not nums1:
+            return nums2[k]
+        if not nums2:
+            return nums1[k]
+        ia, ib = len(nums1) / 2, len(nums2) / 2
+        ma, mb = nums1[ia], nums2[ib]
         
-    def findKth(self, nums1, nums2, k, aStart, aEnd, bStart, bEnd):
-        aLen = aEnd - aStart + 1
-        bLen = bEnd - bStart + 1
-        
-        if aLen == 0:
-            return nums2[bStart + k]
-        elif bLen == 0:
-            return nums1[aStart + k]
-        elif k == 0 and nums1[aStart] < nums2[bStart]:
-            return nums1[aStart]
-        elif k == 0 and nums1[aStart] >= nums2[bStart]:
-            return nums2[bStart]
-
-        aMid = aLen * k / (aLen + bLen)
-        bMid = k - aMid - 1
-
-        aMid = aMid + aStart
-        bMid = bMid + bStart
-
-        if (nums1[aMid] > nums2[bMid]):
-            k = k - (bMid - bStart + 1)
-            aEnd = aMid
-            bStart = bMid + 1
+        if ia + ib < k:
+            if ma > mb:
+                return self.kth(nums1, nums2[ib+1:], k - ib - 1)
+            else:
+                return self.kth(nums1[ia+1:], nums2, k - ia - 1)
         else:
-            k = k - (aMid - aStart + 1)
-            bEnd = bMid
-            aStart = aMid + 1
-
-        return self.findKth(nums1, nums2, k, aStart, aEnd, bStart, bEnd)
+            if ma > mb:
+                return self.kth(nums1[:ia], nums2, k)
+            else:
+                return self.kth(nums1, nums2[:ib], k)
+            

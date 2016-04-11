@@ -21,17 +21,15 @@ class Solution(object):
         :rtype: ListNode
         """
         dummy = ListNode(None)
-        ptr1 = l1
-        ptr2 = l2
         ptr = dummy
         carry = 0
-        while ptr1 or ptr2:
-            if ptr1:
-                carry += ptr1.val
-                ptr1 = ptr1.next
-            if ptr2:
-                carry += ptr2.val
-                ptr2 = ptr2.next
+        while l1 or l2:
+            if l1:
+                carry += l1.val
+                l1 = l1.next
+            if l2:
+                carry += l2.val
+                l2 = l2.next
             ptr.next = ListNode(carry % 10)
             ptr = ptr.next
             carry /= 10

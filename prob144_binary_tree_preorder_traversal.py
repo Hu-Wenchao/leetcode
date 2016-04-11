@@ -40,8 +40,8 @@ class Solution(object):
             tmp = stack.pop()
             if tmp:
                 ret.append(tmp.val)
-                stack.append(tmp.left)
                 stack.append(tmp.right)
+                stack.append(tmp.left)
         return ret
 
     def preorderTraversal3(self, root):

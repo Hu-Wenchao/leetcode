@@ -22,33 +22,12 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        if len(s) < 2 or numRows == 1:
-            return s
-            
-        temp = 2*numRows - 2
-        line = [""] * temp
-        
-        if len(s) >= temp:
-            for i in range(len(s) // temp):
-                for j in range(temp):
-                    line[j] += s[i*temp + j]
-        for i in range(len(s) % temp):
-            line[i] += s[(len(s) // temp) * temp + i]
-
-        for i in range(numRows-2):
-            line[i+1] = self.mergeRows(line[i+1], line[-i-1])
-
-        newRow = ""
-        for i in range(numRows):
-            newRow += line[i]
-        
-        return newRow        
-
-    def mergeRows(self, row1, row2):
-        mergedRow = ""
-        for i in range(len(row2)):
-            mergedRow += row1[i]
-            mergedRow += row2[i]
-        if len(row1) > len(row2):
-            mergedRow += row1[-1]
-        return mergedRow
+        step = (numRows == 1) - 1
+        l = [''] * numRows
+        i = 0
+        for ch in s:
+            l[i] += ch
+            if i == 0 or i == numRows - 1:
+                step = -step
+            i += step
+        return ''.join(l)
