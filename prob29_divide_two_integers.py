@@ -12,21 +12,17 @@ class Solution(object):
         :type divisor: int
         :rtype: int
         """
-        isNegative = (dividend > 0) ^ (divisor > 0)
-        dividend = abs(dividend)
-        divisor = abs(divisor)
-        count = 1
+        sign = -1 if ((dividend > 0) ^ (divisor > 0)) else 1
+        dividend, divisor = abs(dividend), abs(divisor)
+        res, c = 0, 1
         while dividend >= (divisor << 1):
             divisor <<= 1
-            count <<= 1
-        result = 0
+            c <<= 1
         while dividend > 0 and divisor >= 1:
             if dividend >= divisor:
                 dividend -= divisor
-                result += count
+                res += c
             divisor >>= 1
-            count >>= 1
-        if isNegative:
-            return max(-result, -2147483648)
-        else:
-            return min(result, 2147483647)
+            c >>= 1
+        res *= sign
+        return min(max(-2**31, res), 2**31 - 1)

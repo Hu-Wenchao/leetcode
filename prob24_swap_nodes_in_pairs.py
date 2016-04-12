@@ -20,16 +20,13 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        dummy = ListNode(0)
+        dummy = ListNode(None)
         dummy.next = head
-        
-        previous = dummy
-        while previous.next and previous.next.next:
-            node1 = previous.next
-            node2 = previous.next.next
-            previous.next = node2
-            node1.next = node2.next
-            node2.next = node1
-            previous = node1
-            
+        pt = dummy
+        while pt.next and pt.next.next:
+            tmp = pt.next.next
+            pt.next.next = tmp.next
+            tmp.next = pt.next
+            pt.next = tmp
+            pt = pt.next.next
         return dummy.next

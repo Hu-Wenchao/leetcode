@@ -19,18 +19,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) < 2:
-            return len(nums)
-        
-        pre_c = nums[0]
-        list_length = 1
-        i = 1
-        while i < len(nums):
-            cur_c = nums[i]
-            if cur_c == pre_c:
-                nums.remove(cur_c)
-            else:
-                pre_c = cur_c
-                list_length += 1 
-                i += 1
-        return list_length
+        length = 0
+        for i in xrange(len(nums)):
+            if i == 0 or nums[i] != nums[i-1]:
+                nums[length] = nums[i]
+                length += 1
+        return length

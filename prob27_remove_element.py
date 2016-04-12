@@ -16,3 +16,12 @@ class Solution(object):
         while val in nums:
             nums.remove(val)
         return len(nums)
+
+    def removeElement2(self, nums, val):
+        i = 0
+        while i < len(nums):
+            if nums[i] != val:
+                i += 1
+            else:
+                del nums[i]
+        return len(nums)

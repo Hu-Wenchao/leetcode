@@ -12,14 +12,15 @@ class Solution(object):
         :type needle: str
         :rtype: int
         """
-        if len(needle) > haystack:
-            return -1
-        
-        if needle == haystack:
-            return 0
-        
-        for i in range(0, len(haystack) - len(needle) + 1):
-            if haystack[i:i+len(needle)] == needle:
-                return i
+        return haystack.find(needle)
 
-        return -1
+    def strStr2(self, haystack, needle):
+        for i in xrange(len(haystack) + 1):
+            for j in xrange(len(needle) + 1):
+                if j == len(needle):
+                    return i
+                if i + j == len(haystack):
+                    return -1
+                if haystack[i+j] != needle[j]:
+                    break
+

@@ -13,27 +13,35 @@ class Solution(object):
         :type n: int
         :rtype: List[str]
         """
-        solution = []
-        self.generateParenthesisRec(n, 0, 0, [], solution)
-        return solution
-        
-    def generateParenthesisRec(self, n, openParenthesis, 
-                               closeParenthesis, tempSolution, solution): 
-        if closeParenthesis == n:
-            solution.append("".join(tempSolution))
+        result = []
+        self.generate(n, 0, 0, [], result)
+        return result
+
+    def generate(self, n, lp, rp, tmp, result):
+        if rp == n:
+            result.append(''.join(tmp))
             return
-        if openParenthesis < n:
-            tempSolution.append("(")
-            self.generateParenthesisRec(n, openParenthesis+1, 
-                                        closeParenthesis, tempSolution, 
-                                        solution)
-            tempSolution.pop()
-        if closeParenthesis < openParenthesis:
-            tempSolution.append(")")
-            self.generateParenthesisRec(n, openParenthesis, 
-                                        closeParenthesis+1, tempSolution, 
-                                        solution)
-            tempSolution.pop()
-                    
+        if lp < n:
+            tmp.append('(')
+            self.generate(n, lp+1, rp, tmp, result)
+            tmp.pop()
+        if rp < lp:
+            tmp.append(')')
+            self.generate(n, lp, rp+1, tmp, result)
+            tmp.pop()
+
+    def generateParenthesis2(self, n):
+        return list(self.generate2('', n, n))
+        
+    def generate2(self, p, left, right):
+        if right >= left >= 0:
+            if not right:
+                yield p
+            for q in self.generate2(p + '(', left-1, right):
+                yield q
+            for q in self.generate2(p + ')', left, right-1):
+                yield q
+        
+    
                 
             

@@ -34,8 +34,6 @@ class Solution(object):
         dummy = ListNode(0)
         previous = dummy
         dummy.next = head
-        # begin = head
-        # end = previous
         while True:
             begin = previous.next
             end = previous
