@@ -26,34 +26,17 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        if not head:
-            return head
-        
-        if head.next == None:
-            return None
-
-        # measure the length of the list:
-        ptr = head
-        list_length = 1
-        while ptr.next != None:
-            list_length += 1
-            ptr = ptr.next
-        
-        # n == list_length case
-        if n == list_length:
-            return head.next
-
-        # move the pointer to (list_length - n)'s position.
-        posi = list_length - n 
-        ptr = head
-        while posi > 1:
-            posi -= 1
-            ptr = ptr.next
-        
-        # n == 1 case
-        if n == 1:
-            ptr.next = None
-        else:
-            ptr.next = ptr.next.next
-
-        return head
+        dummy = ListNode(None)
+        dummy.next = head
+        pt = head
+        list_len = 0
+        while pt:
+            list_len += 1
+            pt = pt.next
+        pt = dummy
+        i = list_len - n
+        while i > 0:
+            pt = pt.next
+            i -= 1
+        pt.next = pt.next.next
+        return dummy.next

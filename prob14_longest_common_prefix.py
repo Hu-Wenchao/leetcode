@@ -10,16 +10,18 @@ class Solution(object):
         :rtype: str
         """
         if len(strs) == 0:
-            return ""
-
-        for i in range(len(strs[0])-1, -1, -1):
-            comPre = strs[0][:i+1]
-            isValid = True
-            for j in range(1, len(strs)):
-                if len(strs[j]) <= i or strs[j][:i+1] != comPre:
-                    isValid = False
-                    break
-            if isValid:
-                return comPre
-
-        return ""
+            return ''
+        com = strs[0]
+        for i in xrange(1, len(strs)):
+            com = self.helper(com, strs[i])
+        return com
+        
+    def helper(self, s1, s2):
+        if len(s1) > len(s2):
+            s1, s2 = s2, s1
+        i = len(s1)
+        while i > 0:
+            if s1[:i] == s2[:i]:
+                return s1[:i]
+            i -= 1
+        return ''

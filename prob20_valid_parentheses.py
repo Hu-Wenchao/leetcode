@@ -14,15 +14,16 @@ class Solution(object):
         :rtype: bool
         """
         stack = []
-        for i in range(len(s)):
-            if s[i] == "(" or s[i] == "[" or s[i] == "{":
-                stack.append(s[i])
+        for ch in s:
+            if ch in ['(', '[', '{']:
+                stack.append(ch)
             else:
-                if len(stack) == 0:
+                if not stack:
                     return False
-                preOpen = stack.pop()
-                if (s[i] == ")" and preOpen != "(") or \
-                   (s[i] == "]" and preOpen != "[") or \
-                   (s[i] == "}" and preOpen != "{"):
+                x = stack.pop()
+                if (ch == ')' and x != '(') or \
+                   (ch == ']' and x != '[') or \
+                   (ch == '}' and x != '{'):
                     return False
         return len(stack) == 0
+                    

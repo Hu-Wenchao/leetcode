@@ -16,44 +16,12 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        n = len(height)
-        if n < 2:
-            return 0
-        i = 0
-        j = n - 1
-        maxResult = 0
-        while i < j:
-            maxResult = max(maxResult, min(height[i], height[j]) * (j-i))
-            if height[i] < height[j]:
-                i += 1
+        l, r, c = 0, len(height) - 1, 0
+        while l < r:
+            c = max(c, min(height[l], height[r]) * (r - l))
+            if height[l] < height[r]:
+                l += 1
             else:
-                j -= 1
-        return maxResult
-            
-    
-    def maxArea2(self, height):
-        # TLE error
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        n = len(height)
-        if n < 2:
-            return 0
-        else:
-            container = []
-            for i in range(n):
-                temp = []
-                for j in range(n):
-                    if i < j:
-                        temp.append(abs(i - j) * min(height[i], height[j]))
-                    else:
-                        temp.append(0)
-                container.append(list(temp))
-        
-        max_volume = []
-        for i in range(n):
-            max_volume.append(max(container[i]))
-        
-        return max(max_volume)
+                r -= 1
+        return c
         

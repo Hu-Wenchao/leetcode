@@ -15,45 +15,14 @@ class Solution(object):
         :type digits: str
         :rtype: List[str]
         """
-        if len(digits) == 0:
+        ph = {'2': 'abc', '3': 'def', '4': 'ghi', '5': 'jkl', 
+              '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
+        if not digits:
             return []
-        solution = [""]
-        for i in range(len(digits)):
-            templist = []
-            for string in solution:
-                if digits[i] == "2":
-                    templist.append(string + "a")
-                    templist.append(string + "b")
-                    templist.append(string + "c")
-                elif digits[i] == "3":
-                    templist.append(string + "d")
-                    templist.append(string + "e")
-                    templist.append(string + "f")
-                elif digits[i] == "4":
-                    templist.append(string + "g")
-                    templist.append(string + "h")
-                    templist.append(string + "i")
-                elif digits[i] == "5":
-                    templist.append(string + "j")
-                    templist.append(string + "k")
-                    templist.append(string + "l")
-                elif digits[i] == "6":
-                    templist.append(string + "m")
-                    templist.append(string + "n")
-                    templist.append(string + "o")
-                elif digits[i] == "7":
-                    templist.append(string + "p")
-                    templist.append(string + "q")
-                    templist.append(string + "r")
-                    templist.append(string + "s")
-                elif digits[i] == "8":
-                    templist.append(string + "t")
-                    templist.append(string + "u")
-                    templist.append(string + "v")
-                elif digits[i] == "9":
-                    templist.append(string + "w")
-                    templist.append(string + "x")
-                    templist.append(string + "y")
-                    templist.append(string + "z")
-            solution = templist
-        return solution
+        ret = list(ph[digits[0]])
+        for d in digits[1:]:
+            tmp = []
+            for ch in ph[d]:
+                tmp += [term + ch for term in ret]
+            ret = tmp
+        return ret

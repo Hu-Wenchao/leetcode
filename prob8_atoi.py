@@ -11,34 +11,33 @@ to gather all the input requirements up front.
 """
 
 class Solution(object):
-    def myAtoi(self, str):
+    def myAtoi(self, s):
         """
-        :type str: str
+        :type s: str
         :rtype: int
         """
-        if len(s)== 0: 
+        s = s.strip()
+        if not s:
             return 0
-        ls = list(s.strip())
-        sign = -1 if ls[0] == '-' else 1
-        if ls[0] in ['-', '+']:
-            del ls[0]
-        ret, i = 0, 0
-        while i < len(ls) and ls[i].isdigit():
-            ret = 10 * ret + ord(ls[i]) - ord('0')
+        sign = -1 if s[0] == '-' else 1
+        i, value = 0, 0
+        if s[0] in ['-', '+']:
             i += 1
-        return max(-2**31, min(sign * ret, 2**31 - 1))
+        while i < len(s) and s[i].isdigit():
+            value = 10 * value + ord(s[i]) - ord('0')
+            i += 1
+        return max(-2**31, min(sign * value, 2**31 - 1))
 
-    def myAtoi2(self, str):
-        str = str.strip()
-        str = re.findall('(^[\+\-0]*\d+)\D*', str)
-
+    def myAtoi2(self, s):
+        s = s.strip()
+        s = re.findall('^[\+\-0]*\d+', s)
         try:
-            result = int(''.join(str))
-            MAX_INT = 2147483647
-            MIN_INT = -2147483648
-            if result > MAX_INT > 0:
+            result = int(s[0])
+            MAX_INT = 2 ** 31 - 1
+            MIN_INT = -2 ** 31
+            if result > MAX_INT:
                 return MAX_INT
-            elif result < MIN_INT < 0:
+            elif result < MIN_INT:
                 return MIN_INT
             else:
                 return result

@@ -26,29 +26,21 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        previousRow = [True]
-        for i in range(0, len(p)):
-            if p[i]=='*':
-                previousRow.append(previousRow[i-1])
-            else:
-                previousRow.append(False)
-        print(previousRow)
-                
-        for letter in range(0,len(s)):
-            actualRow = [False];
-            for i in range(0, len(p)):
-                if p[i]=='*':
-                    temp = actualRow[i-1] or \
-                           (previousRow[i+1] and
-                            (p[i-1]==s[letter] or p[i-1]=='.'))
-                elif p[i] == '.':
-                    temp = previousRow[i]
-                else:
-                    temp = previousRow[i] and p[i]==s[letter] 
-                actualRow.append(temp)
-            print(letter)
-            print(actualRow)
-            previousRow = actualRow
-            print(previousRow)
-        return previousRow[len(p)]
+        # define the state dp[i][j] to be true
+        # if p[0..i) matches s[0..j) and false otherwise.
+        m, n = len(s), len(p)
+        dp = [[False] * (m + 1) for _ in xrange(n + 1)]
+        dp[0][0] = True
+        for i in xrange(1, n+1):
+            x = p[i-1]
+            if x == '*' and i > 1:
+                dp[i][0] = dp[i-2][0]
+            for j in xrange(1, m+1):
+                if x == '*':
+                    dp[i][j] = dp[i-2][j] or dp[i-1][j] or \
+                               (dp[i-1][j-1] and p[i-2] == s[j-1]) or \
+                               (dp[i][j-1] and p[i-2] == '.')
+                elif x == '.' or x == s[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+        return dp[n][m]
             
