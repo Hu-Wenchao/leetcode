@@ -30,16 +30,9 @@ class Solution(object):
 
     def myAtoi2(self, s):
         s = s.strip()
-        s = re.findall('^[\+\-0]*\d+', s)
+        s = re.findall('^[\+\-0]?\d+', s)
         try:
             result = int(s[0])
-            MAX_INT = 2 ** 31 - 1
-            MIN_INT = -2 ** 31
-            if result > MAX_INT:
-                return MAX_INT
-            elif result < MIN_INT:
-                return MIN_INT
-            else:
-                return result
+            return min(max(result, -2**31), 2**31-1)
         except:
             return 0
