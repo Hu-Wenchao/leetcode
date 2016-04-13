@@ -31,28 +31,28 @@ class Solution(object):
         :type k: int
         :rtype: ListNode
         """
-        dummy = ListNode(0)
-        previous = dummy
+        dummy = ListNode(None)
         dummy.next = head
+        pt = dummy
         while True:
-            begin = previous.next
-            end = previous
+            head = pt.next
+            tail = pt
             for i in range(k):
-                end = end.next
-                if end == None:
+                tail = tail.next
+                if tail == None:
                     return dummy.next
-            nextGroup = end.next
-            self.reverseList(begin, end)
-            previous.next = end
-            begin.next = nextGroup
-            previous = begin
-
-    def reverseList(self, start, end):
-        alreadyReversed = start
-        actual = start
-        nextNode = start.next
-        while actual != end:
-            actual = nextNode
-            nextNode = nextNone.next
-            actual.next = alreadyReversed
-            alreadyReversed = actual
+            next_group = tail.next
+            self.reverse(head, tail)
+            pt.next = tail
+            head.next = next_group
+            pt = head
+        
+    def reverse(self, head, tail):
+        reversed = head
+        cur = head
+        next_node = head.next
+        while cur != tail:
+            cur = next_node
+            next_node = next_node.next
+            cur.next = reversed
+            reversed = cur

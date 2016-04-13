@@ -14,21 +14,17 @@ class Solution(object):
         :rtype: List[str]
         """
         result = []
-        self.generate(n, 0, 0, [], result)
+        self.generate(n, 0, 0, '', result)
         return result
 
-    def generate(self, n, lp, rp, tmp, result):
-        if rp == n:
-            result.append(''.join(tmp))
+    def generate(self, n, l, r, tmp, result):
+        if r == n:
+            result.append(tmp)
             return
-        if lp < n:
-            tmp.append('(')
-            self.generate(n, lp+1, rp, tmp, result)
-            tmp.pop()
-        if rp < lp:
-            tmp.append(')')
-            self.generate(n, lp, rp+1, tmp, result)
-            tmp.pop()
+        if l < n:
+            self.generate(n, l+1, r, tmp + '(', result)
+        if r < l:
+            self.generate(n, l, r+1, tmp + ')', result)
 
     def generateParenthesis2(self, n):
         return list(self.generate2('', n, n))

@@ -24,9 +24,9 @@ class Solution(object):
                  ('C', 100), ('XC', 90), ('L', 50), ('XL', 40), ('X', 10), 
                  ('IX', 9), ('V', 5), ('IV', 4), ('I', 1)]
         result = 0
-        id = 0
+        i = 0
         for r, n in roman:
-            while s[id : id+len(r)] == r:
+            while s[i : i+len(r)] == r:
                 result += n
-                id += len(r)
+                i += len(r)
         return result

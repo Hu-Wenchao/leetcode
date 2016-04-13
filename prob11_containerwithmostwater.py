@@ -18,10 +18,11 @@ class Solution(object):
         """
         l, r, c = 0, len(height) - 1, 0
         while l < r:
-            c = max(c, min(height[l], height[r]) * (r - l))
             if height[l] < height[r]:
+                c = max(c, height[l] * (r - l))
                 l += 1
             else:
+                c = max(c, height[r] * (r - l))
                 r -= 1
         return c
         
