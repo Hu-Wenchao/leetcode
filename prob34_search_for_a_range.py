@@ -19,11 +19,43 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        if target not in nums:
+        s = self.binsearch(nums, target - 0.5)
+        if nums[s] != target:
             return [-1, -1]
+        nums.append(float('inf'))
+        e = self.binsearch(nums, target + 0.5)
+        return [s, e+1]
+
+
+    def binsearch(self, nums, target):
+        l, r = 0, len(nums) - 1
+        while l < r:
+            m = (l + r) / 2
+            if target < nums[m]:
+                r = m
+            else:
+                l = m + 1
+        return l
+
+    def searchRange2(self, nums, target):
+        ret = [-1, -1]
+        l, r = 0, len(nums) - 1
+        while l < r:
+            m = (l + r) / 2
+            if nums[m] < target:
+                l = m + 1
+            else:
+                r = m
+        if nums[l] != target:
+            return ret
         else:
-            start = nums.index(target)
-            end = start
-            while end + 1 < len(nums) and nums[end+1] == target:
-                end += 1
-        return [start, end]
+            ret[0] = l
+        r = len(nums) - 1
+        while l < r:
+            m = (l + r) / 2 + 1
+            if nums[m] > target:
+                r = m - 1
+            else:
+                l = m
+        ret[1]= r
+        return ret

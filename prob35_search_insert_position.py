@@ -20,38 +20,15 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        n = len(nums)
-        left = 0
-        right = n - 1
-        while left + 1 < right:
-            mid = left + (right - left) / 2
-            if mid > 0 and nums[mid - 1] < target < nums[mid]:
-                return mid
-            elif target <= nums[mid]:
-                right = mid
+        if nums[0] > target:
+            return 0
+        elif nums[-1] < target:
+            return len(nums)
+        l, r = 0, len(nums) - 1
+        while l < r:
+            m = (l + r) / 2
+            if nums[m] < target:
+                l = m + 1
             else:
-                left = mid
-        if nums[left] < target < nums[right]:
-            return left + 1
-        elif nums[left] == target:
-            return left
-        elif nums[right] == target:
-            return right
-        elif nums[left] > target:
-            return min(0, left)
-        elif nums[right] < target:
-            return max(n, right)
-
-    def searchInsert2(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        i = 0
-        while i < len(nums):
-            if nums[i] < target:
-                i += 1
-            else:
-                return i
-        return i
+                r = m
+        return l

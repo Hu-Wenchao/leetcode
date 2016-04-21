@@ -17,7 +17,25 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if target in nums:
-            return nums.index(target)
-        else:
-            return -1
+        l, r = 0, len(nums) - 1
+        # Find the smallest element using binary serarch.
+        while l < r:
+            m = (l + r) / 2
+            if nums[m] > nums[r]:
+                l = m + 1
+            else:
+                r = m
+        # The rotation point.
+        rot = l
+        l, r = 0, len(nums) - 1
+        # Binary search take rotation shift into consideration.
+        while l <= r:
+            m = (l + r) / 2
+            rm = (m + rot) % len(nums)
+            if nums[rm] == target:
+                return realmid
+            if nums[rm] < target:
+                l = m + 1
+            else:
+                r = m - 1
+        return -1

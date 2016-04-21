@@ -25,26 +25,20 @@ class Solution(object):
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-        n = len(nums)
-        if n < 2:
+        i = len(nums) - 1
+        while i > 0 and nums[i-1] >= nums[i]:
+            i -= 1
+        if i == 0:
+            nums.reverse()
             return
-        ide = -1
-        for i in range(n-1, 0, -1):
-            if nums[i] > nums[i-1]:
-                ide = i - 1
-                break
-        if ide != -1:
-            for i in range(n-1, ide, -1):
-                if nums[i] > nums[ide]:
-                    nums[i], nums[ide] = nums[ide], nums[i]
-                    break
-            left = ide + 1
-            right = n-1
-            while left < right:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
-                right -= 1
-        else:
-            nums = nums.reverse()
+        k = i - 1
+        i = len(nums) - 1
+        while nums[i] <= nums[k]:
+            i -= 1
+        nums[k], nums[i] = nums[i], nums[k]
+        l, r = k+1, len(nums)-1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
         return
-        

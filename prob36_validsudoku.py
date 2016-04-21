@@ -31,67 +31,36 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: bool
         """
-        self.board = board
-        for i in range(9):
-            for j in range(9):
-                if board[i][j] is ".":
+        valid = '123456789'
+        for i in xrange(9):
+            tmp = []
+            for j in xrange(9):
+                n = board[i][j]
+                if n == '.':
                     continue
-                elif self.isValidCell(board[i][j], i, j):
+                elif n in valid and n != '.' and n not in tmp:
+                    tmp.append(n)
+                else:
+                    return False
+        for j in xrange(9):
+            tmp = []
+            for i in xrange(9):
+                n = board[i][j]
+                if n == '.':
                     continue
+                elif n in valid and n != '.' and n not in tmp:
+                    tmp.append(n)
                 else:
                     return False
-        return True
-        
-    def isValidCell(self, strnum, row, column):
-        for i in range(9):
-            if (strnum in self.board[row][i]) and (i != column):
-                return False
-        for i in range(9):
-            if (strnum in self.board[i][column]) and (i != row):
-                return False
-        tempx = row // 3
-        tempy = column // 3
-        for i in range(tempx*3, tempx*3+3):
-            for j in range(tempy*3, tempy*3+3):
-                if (strnum in self.board[i][j]) and (i != row) and (j != column):
-                    return False
-        return True
-
-def isValidSudoku2(self, board):
-        """
-        :type board: List[List[str]]
-        :rtype: bool
-        """
-        # Check rows
-        for i in range(9):
-            d = {}
-            for j in range(9):
-                if board[i][j] == '.':
-                    pass
-                elif board[i][j] in d:
-                    return False
-                else:
-                    d[board[i][j]] = True
-        # Check columns
-        for j in range(9):
-            d = {}
-            for i in range(9):
-                if board[i][j] == '.':
-                    pass
-                elif board[i][j] in d:
-                    return False
-                else:
-                    d[board[i][j]] = True
-        # Check sub-boxes
-        for m in range(0, 9, 3):
-            for n in range(0, 9, 3):
-                d = {}
-                for i in range(n, n + 3):
-                    for j in range(m, m + 3):
-                        if board[i][j] == '.':
-                            pass
-                        elif board[i][j] in d:
-                            return False
-                        else:
-                            d[board[i][j]] = True
+        for i in xrange(0, 9, 3):
+            for j in xrange(0, 9, 3):
+                tmp = []
+                for k in xrange(9):
+                    n = board[i+k/3][j+k%3]
+                    if n == '.':
+                        continue
+                    elif n in valid and n != '.' and n not in tmp:
+                        tmp.append(board[i+k/3][j+k%3])
+                    else:
+                        return False
         return True

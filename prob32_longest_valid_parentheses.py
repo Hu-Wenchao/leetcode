@@ -16,21 +16,20 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        n = len(s)
         length = 0
-        lastError = -1
+        invalid = -1
         stack = []
-        for i in range(n):
-            if s[i] == "(":
+        for i in xrange(len(s)):
+            if s[i] == '(':
                 stack.append(i)
             else:
                 if len(stack) == 0:
-                    lastError = i
+                    invalid = i
                 else:
                     stack.pop()
                     if len(stack) == 0:
-                        validTill = lastError
+                        valid = invalid
                     else:
-                        validTill = stack[-1]
-                    length = max(length, i-validTill)
+                        valid = stack[-1]
+                    length = max(length, i-valid)
         return length
