@@ -57,5 +57,5 @@ class Solution(object):
                 r = m - 1
             else:
                 l = m
-        ret[1]= r
+        ret[1] = r
         return ret

@@ -33,7 +33,7 @@ class Solution(object):
             m = (l + r) / 2
             rm = (m + rot) % len(nums)
             if nums[rm] == target:
-                return realmid
+                return rm
             if nums[rm] < target:
                 l = m + 1
             else:
