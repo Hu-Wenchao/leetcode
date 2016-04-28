@@ -26,29 +26,28 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        pPointer = 0
-        sPointer = 0
+        pptr = 0
+        sptr = 0
         ss = 0
         star = -1
-        while sPointer < len(s):
-            if pPointer < len(p) and \
-               (s[sPointer] == p[pPointer] or p[pPointer] == "?"):
-                sPointer += 1
-                pPointer += 1
+        while sptr < len(s):
+            if pptr < len(p) and (s[sptr] == p[pptr] or p[pptr] == '?'):
+                sptr += 1
+                pptr += 1
                 continue
-            if pPointer < len(p) and p[pPointer] == "*":
-                star = pPointer
-                pPointer += 1
-                ss = sPointer
+            if pptr < len(p) and p[pptr] == '*':
+                star = pptr
+                pptr += 1
+                ss = sptr
                 continue
             if star != -1:
-                pPointer = star + 1
+                pptr = star + 1
                 ss += 1
-                sPointer = ss
+                sptr = ss
                 continue
             return False
-        while pPointer < len(p) and p[pPointer] == "*":
-            pPointer += 1
-        if pPointer == len(p):
+        while pptr < len(p) and p[pptr] == '*':
+            pptr += 1
+        if pptr == len(p):
             return True
         return False

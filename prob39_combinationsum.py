@@ -27,18 +27,16 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         candidates.sort()
-        solution = []
-        self.combinationSumRec(candidates, target, 0, 0, [], solution)
-        return solution
+        ret = []
+        self.rec(candidates, target, 0, 0, [], ret)
+        return ret
 
-    def combinationSumRec(self, candidates, target, index, tempsum,
-                          templist, solution):
-        if tempsum == target:
-            solution.append(list(templist))
-        for i in range(index, len(candidates)):
-            if tempsum + candidates[i] > target:
+    def rec(self, candidates, target, idx, tmpsum, tmplist, ret):
+        if tmpsum == target:
+            ret.append(list(tmplist))
+        for i in xrange(idx, len(candidates)):
+            if tmpsum + candidates[i] > target:
                 break
-            templist.append(candidates[i])
-            self.combinationSumRec(candidates, target, i, tempsum+candidates[i],
-                                   templist, solution)
-            templist.pop()
+            tmplist.append(candidates[i])
+            self.rec(candidates, target, i, tmpsum+candidates[i], tmplist, ret)
+            tmplist.pop()

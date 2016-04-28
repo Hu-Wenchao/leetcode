@@ -17,28 +17,23 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        curstr = "1"
-        curposi = 1
-        while curposi < n:
-            curstr = self.nextStr(curstr)
-            curposi += 1
-        return curstr
+        ret = '1'
+        while n > 1:
+            ret = self.nextStr(ret)
+            n -= 1
+        return ret
 
-    def nextStr(self, curstr):
-        pre_c = curstr[0]
-        next_str = [1, pre_c]
-        alter = 1
-        for i in range(1, len(curstr)):
-            cur_c = curstr[i]
-            if cur_c == pre_c:
-                next_str[2*alter - 2] += 1
-            else:
-                pre_c = cur_c
-                next_str.append(1)
-                next_str.append(pre_c)
-                alter += 1
-        temp_str = ""
-        for item in next_str:
-            temp_str += str(item)
-        return temp_str
+    def nextStr(self, s):
+        ret = ''
+        prechar = s[0]
+        tmp = 1
+        for c in s[1:]:
+            if c == prechar:
+                tmp += 1
+            elif c != prechar:
+                ret += str(tmp) + prechar
+                prechar = c
+                tmp = 1
+        ret += str(tmp) + prechar
+        return ret
                 
