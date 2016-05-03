@@ -1,3 +1,2 @@
 # leetcodeSolutions
-Solutions to leetcode problems. All the uploaded solutions are written using Python and 
-tested in the leetcode website.
+Solutions to leetcode problems in python and cpp.
