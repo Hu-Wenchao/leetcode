@@ -37,7 +37,7 @@ class Solution(object):
             right = right[second_peak+1:]
         return ret
 
-    def trap(self, height):
+    def trap2(self, height):
         if len(height) < 3:
             return 0
         peakid = height.index(max(height))

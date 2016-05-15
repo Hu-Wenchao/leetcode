@@ -22,15 +22,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        result = 0
-        last = 0
+        step = 0
+        pre = 0
         cur = 0
-        for i in range(len(nums)):
-            if i > last:
-                last = cur
-                result += 1
+        for i in xrange(len(nums)):
+            if i > pre:
+                pre = cur
+                step += 1
             cur = max(cur, i + nums[i])
-        return result
+        return step
 
     def jump2(self, nums):
         step = 0
@@ -49,4 +49,3 @@ class Solution(object):
                 if new_right > right:
                     right = new_right
             left = old_right + 1
-        return 0

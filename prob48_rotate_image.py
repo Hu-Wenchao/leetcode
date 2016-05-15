@@ -13,14 +13,15 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: void Do not return anything, modify matrix in-place instead.
         """
-        n = len(matrix) - 1
-        for i in range(len(matrix) / 2):
-            num1 = i
-            num2 = n - i
-            for j in range(num1, num2):
-                temp = matrix[num1][j]
-                matrix[num1][j] = matrix[n-j][num1]
-                matrix[n-j][num1] = matrix[num2][n-j]
-                matrix[num2][n-j] = matrix[j][num2]
-                matrix[j][num2] = temp
-        return
+        n = len(matrix)
+        for i in xrange(n / 2):
+            for j in xrange(n - 1 - 2 * i):
+                matrix[i+j][n-i-1], \
+                matrix[n-i-1][n-i-1-j],\
+                matrix[n-i-1-j][i], \
+                matrix[i][i+j] = \
+                                 matrix[i][i+j], \
+                                 matrix[i+j][n-i-1], \
+                                 matrix[n-i-1][n-i-1-j], \
+                                 matrix[n-i-1-j][i]
+                                                     

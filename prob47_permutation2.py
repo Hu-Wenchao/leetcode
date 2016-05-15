@@ -12,22 +12,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        d = {}
-        return self.permute(nums, d)
-
-    def permute(self, nums, d):
         if not nums:
-            return [[]]
-        else:
-            res = []
-            for i, c in enumerate(nums):
-                if c in d:
-                    continue
-                else:
-                    d[c] = True
-                rest_perms = self.permuteUnique(nums[:i] + nums[i+1:])
-                for perm in rest_perms:
-                    perm.insert(0, c)
-                res += rest_perms
-            return res
-        
+            return []
+        nums.sort()
+        ret = [[]]
+        for n in nums:
+            new_ret = []
+            for seq in ret:
+                for i in xrange(len(seq), -1, -1):
+                    if i < len(seq) and seq[i] == n:
+                        break
+                    new_ret.append(seq[:i] + [n] + seq[i:])
+            ret = new_ret
+        return ret

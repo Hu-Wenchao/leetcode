@@ -13,17 +13,31 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         if not nums:
-            return [[]]
-        else:
-            res = []
-            for i, e in enumerate(nums):
-                rest = nums[:i] + nums[i+1:]
-                rest_perms = self.permute(rest)
-                for perm in rest_perms:
-                    perm.append(e)
-                res += rest_perms
-                print(res)
-            return res
+            return []
+        ret = [[]]
+        for num in nums:
+            new_ret = []
+            for seq in ret:
+                for i in xrange(len(seq) + 1):
+                    new_ret.append(seq[:i] + [num] + seq[i:])
+            ret = new_ret
+        return ret
+        
+    def permute2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        res = []
+        self.dfs(nums, [], res)
+        return res
+
+    def dfs(self, nums, path, res):
+        if not nums:
+            res.append(path)
+        for i in xrange(len(nums)):
+            self.dfs(nums[:i]+nums[i+1:], path+[nums[i]], res)
+            
             
                 
             

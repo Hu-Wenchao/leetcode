@@ -21,14 +21,11 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        mydict = {}
+        dic = {}
         for word in strs:
-            temp = "".join(sorted(word))
-            mydict[temp] = [word] if temp not in mydict \
-                           else mydict[temp] + [word]
-        res = []
-        for key in mydict:
-            item_list = mydict[key]
-            item_list.sort()
-            res.append(item_list)
-        return res
+            key = ''.join(sorted(word))
+            dic[key] = [word] if key not in dic else dic[key] + [word]
+        ret = []
+        for key in dic.keys():
+            ret.append(sorted(dic[key]))
+        return ret
