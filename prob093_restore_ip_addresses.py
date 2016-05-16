@@ -16,7 +16,7 @@ class Solution(object):
         """
         if len(s) > 12:
             return []
-        ret = []
+        res = []
         for m in [1, 2, 3]:
             for n in [m+1, m+2, m+3]:
                 for p in [n+1, n+2, n+3]:
@@ -24,13 +24,13 @@ class Solution(object):
                         continue
                     s1, s2, s3, s4 = s[:m], s[m:n], s[n:p], s[p:]
                     if self.isValid([s1, s2, s3, s4]):
-                        ret.append(s1+'.'+s2+'.'+s3+'.'+s4)
-        return ret
+                        res.append(s1+'.'+s2+'.'+s3+'.'+s4)
+        return res
 
     def isValid(self, str_list):
-        for string in str_list:
+        for s in str_list:
             if s[0] == '0' and s != '0':
                 return False
-            elif int(string) > 255:
+            elif int(s) > 255:
                 return False
         return True

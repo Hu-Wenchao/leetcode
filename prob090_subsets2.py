@@ -13,15 +13,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        res = []
+        res = [[]]
         nums.sort()
-        self.dfs(nums, 0, [], res)
+        for n in nums:
+            for tmp in [x + [n] for x in res]:
+                if tmp not in res:
+                    res.append(tmp)
         return res
-
-    def dfs(self, nums, index, path, res):
-        res.append(path)
-        for i in xrange(index, len(nums)):
-            # Remove the following tow lines for subset I.
-            if i > index and nums[i] == nums[i-1]:
-                continue
-            self.dfs(nums, i+1, path+[nums[i]], res)

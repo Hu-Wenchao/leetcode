@@ -14,7 +14,8 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
-        ret = [0]
-        for i in range(n):
-            ret += [x + 2**i for x in reversed(ret)]
-        return ret
+        res = [0]
+        for i in xrange(n):
+            res += [x + 2**i for x in res[::-1]]
+        return res
+        

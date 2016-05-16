@@ -23,37 +23,20 @@ class Solution(object):
         :type x: int
         :rtype: ListNode
         """
-        if not head or head.next:
+        if not head or not head.next:
             return head
-
-        dummy = ListNode(None)
-        dummy.next = head
-
-        # Find the first node where node.val >= x
-        ptr = head
-        if ptr.val >= x:
-            small = dummy
-            large = head
-        else:
-            while ptr.next and ptr.next.val < x:
-                ptr = ptr.next
-            if not ptr.next:
-                return head
+        large = ListNode(None)
+        small = ListNode(None)
+        pl = large
+        ps = small
+        while head:
+            if head.val >= x:
+                pl.next = head
+                pl = pl.next
             else:
-                small = ptr
-                large = ptr.next
-        
-        # partition the list
-        while ptr.next:
-            while ptr.next and ptr.next.val < x:
-                small.next = ptr.next
-                small = small.next
-                ptr.next = ptr.next.next
-            if ptr.next:
-                ptr = ptr.next
-        small.next = large
-        
-        if head.val >= x:
-            return dummy.next
-        else:
-            return head
+                ps.next = head
+                ps = ps.next
+            head = head.next
+        pl.next = None
+        ps.next = large.next
+        return small.next

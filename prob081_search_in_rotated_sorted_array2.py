@@ -14,24 +14,26 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        l, r = 0, len(nums) -1
+        l, r = 0, len(nums) - 1
         while l <= r:
-            mid = 1 + (r - l)//2
-            if nums[mid] == target:
+            m = (r + l) / 2
+            if nums[m] == target:
                 return True
-            while l < mid and nums[l] == nums[mid]:
+            # skip duplicates
+            while l < m and nums[l] == nums[m]:
                 l += 1
-            if nums[l] <= nums[mid]:
-                if nums[l] <= target <= nums[mid]:
-                    r = mid - 1
+            # the first half is ordered
+            if nums[l] <= nums[m]:
+                # target is in the first half
+                if nums[l] <= target < nums[m]:
+                    r = m - 1
                 else:
-                    l = mid + 1
+                    l = m + 1
+            # the second half is ordered
             else:
-                if nums[mid] < target <= nums[r]:
-                    l = mid + 1
+                # target is in the second half
+                if nums[m] < target <= nums[r]:
+                    l = m + 1
                 else:
-                    r = mid - 1
+                    r = m - 1
         return False
-
-        # For python, there is a cheating solution.
-        # return target in nums

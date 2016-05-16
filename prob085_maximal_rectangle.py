@@ -12,22 +12,22 @@ class Solution(object):
         """
         if not matrix:
             return 0
-        h, w = len(matrix), len(matrix[0])
-        mat = [[0] * w for _ in range(h)]
-        for i in xrange(h):
-            for j in xrange(w):
-                if mattrix[i][j] == '1':
-                    mat[i][j] = mat[i-1][j] + 1
-        return max(self.largestRectangleArea(row) for row in mat)
+        m, n = len(matrix), len(matrix[0])
+        dp = [[0] * n for _ in xrange(m)]
+        for i in xrange(m):
+            for j in xrange(n):
+                if matrix[i][j] == '1':
+                    dp[i][j] = dp[i-1][j] + 1
+        return max(self.helper(row) for row in dp)
 
-    def largestRectangleArea(self, height):
+    def helper(self, height):
         height.append(0)
-        ret = 0
+        res = 0
         stack = []
         for i in xrange(len(height)):
-            while stack and height[i] < height[stack[-1]]:
+            while stack and height[i]< height[stack[-1]]:
                 h = height[stack.pop()]
                 w = i if not stack else i - stack[-1] - 1
-                ret = max(ret, h * w)
+                res = max(res, h * w)
             stack.append(i)
-        return ret
+        return res

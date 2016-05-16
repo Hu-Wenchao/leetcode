@@ -20,17 +20,23 @@ be binary search trees.
 #         self.right = None
 
 class Solution(object):
-    def isValidBST(self, root, lessThan = float('inf'), 
-                   largerThan = float('-inf')):
+    def isValidBST(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
+        tree = []
+        self.inOrder(root, tree)
+        for i in xrange(1, len(tree)):
+            if tree[i-1] >= tree[i]:
+                return False
+        return True
+
+    def inOrder(self, root, tree):
         if not root:
-            return True
-        if root.val <= largerThan or root.val >= lessThan:
-            return False
-        return self.isValidBST(root.left, min(lessThan, root.val), largerThan) \
-            and self.isValidBST(root.right, lessThan, max(root.val, largerThan))
+            return
+        self.inOrder(root.left, tree)
+        tree.append(root.val)
+        self.inOrder(root.right, tree)
         
             

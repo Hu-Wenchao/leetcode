@@ -11,12 +11,12 @@ class Solution(object):
         :rtype: int
         """
         heights.append(0)
-        ret = 0
+        res = 0
         stack = []
         for i in xrange(len(heights)):
             while stack and height[i] < heights[stack[-1]]:
                 h = heights[stack.pop()]
                 w = i if not stack else i - stack[-1] - 1
-                ret = max(ret, h * w)
+                res = max(res, h * w)
             stack.append(i)
-        return ret
+        return res

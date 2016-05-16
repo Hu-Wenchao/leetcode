@@ -20,17 +20,16 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        dummy = ListNode(0)
-        list = dummy
-        pointer = head
-        while pointer!= None:
-            if pointer.next != None and pointer.val == pointer.next.val:
-                value = pointer.val;
-                while pointer!= None and pointer.val == value:
-                    pointer = pointer.next
+        if not head or not head.next:
+            return head
+        dummy = ListNode(None)
+        dummy.next = head
+        ptr = dummy
+        while ptr.next:
+            if ptr.next.next and ptr.next.val == ptr.next.next.val:
+                tmpval = ptr.next.val
+                while ptr.next and ptr.next.val == tmpval:
+                    ptr.next = ptr.next.next
             else:
-                list.next = pointer
-                list = list.next
-                pointer = pointer.next
-        list.next = None
+                ptr = ptr.next
         return dummy.next

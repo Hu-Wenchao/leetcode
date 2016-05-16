@@ -11,13 +11,10 @@ class Solution(object):
         """
         if n == 0 or n == 1:
             return 1
-        
-        ret = [0] * (n + 1)
-        ret[0] = 1
-        ret[1] = 1
-
-        for i in range(2, n + 1):
-            for j in range(i):
-                ret[i] += ret[j] * ret[i-1-j]
-        
-        return ret[-1]
+        res = [0] * (n + 1)
+        res[0] = 1
+        res[1] = 1
+        for i in xrange(2, n + 1):
+            for j in xrange(i):
+                res[i] += res[j] * res[i-1-j]
+        return res[-1]

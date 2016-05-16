@@ -21,13 +21,12 @@ class Solution(object):
         """
         if not head:
             return head
-        dummy = ListNode(0)
+        dummy = ListNode(None)
         dummy.next = head
-        ptr = head
-        while ptr:
-            if ptr.next and ptr.next.val != ptr.val:
-                ptr = ptr.next
-            elif ptr.next and ptr.next.val == ptr.val:
+        ptr = dummy
+        while ptr.next:
+            if ptr.next.val == ptr.val:
                 ptr.next = ptr.next.next
-            elif not ptr.next:
-                return dummy.next
+            else:
+                ptr = ptr.next
+        return dummy.next

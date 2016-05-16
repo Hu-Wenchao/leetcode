@@ -27,7 +27,7 @@ class Solution(object):
         """
         if m == n:
             return head
-        dummy = ListNode(0)
+        dummy = ListNode(None)
         dummy.next = head
         pre = dummy
         
