@@ -21,19 +21,15 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        res = []
-        nums = [i for i in xrange(1, n+1)]
-
-        while n - 1 >= 0:
-            num, k = k / factorial(n - 1), k % factorial(n - 1)
-            if k > 0:
-                res.append(str(nums[num]))
-                nums.remove(nums[num])
-                
-            else:
-                res.append(str(nums[num-1]))
-                nums.remove(nums[num-1])
-            
+        numbers = list(xrange(1, n+1))
+        ret = ''
+        k -= 1
+        while n > 0:
             n -= 1
-        
-        return ''.join(res)
+            # get the index of current digit
+            index, k = divmod(k, factorial(n))
+            ret += str(numbers[index])
+            # remove handled number
+            numbers.remove(numbers[index])
+
+        return ret

@@ -16,11 +16,11 @@ class Solution(object):
         :rtype: bool
         """
         # Solution 1
-        # try:
-        #     float(s)
-        #     return True
-        # except ValueError:
-        #     return False
+        try:
+            float(s)
+            return True
+        except ValueError:
+            return False
 
         # Solution 2 using re
         return bool(re.match('[\+\-]?((\d*\.?\d+)|(\d+\.?\d*))([eE][\+\-]?\d+)?$',\

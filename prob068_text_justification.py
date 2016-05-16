@@ -25,19 +25,20 @@ class Solution(object):
         :type maxWidth: int
         :rtype: List[str]
         """
-        res, cur, num_of_letters = [], [], 0
+        ret = []
+        line, n = [], 0
         for w in words:
-            if num_of_letters + len(w) + len(cur) > maxWidth:
-                if len(cur) == 1:
-                    res.append( cur[0] + ' '*(maxWidth - num_of_letters) )
+            if n + len(w) + len(line) > maxWidth:
+                if len(line) == 1:
+                    ret.append(line[0] + ' ' * (maxWidth - n))
                 else:
-                    num_spaces = maxWidth - num_of_letters - len(cur) + 1
-                    space_between_words, num_extra_spaces = divmod( num_spaces, len(cur)-1)
-                    for i in range(num_extra_spaces):
-                        cur[i] += ' '
-                    res.append( (' '*(1+space_between_words)).join(cur) )
-                cur, num_of_letters = [], 0
-            cur += [w]
-            num_of_letters += len(w)
-        res.append( ' '.join(cur) + ' '*(maxWidth - num_of_letters - len(cur) + 1) )
-        return res
+                    num_spaces = maxWidth - n - len(line) + 1
+                    space, extra_space = divmod(num_spaces, len(line)-1)
+                    for i in xrange(extra_space):
+                        line[i] += ' '
+                    ret.append((' ' * (1+space)).join(line))
+                line, n = [], 0
+            line += [w]
+            n += len(w)
+        ret.append(' '.join(line) + ' ' * (maxWidth - n - len(line) + 1))
+        return ret

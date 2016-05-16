@@ -12,14 +12,13 @@ class Solution(object):
         """
         if x < 0:
             return -1
-        begin = 0
-        end = x
-        while begin < end:
-            mid = begin + (end - begin + 1) / 2
-            if mid**2 == x:
-                return mid
-            elif mid**2 < x:
-                begin = mid
+        b, e = 0, x
+        while b < e:
+            m = (b + e + 1) / 2
+            if m**2 == x:
+                return m
+            elif m**2 < x:
+                b = m
             else:
-                end = mid - 1
-        return begin
+                e = m - 1
+        return b

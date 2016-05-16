@@ -27,21 +27,14 @@ class Solution(object):
         return reach >= len(nums)
 
     def canJump2(self, nums):
-        n = len(nums)
-        if n == 0:
-            return True
-        leftmost = n - 1
-        i = n - 2
-        while i >= 0:
-            if i + nums[i] >= leftmost:
-                leftmost = i
-            i -= 1
-        return leftmost == 0
-
-    def canJump3(self, nums):
-        f = [0] * len(nums)
-        for i in range(1, len(nums)):
-            f[i] = max(f[i-1], nums[i-1]) - 1
-            if f[i] < 0:
-                return False
-        return f[len(nums)-1] >= 0 
+        left = right = 0
+        while left <= right:
+            old_right = right
+            for i in xrange(left, old_right+1):
+                new_right = max(right, i+nums[i])
+                if new_right >= len(nums)-1:
+                    return True
+                if new_right > right:
+                    right = new_right
+            left = old_right + 1
+        return False

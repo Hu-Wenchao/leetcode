@@ -36,44 +36,15 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        m = len(matrix)
-        n = len(matrix[0])
-        
-        left = 0
-        right = m * n - 1
-        
+        m, n = len(matrix), len(matrix[0])
+        l, r = 0, m * n - 1
         while True:
-            middle = (left + right) / 2
+            middle = (l + r) / 2
             if target == matrix[middle/n][middle%n]:
                 return True
-            if left >= right:
+            if l >= r:
                 return False
             if target < matrix[middle/n][middle%n]:
-                right = middle - 1
+                r = middle - 1
             else:
-                left = middle + 1
-
-    def searchMatrix3(self, matrix, target):
-        """
-        :type matrix: List[List[int]]
-        :type target: int
-        :rtype: bool
-        """
-        m = len(matrix)
-        n = len(matrix[0])
-        if m == 0 or n == 0:
-            return False
-        
-        # find the correct row
-        row = 0
-        for i in range(m):
-            if target <= matrix[i][-1]:
-                row = i
-                break
-
-        # find the correct column
-        for i in range(n):
-            if target == matrix[row][i]:
-                return True
-        
-        return False
+                l = middle + 1

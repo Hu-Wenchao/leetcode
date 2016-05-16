@@ -15,14 +15,11 @@ class Solution(object):
         :rtype: int
         """
         if not obstacleGrid:
-            return 0
-            
+            return 0           
         m = len(obstacleGrid)
         n = len(obstacleGrid[0])
-
         dp = [0] * (n+1)
-        dp[1] = 1
-        
+        dp[1] = 1        
         for i in xrange(1, m+1):
             for j in xrange(1, n+1):
                 dp[j] = (dp[j] + dp[j-1]) if obstacleGrid[i-1][j-1]==0 else 0

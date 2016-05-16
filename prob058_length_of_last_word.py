@@ -19,12 +19,20 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        s = s.strip()
-        length = 0
-        for i in range(len(s)-1, -1, -1):
-            if s[i] != " ":
-                length += 1
-            else:
-                return length
-        return length
+        if not s:
+            return 0
+        s = s.rstrip()
+        ret = 0
+        for c in s[::-1]:
+            if not c.isalpha():
+                return ret
+            ret += 1
+        return ret
+
+    def lengthOfLastWord2(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        return len(s.strip(' ').split(' ')[-1])
         

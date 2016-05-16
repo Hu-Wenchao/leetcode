@@ -20,29 +20,26 @@ class Solution(object):
         :type k: int
         :rtype: ListNode
         """
-        if k == 0 or head == None or head.next == None:
+        if not head or not head.next:
             return head
-
-        ptr = head
+        dummy = ListNode(None)
+        dummy.next = head
         # Measure the list length.
-        l = 1
+        l = 0
+        ptr = dummy
         while ptr.next:
-            l += 1
             ptr = ptr.next
-
+            l += 1
         # Make circular list.
         ptr.next = head
-
         # Compute the offset.
-        n = l - k % l
-        
+        n = l - k % l        
         # Move the cursor to nth place.
+        ptr = dummy
         while n > 0:
-            ptr = head
-            head = head.next
-            n -= 1
-        
+            ptr = ptr.next
+            n -= 1        
         # Break the cicular list.
+        head = ptr.next
         ptr.next = None
-
         return head

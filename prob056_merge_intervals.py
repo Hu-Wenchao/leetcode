@@ -18,13 +18,12 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
-        intervals = sorted(intervals, key = lambda interval:interval.start)
         if len(intervals) <= 1:
             return intervals
+        intervals = sorted(intervals, key = lambda interval:interval.start)
         interval = intervals[0]
         ret = []
-        for i in range(1, len(intervals)):
-            interval2 = intervals[i]
+        for interval2 in intervals[1:]:
             if interval.end < interval2.start:
                 ret.append(interval)
                 interval = interval2

@@ -8,7 +8,6 @@ T = "ABC"
 Minimum window is "BANC".
 """
 
-import collections
 class Solution(object):
     def minWindow(self, s, t):
         """
@@ -16,10 +15,11 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        need, missing = collections.Counter(t), len(t)
+        from collections import Counter
+        need, missing = Counter(t), len(t)
         i = I = J = 0
         for j, c in enumerate(s, 1):
-            missing = need[c] > 0
+            missing -= need[c] > 0
             need[c] -= 1
             if not missing:
                 while i < j and need[s[i]] < 0:

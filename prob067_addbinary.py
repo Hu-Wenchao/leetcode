@@ -14,11 +14,4 @@ class Solution(object):
         :type b: str
         :rtype: str
         """
-        value_a = 0
-        value_b = 0
-        for i in range(len(a)):
-            value_a += int(a[i]) * 2**(len(a)-i-1)
-        for i in range(len(b)):
-            value_b += int(b[i]) * 2**(len(b)-i-1)
-        result = value_a + value_b
-        return bin(result)[2:]
+        return bin(int(a, 2) + int(b, 2))[2:]

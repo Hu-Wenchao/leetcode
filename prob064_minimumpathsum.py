@@ -5,21 +5,17 @@ minimizes the sum of all numbers along its path.
 """
 
 class Solution(object):
-    def subsetsWithDup(self, nums):
+    def minPathSum(self, grid):
         """
-        :type nums: List[int]
-        :rtype: List[List[int]]
+        :type grid: List[List[int]]
+        :rtype: int
         """
         if not grid:
             return 0
-
-        m, n = len(nums), len(nums[0])
-        
+        m, n = len(grid), len(grid[0])
         dp = [float('inf')] * (n+1)
         dp[1] = 0
-
         for i in xrange(1, m+1):
             for j in xrange(1, n+1):
                 dp[j] = min(dp[j], dp[j-1]) + grid[i-1][j-1]
-                
         return dp[-1]

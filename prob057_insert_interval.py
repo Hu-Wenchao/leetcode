@@ -25,32 +25,6 @@ with [3,5],[6,7],[8,10].
 
 class Solution(object):
     def insert(self, intervals, newInterval):
-        for i, interval in enumerate(intervals):
-            if newInterval.start <= interval.end:
-                if interval.start <= newInterval.start:
-                    newInterval.start = interval.start
-                insert_start = i
-                break
-        else:
-            insert_start = len(intervals)
-
-        for i, interval in enumerate(itertools.islice(intervals, \
-                                                      insert_start, \
-                                                      None), insert_start):
-            if newInterval.end <= interval.end:
-                if interval.start <= newInterval.end:
-                    newInterval.end = interval.end
-                    insert_end = i + 1
-                else:
-                    insert_end = i
-                break
-        else:
-            insert_end = len(intervals) + 1
-
-        intervals[insert_start:insert_end] = [newInterval]
-        return intervals
-
-    def insert2(self, intervals, newInterval):
         """
         :type intervals: List[Interval]
         :type newInterval: Interval
@@ -85,7 +59,7 @@ class Solution(object):
         ret = sorted(ret, key = lambda interval:interval.start)
         return ret
 
-    def insert3(self, intervals, newInterval):
+    def insert2(self, intervals, newInterval):
         """
         :type intervals: List[Interval]
         :type newInterval: Interval
@@ -97,8 +71,7 @@ class Solution(object):
             return intervals
         interval = intervals[0]
         ret = []
-        for i in range(1, len(intervals)):
-            interval2 = intervals[i]
+        for interval2 in intervals[1:]:
             if interval.end < interval2.start:
                 ret.append(interval)
                 interval = interval2

@@ -12,12 +12,11 @@ class Solution(object):
         :type digits: List[int]
         :rtype: List[int]
         """
-        result = 0
-        for i in range(len(digits)):
-            result += digits[i] * 10**(len(digits)-i-1)
-        result += 1
-        result = str(result)
-        result_list = []
-        for i in range(len(result)):
-            result_list.append(int(result[i]))
-        return result_list
+        digits.insert(0, 0)
+        digits[-1] += 1
+        for i in xrange(len(digits)-1, 0, -1):
+            digits[i-1] += digits[i] / 10
+            digits[i] %= 10
+        if digits[0] == 0:
+            return digits[1:]
+        return digits
