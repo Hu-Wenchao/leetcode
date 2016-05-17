@@ -16,11 +16,11 @@ class Solution(object):
             return 0
         profit1 = 0
         profit2 = 0
-        o1 = max(prices) * 100
-        o2 = -o1
-        for i in range(len(prices)):
-            o1 = min(o1, prices[i])
-            profit1 = max(profit1, prices[i] - o1)
-            o2 = max(o2, profit1-prices[i])
-            profit2 = max(profit2, prices[i]+o2)
+        buy1 = float('inf')
+        buy2 = -float('inf')
+        for i in xrange(len(prices)):
+            buy1 = min(buy1, prices[i])
+            profit1 = max(profit1, prices[i] - buy1)
+            buy2 = max(buy2, profit1 - prices[i])
+            profit2 = max(profit2, prices[i] + buy2)
         return profit2

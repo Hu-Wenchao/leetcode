@@ -17,19 +17,19 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        ret = []
-        pre = []
-        if root:
-            pre.append(root)
-        while pre:
-            temp = []
-            cur = []
-            for node in pre:
-                temp.append(node.val)
+        if not root:
+            return []
+        res = []
+        prelayer = [root]
+        while prelayer:
+            curlayer = []
+            tmp = []
+            for node in prelayer:
+                tmp.append(node.val)
                 if node.left:
-                    cur.append(node.left)
+                    curlayer.append(node.left)
                 if node.right:
-                    cur.append(node.right)
-            pre = cur
-            ret.insert(0, temp)
-        return ret
+                    curlayer.append(node.right)
+            res.insert(0, tmp)
+            prelayer = curlayer
+        return res

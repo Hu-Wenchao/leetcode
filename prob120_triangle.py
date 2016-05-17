@@ -12,17 +12,9 @@ class Solution(object):
         """
         if not triangle:
             return 0
-        elif len(triangle) == 1:
-            return triangle[0][0]
-        for i in range(1, len(triangle)):
-            temp = triangle[i]
-            for j in range(len(triangle[i])):
-                if j == 0:
-                    temp[0] += triangle[i-1][0]
-                elif j == len(triangle[i]) - 1:
-                    temp[-1] += triangle[i-1][-1]
-                else:
-                    temp[j] += min(triangle[i-1][j-1], triangle[i-1][j])
-            triangle[i] = temp
+        for i in xrange(1, len(triangle)):
+            triangle[i][0] += triangle[i-1][0]
+            triangle[i][-1] += triangle[i-1][-1]
+            for j in xrange(1, len(triangle[i]) - 1):
+                triangle[i][j] += min(triangle[i-1][j-1], triangle[i-1][j])
         return min(triangle[-1])
-                    

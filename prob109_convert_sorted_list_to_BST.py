@@ -24,6 +24,27 @@ class Solution(object):
         """
         if not head:
             return None
+        if not head.next:
+            return TreeNode(head.val)
+        slow, fast = head, head.next.next
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+        tmp = slow.next
+        slow.next = None
+        root = TreeNode(tmp.val)
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(tmp.next)
+        return root
+
+    
+    def sortedListToBST2(self, head):
+        """
+        :type head: ListNode
+        :rtype: TreeNode
+        """
+        if not head:
+            return None
         nums = []
         while head:
             nums.append(head.val)
@@ -39,18 +60,4 @@ class Solution(object):
         root.right = self.sortedArrayToBST(nums[mid+1:])
         return root
 
-    def sortedListToBST2(self, head):
-        if not head:
-            return None
-        if not head.next:
-            return TreeNode(head.val)
-        slow, fast = head, head.next.next
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-        tmp = slow.next
-        slow.next = None
-        root = TreeNode(tmp.val)
-        root.left = self.sortedListToBST2(head)
-        root.right = self.sortedListToBST2(tmp.next)
-        return root
+    

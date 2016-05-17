@@ -10,7 +10,6 @@ Given a binary tree, flatten it to a linked list in-place.
 #         self.right = None
 
 class Solution(object):
-    prev = None
     def flatten(self, root):
         """
         :type root: TreeNode
@@ -25,10 +24,8 @@ class Solution(object):
         if not root:
             return
         self.prev = root
-        self.flatten(root.left)
-        
+        self.flatten(root.left)        
         temp = root.right
         root.right, root.left = root.left, None
-        self.prev.right = temp
-        
+        self.prev.right = temp        
         self.flatten(temp)

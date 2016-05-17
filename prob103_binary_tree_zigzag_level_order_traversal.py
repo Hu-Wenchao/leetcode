@@ -17,25 +17,25 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        ret = []
-        pre = []
-        if root:
-            pre.append(root)
-            flag = 0
-        while pre:
-            temp = []
-            cur = []
-            flag += 1
-            for node in pre:
-                temp.append(node.val)
+        if not root:
+            return []
+        res = []
+        prelayer = [root]
+        flag = 0  # 0 for forward, 1 for backward
+        while prelayer:
+            curlayer = []
+            tmp = []
+            for node in prelayer:
+                tmp.append(node.val)
                 if node.left:
-                    cur.append(node.left)
+                    curlayer.append(node.left)
                 if node.right:
-                    cur.append(node.right)
-            pre = cur
-            if flag % 2 == 1:
-                ret.append(temp)
+                    curlayer.append(node.right)
+            if flag % 2 == 0:
+                res.append(tmp)
+                flag = 1
             else:
-                temp.reverse()
-                ret.append(temp)
-        return ret
+                res.append(tmp[::-1])
+                flag = 0
+            prelayer = curlayer
+        return res

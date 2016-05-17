@@ -25,7 +25,7 @@ class Solution(object):
                 elif s == '*':
                     stack.append(b * a)
                 else:
-                    if b * a < 0 and b % r != 0:
+                    if b * a < 0 and b % a != 0:
                         stack.append(b / a + 1)
                     else:
                         stack.append(b / a)

@@ -11,13 +11,15 @@ class Solution(object):
         :type rowIndex: int
         :rtype: List[int]
         """
-        if rowIndex == 0:
-            return [1]
-        ret = [1]
-        for i in range(rowIndex):
-            temp = [1]
-            for i in range(len(ret)-1):
-                temp.append(ret[i] + ret[i+1])
-            temp.append(1)
-            ret = temp
-        return ret
+        if numRows <= 0:
+            return []
+        elif numRows == 1:
+            return [[1]]
+        elif numRows == 2:
+            return [[1], [1, 1]]
+        res = [[1], [1, 1]]
+        while numRows > 2:
+            res.append([1] + [res[-1][i-1] + res[-1][i]
+                              for i in xrange(1, len(res[-1]))] + [1])
+            numRows -= 1
+        return res

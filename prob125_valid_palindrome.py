@@ -25,3 +25,14 @@ class Solution(object):
             l +=1 
             r -= 1
         return True
+
+    def isPalindrome2(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        tmp = []
+        for c in s:
+            if c.isalnum():
+                tmp.append(c.lower())
+        return tmp == tmp[::-1]

@@ -15,19 +15,19 @@ need to go through the root.
 #         self.right = None
 
 class Solution(object):
-    maxValue = -float('inf')
     def maxPathSum(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
+        self.maxValue = -float('inf')
         self.maxPathDown(root)
-        return self.maxValue
+        return self.max_value
 
-    def maxPathDown(self, node):
-        if not node:
+    def maxPathDown(self, root):
+        if not root:
             return 0
-        left = max(0, self.maxPathDown(node.left))
-        right = max(0, self.maxPathDown(node.right))
-        self.maxValue = max(self.maxValue, left + right + node.val)
-        return max(left, right) + node.val
+        left = max(0, self.maxPathDown(root.left))
+        right = max(0, self.maxPathDown(root.right))
+        self.max_value = max(self.max_value, left + right + root.val)
+        return max(left, right) + root.val

@@ -18,20 +18,20 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        ret = 0
-        pre = []
-        if root:
-            pre.append(root)
-        while pre:
-            cur = []
-            for node in pre:
+        if not root:
+            return 0
+        res = 0
+        prelayer = [root]
+        while prelayer:
+            curlayer = []
+            for node in prelayer:
                 if node.left:
-                    cur.append(node.left)
+                    curlayer.append(node.left)
                 if node.right:
-                    cur.append(node.right)
-            ret += 1
-            pre = cur
-        return ret
+                    curlayer.append(node.right)
+            res += 1
+            prelayer = curlayer
+        return res
 
     def maxDepth2(self, root):
         if not root:

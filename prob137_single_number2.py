@@ -24,15 +24,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        nums_dict = {}
-        for i in range(len(nums)):
-            if nums[i] not in nums_dict:
-                nums_dict[nums[i]] = 1
+        dic = {}
+        for n in nums:
+            if n in dic:
+                dic[n] += 1
             else:
-                nums_dict[nums[i]] += 1
-        for (k, v) in nums_dict.iteritems():
-            if v == 1:
-                return k
+                dic[n] = 1
+        for n in dic.keys():
+            if dic[n] == 1:
+                return n
 
     def singleNumber3(self, nums):
         """

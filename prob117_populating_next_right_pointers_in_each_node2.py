@@ -44,6 +44,6 @@ class Solution(object):
             if cur.next:
                 cur = cur.next
             pre = pre.next
-            if not pre.next:
+            if not pre:
                 cur = dummy
                 pre = dummy.next

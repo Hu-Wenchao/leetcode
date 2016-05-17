@@ -15,12 +15,10 @@ class Solution(object):
         """
         if len(prices) < 2:
             return 0
-        low = prices[0]
         profit = 0
-        for i in range(1, len(prices)):
-            if prices[i] < low:
-                low = prices[i]
-            if prices[i] - low > profit:
-                profit = prices[i] - low
+        lowest = float('inf')
+        for i in xrange(len(prices)):
+            lowest = min(lowest, prices[i])
+            profit = max(profit, prices[i] - lowest)
         return profit
         

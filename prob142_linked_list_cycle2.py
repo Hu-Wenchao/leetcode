@@ -15,7 +15,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if head == None:
+        if not head:
             return None
         hare, turtle = head, head
         while hare:

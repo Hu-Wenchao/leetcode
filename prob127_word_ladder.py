@@ -28,6 +28,7 @@ class Solution(object):
         wordList.discard(beginWord)
         while front:
             front = wordList & (set(word[:index] + ch + word[index+1:]
+                                    for word in front
                                     for index in range(len(word))
                                     for ch in 'abcdefghijklmnopqrstuvwxyz'))
             if front & back:

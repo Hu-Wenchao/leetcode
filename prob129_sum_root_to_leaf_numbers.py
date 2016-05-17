@@ -31,20 +31,20 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        ret = 0
         if not root:
-            return ret
-        pre = [root]
-        while pre:
-            cur = []
-            for node in pre:
+            return 0
+        res = 0
+        prelayer = [root]
+        while prelayer:
+            curlayer = []
+            for node in prelayer:
                 if not node.left and not node.right:
-                    ret += node.val
+                    res += node.val
                 if node.left:
                     node.left.val += 10 * node.val
-                    cur.append(node.left)
+                    curlayer.append(node.left)
                 if node.right:
                     node.right.val += 10 * node.val
-                    cur.append(node.right)
-            pre = cur
-        return ret
+                    curlayer.append(node.right)
+            prelayer = curlayer
+        return res

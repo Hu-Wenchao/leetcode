@@ -16,11 +16,10 @@ class Solution(object):
         """
         if not head:
             return False
-        walker = head
-        runner = head
-        while runner.next and runner.next.next:
-            walker = walker.next
-            runner = runner.next.next
-            if walker == runner:
+        slow = head
+        fast = head
+        while fast.next and fast.next.next:
+            slow, fast = slow.next, fast.next.next
+            if slow == fast:
                 return True
         return False
