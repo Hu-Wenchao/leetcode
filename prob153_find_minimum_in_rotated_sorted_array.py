@@ -18,14 +18,13 @@ class Solution(object):
         return nums[0]
 
     def findMin2(self, nums):
-        start = 0
-        end = len(nums) - 1
-        while start < end:
-            if nums[start] < nums[end]:
-                return nums[start]
-            mid = (start + end) / 2
-            if nums[mid] >= nums[start]:
-                start = mid + 1
+        l, r = 0, len(nums)-1
+        while l < r:
+            if nums[l] < nums[r]:
+                return nums[l]
+            m = (l + r) / 2
+            if nums[m] >= nums[l]:
+                l = m + 1
             else:
-                end = mid
-        return nums[start]
+                r = m
+        return nums[l]
