@@ -16,20 +16,20 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) < 2 or max(nums)-min(nums) == 0:   # in case bsize == 0
+        if len(nums) < 2 or max(nums) == min(nums):
             return 0
-        maxn,minn,lenn = max(nums),min(nums),len(nums)
-        bsize = (maxn - minn + 1.0) / lenn  # could have interger issue on OJ
-        buckets = [[2**31-1, -1] for _ in range(lenn+1)]
-        for i in nums:
-            place = int( (i-minn) // bsize )
-            buckets[place][0] = min(i, buckets[place][0])
-            buckets[place][1] = max(i, buckets[place][1])
-        res, prev = 0, buckets[0][0]
-        for i in buckets:
-            if i != [2**31-1, -1]:
-                res = max(res, i[0]-prev)
-                prev = i[1]
+        maxn, minn, lenn = max(nums), min(nums), len(nums)
+        bsize = (maxn - minn + 1.0) / len(nums)
+        bucket = [[2**31-1, -1] for _ in xrange(lenn+1)]
+        for n in nums:
+            index = int((n - minn) // bsize)
+            bucket[index][0] = min(n, bucket[index][0])
+            bucket[index][1] = max(n, bucket[index][1])
+        res, prev = 0, bucket[0][0]
+        for n in bucket:
+            if n != [2**31-1, -1]:
+                res = max(res, n[0] - prev)
+                prev = n[1]
         return res
 
     def maximumGap2(self, nums):
@@ -37,20 +37,18 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        A = self.radixSort(nums)
-        ans = 0
-        if len(A) == 0: return 0
-        prev = A[0]
-        for i in A:
-            if i - prev > ans: 
-                ans = i - prev
-            prev = i
-        return ans
+        if len(nums) < 2 or max(nums) == min(nums):
+            return 0
+        nums = self.radix(nums)
+        res = 0
+        for i in xrange(1, len(nums)):
+            res = max(res, nums[i] - nums[i-1])
+        return res
 
-    def radixSort(self, A): 
-        for k in xrange(10):     
-            s=[[] for i in xrange(10)]
-            for i in A:
-                s[i/(10**k)%10].append(i)
-            A=[a for b in s for a in b] 
-        return A
+    def radix(self, nums):
+        for i in xrange(len(str(max(nums)))):
+            tmp = [[] for _ in xrange(10)]
+            for n in nums:
+                tmp[n / (10**i) % 10].append(n)
+            nums = [a for b in tmp for a in b]
+        return nums

@@ -19,11 +19,11 @@ class Solution(object):
     def majorityElement2(self, nums):
         count = 1
         major = nums[0]
-        for i in range(1, len(nums)):
+        for n in nums[1:]:
             if count == 0:
-                major = nums[i]
-                count += 1
-            elif major == nums[i]:
+                major = n
+                count = 1
+            elif major == n:
                 count += 1
             else:
                 count -= 1

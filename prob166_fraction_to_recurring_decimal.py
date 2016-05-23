@@ -21,13 +21,13 @@ class Solution(object):
         """
         quotient, remainder = divmod(abs(numerator), abs(denominator))
         sign = '-' if numerator * denominator < 0 else ''
-        result = [sign+str(quotient), '.']
+        res = [sign+str(quotient), '.']
         stack = []
         while remainder not in stack:
             stack.append(remainder)
             quotient, remainder = divmod(remainder*10, abs(denominator))
-            result.append(str(quotient))
+            res.append(str(quotient))
         index = stack.index(remainder)
-        result.insert(index+2, '(')
-        result.append(')')
-        return ''.join(result).replace('(0)', '').rstrip('.')
+        res.insert(index+2, '(')
+        res.append(')')
+        return ''.join(res).replace('(0)', '').rstrip('.')

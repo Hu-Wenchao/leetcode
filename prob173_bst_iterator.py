@@ -20,27 +20,30 @@ class BSTIterator(object):
         """
         :type root: TreeNode
         """
-        self.stack = list()
-        self.pushAll(root)
+        self.stack = []
+        self.inorder(root, self.stack)
 
     def hasNext(self):
         """
         :rtype: bool
         """
-        return self.stack
+        if self.stack:
+            return True
+        else:
+            return False
         
     def next(self):
         """
         :rtype: int
         """
-        tmpNode = self.stack.pop()
-        self.pushAll(tmpNode.right)
-        return tmpNode.val
+        return self.stack.pop()
         
-    def pushAll(self, node):
-        while node is not None:
-            self.stack.append(node)
-            node = node.left
+    def inorder(self, root, stack):
+        if root:
+            self.inorder(root.right, stack)
+            stack.append(root.val)
+            self.inorder(root.left, stack)
+
 
 # Your BSTIterator will be called like this:
 # i, v = BSTIterator(root), []

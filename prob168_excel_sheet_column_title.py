@@ -9,9 +9,9 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        s = ''
+        res = ''
         while n > 0:
-            t = (n - 1) % 26
+            r = (n - 1) % 26
             n = (n - 1) / 26
-            s = chr(t + ord('A')) + s
-        return s
+            res = chr(r + ord('A')) + res
+        return res
