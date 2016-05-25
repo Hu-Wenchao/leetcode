@@ -28,16 +28,16 @@ class Solution(object):
         """
         if not root:
             return []
-        pre = [root]
-        ret = [root.val]
-        while pre:
-            cur = []
-            for node in pre:
+        prelayer = [root]
+        res = [root.val]
+        while prelayer:
+            curlayer = []
+            for node in prelayer:
                 if node.left:
-                    cur.append(node.left)
+                    curlayer.append(node.left)
                 if node.right:
-                    cur.append(node.right)
-            if cur:
-                ret.append(cur[-1].val)
-            pre = cur
-        return ret
+                    curlayer.append(node.right)
+            if curlayer:
+                res.append(curlayer[-1].val)
+            prelayer = curlayer
+        return res

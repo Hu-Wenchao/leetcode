@@ -20,17 +20,16 @@ class Solution(object):
         :rtype: ListNode
         """
         if not head:
-            return
-        dummy = pre = ListNode(None)
+            return head
+        dummy = ListNode(None)
         dummy.next = head
-        cur = pre.next
-        while cur.next:
-            if cur.val == val:
-                pre.next = cur.next
-                cur = cur.next
+        ptr = dummy
+        while ptr.next:
+            if ptr.next.val != val:
+                ptr = ptr.next
             else:
-                pre = pre.next
-                cur = cur.next
-        if cur.val == val:
-            pre.next = None
+                if ptr.next.next:
+                    ptr.next = ptr.next.next
+                else:
+                    ptr.next = None
         return dummy.next

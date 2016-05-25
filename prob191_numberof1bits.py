@@ -14,8 +14,8 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        sum = 0
-        while(n>0):
-            sum += n % 2
+        res = 0
+        while n > 0:
+            res += n % 2
             n /= 2
-        return sum
+        return res

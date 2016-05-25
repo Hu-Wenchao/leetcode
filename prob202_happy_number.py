@@ -22,20 +22,19 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        cyclelist = [n]
+        stack = []
         while n != 1:
-            nextnumber = self.next(n)
-            if nextnumber not in cyclelist:
-                cyclelist.append(nextnumber)
+            nn = self.next(n)
+            if nn not in stack:
+                stack.append(nn)
             else:
                 return False
-            n = nextnumber
+            n = nn
         return True
-        
-    def next(self, num):
-        ret = 0
-        while num > 0:
-            t = num % 10
-            num /= 10
-            ret += t * t
-        return ret
+                
+    def next(self, n):
+        res = 0
+        while n > 0:
+            res += (n % 10) ** 2
+            n /= 10
+        return res

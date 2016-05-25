@@ -14,14 +14,14 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head or not head.next:
+        if not head:
             return head
         pre = head
         cur = head.next
         head.next = None
         while cur:
-            temp = cur.next
+            tmp = cur.next
             cur.next = pre
             pre = cur
-            cur = temp
+            cur = tmp
         return pre

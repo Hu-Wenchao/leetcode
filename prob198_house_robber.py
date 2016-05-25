@@ -19,11 +19,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        a = 0
-        b = 0
-        for i in range(len(nums)):
-            if i % 2 == 0:
-                a = max(a + nums[i], b)
-            else:
-                b = max(b + nums[i], a)
-        return max(a, b)
+        dp = [0] * (len(nums) + 1)
+        for i in xrange(1, len(dp)):
+            dp[i] = max(dp[i-1], dp[i-2] + nums[i-1])
+        return dp[-1]

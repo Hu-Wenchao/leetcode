@@ -12,6 +12,17 @@ class Solution(object):
         :type k: int
         :rtype: void Do not return anything, modify nums in-place instead.
         """
+        k %= len(nums)
+        nums[:-k] = list(reversed(nums[:-k]))
+        nums[-k:] = list(reversed(nums[-k:]))
+        nums.reverse()
+        
+    def rotate2(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
         k = k % len(nums)
         while k > 0:
             nums.insert(0, nums.pop())
