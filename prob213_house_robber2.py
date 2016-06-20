@@ -20,21 +20,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) == 0:
-            return 0
-        elif len(nums) == 1:
-            return nums[0]
-            
+        if len(nums) <= 1:
+            return sum(nums)
         return max(self.robrow(nums[1:]), self.robrow(nums[:-1]))
 
     def robrow(self, row):
-        a = 0
-        b = 0
-        for i in range(len(row)):
-            if i % 2 == 0:
-                a = max(a + row[i], b)
-            else:
-                b = max(b + row[i], a)
-        return max(a, b)
-
+        dp = [0] * (len(row) + 1)
+        for i in xrange(1, len(dp)):
+            dp[i] = max(dp[i-1], dp[i-2] + row[i-1])
+        return dp[-1]
         

@@ -18,19 +18,3 @@ class Solution(object):
                 return i
         return i + 1
 
-    def hIndex2(self, citations):
-        if not citations:
-            return 0
-        cites = [0] * (len(citations) + 1)
-        for i in range(len(citations)):
-            if citations[i] > len(citations):
-                cites[-1] += 1
-            else:
-                cites[citations[i]] += 1
-        temp = 0
-        ret = 0
-        for i in range(len(citations), 0, -1):
-            temp += cites[i]
-            if temp >= i:
-                return i
-        return 0

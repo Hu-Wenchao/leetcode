@@ -26,20 +26,20 @@ class Solution:
     def binaryTreePaths(self, root):
         if not root:
             return []
-        self.ret = []
+        self.res = []
         path = str(root.val)
         if not root.left and not root.right:
-            self.ret.append(path)
+            self.res.append(path)
         if root.left:
             self.singlePath(root.left, path)
         if root.right:
             self.singlePath(root.right, path)
-        return self.ret
+        return self.res
         
     def singlePath(self, root, path):
         path += '->' + str(root.val)
         if not root.left and not root.right:
-            self.ret.append(path)
+            self.res.append(path)
         if root.left:
             self.singlePath(root.left, path)
         if root.right:

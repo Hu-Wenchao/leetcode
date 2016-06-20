@@ -26,13 +26,12 @@ class Solution(object):
         :rtype: int
         """
         i = 0
-        ret = len(nums)
-        
-        for i in range(ret):
-            ret ^= nums[i]
-            ret ^= i
+        res = len(nums)        
+        for i in range(res):
+            res ^= nums[i]
+            res ^= i
             i += 1
-        return ret
+        return res
 
     def missingNumber(self, nums):
         """

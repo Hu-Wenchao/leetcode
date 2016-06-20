@@ -16,20 +16,19 @@ class Solution(object):
         """
         if len(nums) <= 1:
             return []
-        forward_product = [0] * len(nums)
-        backward_product = [0] * len(nums)
-        forward_product[0] = nums[0]
-        backward_product[-1] = nums[-1]
+        forward = [0] * len(nums)
+        backward = [0] * len(nums)
+        forward[0] = nums[0]
+        backward[-1] = nums[-1]
         for i in range(1, len(nums)-1):
-            forward_product[i] = forward_product[i-1] * nums[i] 
-            backward_product[-i-1] = backward_product[-i] * nums[-i-1]
-        forward_product[-1] = forward_product[-2] * nums[-1]
-        backward_product[0] = backward_product[1] * nums[0]
+            forward[i] = forward[i-1] * nums[i] 
+            backward[-i-1] = backward[-i] * nums[-i-1]
+        forward[-1] = forward[-2] * nums[-1]
+        backward[0] = backward[1] * nums[0]
         
-        ret = [0] * len(nums)
-        ret[0] = backward_product[1]
-        ret[-1] = forward_product[-2]
+        res = [0] * len(nums)
+        res[0] = backward[1]
+        res[-1] = forward[-2]
         for i in range(1, len(nums)-1):
-            ret[i] = forward_product[i-1] * backward_product[i+1]
-
-        return ret
+            res[i] = forward[i-1] * backward[i+1]
+        return res

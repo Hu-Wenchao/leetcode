@@ -17,12 +17,12 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        tree = self.inOrder(root, [])
+        tree = self.inorder(root, [])
         return tree[k-1]
         
-    def inOrder(self, root, ret):
+    def inorder(self, root, res):
         if root:
-            self.inOrder(root.left, ret)
-            ret.append(root.val)
-            self.inOrder(root.right, ret)
-        return ret
+            self.inorder(root.left, res)
+            res.append(root.val)
+            self.inorder(root.right, res)
+        return res

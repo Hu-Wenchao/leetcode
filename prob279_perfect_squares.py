@@ -14,23 +14,22 @@ class Solution(object):
         """
         if n < 2:
             return n
-        lst = []
+        squares = []
         i = 1
         while i * i <= n:
-            lst.append( i * i )
+            squares.append(i * i)
             i += 1
         cnt = 0
-        toCheck = {n}
-        while toCheck:
+        dic = {n}
+        while dic:
             cnt += 1
-            temp = set()
-            for x in toCheck:
-                for y in lst:
+            tmp = set()
+            for x in dic:
+                for y in squares:
                     if x == y:
                         return cnt
                     if x < y:
                         break
-                    temp.add(x-y)
-            toCheck = temp
-
+                    tmp.add(x-y)
+            dic = tmp
         return cnt

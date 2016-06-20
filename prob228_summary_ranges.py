@@ -11,23 +11,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[str]
         """
-        ret = []
         if not nums:
-            return ret
-        start = nums[0]
-        end = nums[0]
-        for i in range(1, len(nums)):
-            if nums[i] - end == 1:
-                end += 1
-            else:
-                if start != end:
-                    ret.append(str(start) + '->' + str(end))
+            return []
+        res = []
+        s = nums[0]
+        for i in xrange(1, len(nums)):
+            if nums[i] - nums[i-1] != 1:
+                if nums[i-1] != s:
+                    res.append(str(s) + '->' + str(nums[i-1]))
                 else:
-                    ret.append(str(start))        
-                start = nums[i]
-                end = nums[i]
-        if start != end:
-            ret.append(str(start) + '->' + str(end))
+                    res.append(str(s))
+                s = nums[i]
+        if nums[-1] != s:
+            res.append(str(s) + '->' + str(nums[-1]))
         else:
-            ret.append(str(start))
-        return ret
+            res.append(str(s))
+        return res

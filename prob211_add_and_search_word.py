@@ -42,7 +42,7 @@ class WordDictionary(object):
         :rtype: bool
         """
         if not word:
-            return Fasle
+            return False
         if '.' not in word:
             return word in self.word[len(word)]
         for v in self.word[len(word)]:

@@ -13,8 +13,11 @@ class Solution(object):
         :rtype: bool
         """
         dic = {}
-        for i, v in enumerate(nums):
-            if v in dic and i - dic[v] <= k:
-                return True
-            dic[v] = i
+        for i, n in enumerate(nums):
+            if n not in dic:
+                dic[n] = i
+            else:
+                if i - dic[n] <= k:
+                    return True
+                dic[n] = i
         return False

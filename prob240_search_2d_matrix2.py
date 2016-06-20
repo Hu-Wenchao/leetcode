@@ -13,11 +13,8 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        m = len(matrix)
-        if m == 0:
-            return False
-        n = len(matrix[0])
-        if n == 0:
+        m, n = len(matrix), len(matrix[0])
+        if m == 0 or n == 0:
             return False
         i = 0
         j = n - 1

@@ -27,9 +27,11 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        if not root:
-            return
-        root.left, root.right = root.right, root.left
-        self.invertTree(root.left)
-        self.invertTree(root.right)
+        self.helper(root)
         return root
+        
+    def helper(self, root):
+        if root:
+            root.left, root.right = root.right, root.left
+            self.helper(root.left)
+            self.helper(root.right)

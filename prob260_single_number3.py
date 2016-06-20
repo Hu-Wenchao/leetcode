@@ -22,17 +22,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        nums_dict = {}
-        for i in range(len(nums)):
-            if nums[i] not in nums_dict:
-                nums_dict[nums[i]] = 1
+        dic = {}
+        for n in nums:
+            if n not in dic:
+                dic[n] = 1
             else:
-                nums_dict[nums[i]] += 1
-        result = []
-        for (k, v) in nums_dict.iteritems():
+                dic[n] += 1
+        res = []
+        for (k, v) in dic.iteritems():
             if v == 1:
-                result.append(k)
-        return result
+                res.append(k)
+        return res
 
     def singleNumber2(self, nums):
         """
@@ -40,16 +40,16 @@ class Solution(object):
         :rtype: List[int]
         """
         nums.sort()
-        result = []
+        res = []
         i = 0
         while i < len(nums) - 2:
             if nums[i] != nums[i+1]:
-                result.append(nums[i])
+                res.append(nums[i])
                 i += 1
             else:
                 i += 2
-        if len(result) == 1:
-            result.append(nums[-1])
-        elif len(result) == 0:
+        if len(res) == 1:
+            res.append(nums[-1])
+        elif len(res) == 0:
             return nums[-2:]
-        return result
+        return res

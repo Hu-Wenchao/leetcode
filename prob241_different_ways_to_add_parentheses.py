@@ -10,15 +10,22 @@ class Solution(object):
         :type input: str
         :rtype: List[int]
         """
-        tokens = re.split('(\D)', input)
-        nums = map(int, tokens[::2])
-        ops = map({'+': operator.add, '-': operator.sub, 
-                   '*': operator.mul}.get, tokens[1::2])
-        def build(lo, hi):
-            if lo == hi:
-                return [nums[lo]]
-            return [ops[i](a, b)
-                    for i in xrange(lo, hi)
-                    for a in build(lo, i)
-                    for b in build(i + 1, hi)]
-        return build(0, len(nums) - 1)
+        if input.isdigit():
+            return [int(input)]
+        res = []
+        for i in xrange(len(input)):
+            if input[i] in '+-*':
+                res1 = self.diffWaysToCompute(input[:i])
+                res2 = self.diffWaysToCompute(input[i+1:])
+                for j in res1:
+                    for k in res2:
+                        res.append(self.helper(j, k, input[i]))
+        return res
+
+    def helper(self, m, n, op):
+        if op == '+':
+            return m + n
+        elif op == '-':
+            return m - n
+        else:
+            return m * n

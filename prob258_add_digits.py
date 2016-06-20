@@ -17,3 +17,19 @@ class Solution(object):
         if num == 0:
             return 0
         return 1 + ((num - 1) % 9)
+
+    def addDigits2(self, num):
+        """
+        :type num: int
+        :rtype: int
+        """
+        while num > 9:
+            num = self.next(num)
+        return num
+        
+    def next(self, num):
+        res = 0
+        while num > 0:
+            res += num % 10
+            num /= 10
+        return res

@@ -20,7 +20,7 @@ class Solution(object):
         :rtype: int
         """
         if not s:
-            return '0'
+            return 0
         stack, num, sign = [], 0, '+'
         for i in xrange(len(s)):
             if s[i].isdigit():

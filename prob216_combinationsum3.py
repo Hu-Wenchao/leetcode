@@ -31,21 +31,18 @@ class Solution(object):
         :type n: int
         :rtype: List[List[int]]
         """
-        candidates = list(range(1,10))
-        solution = []
-        self.combinationSum3Rec(candidates, n, k, 0, 0, [], solution)
-        return solution
+        nums = list(xrange(1, 10))
+        res = []
+        self.rec(nums, n, k, 0, 0, [], res)
+        return res
 
-    def combinationSum3Rec(self, candidates, n, k, index, tempsum, templist,
-                           solution):
-        if tempsum == n and len(templist) == 3:
-            solution.append(list(templist))
+    def rec(self, nums, n, k, index, tmpsum, tmplist, res):
+        if tmpsum == n and len(tmplist) == k:
+            res.append(list(tmplist))
             return
-        for i in range(index, len(candidates)):
-            if tempsum + candidates[i] > n or len(templist) > k:
+        for i in xrange(index, len(nums)):
+            if tmpsum + nums[i] > n or len(tmplist) > k:
                 break
-            templist.append(candidates[i])
-            self.combinationSum3Rec(candidates, n, k, i+1,
-                                    tempsum+candidates[i],
-                                    templist, solution)
-            templist.pop()
+            tmplist.append(nums[i])
+            self.rec(nums, n, k, i+1, tmpsum+nums[i], tmplist, res)
+            tmplist.pop()

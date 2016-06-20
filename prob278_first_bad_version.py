@@ -26,7 +26,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        low, high = 0, n -1
+        low, high = 0, n - 1
         while low <= high:
             mid = (low + high) / 2
             if isBadVersion(mid):

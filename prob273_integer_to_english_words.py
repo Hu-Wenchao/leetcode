@@ -16,24 +16,24 @@ class Solution(object):
         :type num: int
         :rtype: str
         """
-        ret = ''
+        res = ''
         billion = 1000000000
         million = 1000000
         thousand = 1000
         if num == 0:
-            ret = 'Zero'
+            res = 'Zero'
         if num >= billion:
-            ret += self.helper(num / billion) + 'Billion '
+            res += self.helper(num / billion) + 'Billion '
             num %= billion
         if num >= million:
-            ret += self.helper(num / million) + 'Million '
+            res += self.helper(num / million) + 'Million '
             num %= million
         if num >= thousand:
-            ret += self.helper(num / thousand) + 'Thousand '
+            res += self.helper(num / thousand) + 'Thousand '
             num %= thousand
         if num > 0:
-            ret += self.helper(num)
-        return ret.rstrip(' ')
+            res += self.helper(num)
+        return res.rstrip(' ')
         
     def helper(self, num):
         dic = {1 : 'One', 2 : 'Two', 3 : 'Three', 4 : 'Four', 5 : 'Five',
@@ -41,15 +41,15 @@ class Solution(object):
                11 : 'Eleven', 12 : 'Twelve', 13 : 'Thirteen', 14 : 'Fourteen',
                15 : 'Fifteen', 16 : 'Sixteen', 17 : 'Seventeen',
                18 : 'Eighteen', 19 : 'Nineteen', 20 : 'Twenty',
-               30 : 'Thirty', 40 : 'Fourty', 50 : 'Fifty', 60 : 'Sixty',
+               30 : 'Thirty', 40 : 'Forty', 50 : 'Fifty', 60 : 'Sixty',
                70 : 'Seventy', 80 : 'Eighty', 90 : 'Ninety'}
-        ret = ''
+        res = ''
         if num >= 100:
-            ret += dic[num / 100] + ' Hundred '
+            res += dic[num / 100] + ' Hundred '
             num %= 100
         if num > 20:
-            ret += dic[num / 10 * 10] + ' '
+            res += dic[num / 10 * 10] + ' '
             num %= 10
         if num >0:
-            ret += dic[num] + ' '
-        return ret
+            res += dic[num] + ' '
+        return res

@@ -25,14 +25,14 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        ans = []
+        res = []
         queue = []
-        for i, v in enumerate(nums):
+        for i, n in enumerate(nums):
             if queue and queue[0] <= i - k:
                 queue = queue[1:]
-            while queue and nums[queue[-1]] < v:
+            while queue and nums[queue[-1]] < n:
                 queue.pop()
             queue.append(i)
             if i + 1 >= k:
-                ans.append(nums[queue[0]])
-        return ans
+                res.append(nums[queue[0]])
+        return res
