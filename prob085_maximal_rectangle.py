@@ -17,6 +17,7 @@ class Solution(object):
         for i in xrange(m):
             for j in xrange(n):
                 if matrix[i][j] == '1':
+                    # dp[-1] = [0] * n when i = 0
                     dp[i][j] = dp[i-1][j] + 1
         return max(self.helper(row) for row in dp)
 
