@@ -26,7 +26,7 @@ class Solution(object):
                 if neighbor not in dic:
                     neighborCopy = UndirectedGraphNode(neighbor.label)
                     dic[neighbor] = neighborCopy
-                    dic[node].neighbors.append(neighborCopy)
+                    dic[node].neighbors.append(dic[neighbor])
                     queue.append(neighbor)
                 else:
                     dic[node].neighbors.append(dic[neighbor])
@@ -44,7 +44,7 @@ class Solution(object):
                 if neighbor not in dic:
                     neighborCopy = UndirectedGraphNode(neighbor.label)
                     dic[neighbor] = neighborCopy
-                    dic[node].neighbors.append(neighborCopy)
+                    dic[node].neighbors.append(dic[neighbor])
                     stack.append(neighbor)
                 else:
                     dic[node].neighbors.append(dic[neighbor])
@@ -63,7 +63,7 @@ class Solution(object):
             if neighbor not in dic:
                 neighborCopy = UndirectedGraphNode(neighbor.label)
                 dic[neighbor] = neighborCopy
-                dic[node].neighbors.append(neighborCopy)
+                dic[node].neighbors.append(dic[neighbor])
                 self.dfs(neighbor, dic)
             else:
                 dic[node].neighbors.append(dic[neighbor])
