@@ -21,16 +21,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        nums = [1] + [i for i in nums if i > 0] + [1]
-        n = len(nums)
-        dp = [[0]*n for _ in xrange(n)]
+        nums = [1] + [n for n in nums if n > 0] + [1]
+        l = len(nums)
+        dp = [[0] * l for _ in xrange(l)]
 
-        for k in xrange(2, n):
-            for left in xrange(0, n - k):
+        for k in xrange(2, l):
+            for left in xrange(0, l - k):
                 right = left + k
                 for i in xrange(left + 1,right):
                     dp[left][right] = max(dp[left][right], nums[left] * \
                                           nums[i] * nums[right] + \
                                           dp[left][i] + dp[i][right])
-        return dp[0][n - 1]        
+        return dp[0][l - 1]        
             

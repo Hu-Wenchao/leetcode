@@ -15,13 +15,14 @@ class Solution(object):
         :type primes: List[int]
         :rtype: int
         """
-        uglies = [1]
-        def gen(prime):
-            for ugly in uglies:
-                yield ugly * prime
-        merged = heapq.merge(*map(gen, primes))
-        while len(uglies) < n:
-            ugly = next(merged)
-            if ugly != uglies[-1]:
-                uglies.append(ugly)
-        return uglies[-1]
+        import heapq
+        q, ugly = [], [1]
+        for i in xrange(len(primes)):
+            heapq.heappush(q, (primes[i], 0, primes[i]))
+        while len(ugly) < n:
+            x, i, p = q[0]
+            ugly.append(x)
+            while q and q[0][0] == x:
+                x, i, p = heapq.heappop(q)
+                heapq.heappush(q, (p * ugly[i+1], i+1, p))
+        return ugly[-1]

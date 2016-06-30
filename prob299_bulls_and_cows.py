@@ -17,7 +17,7 @@ class Solution(object):
         :type guess: str
         :rtype: str
         """
-        A = B = 0
+        A, B = 0, 0
         i = 0
         while i < len(secret):
             if secret[i] == guess[i]:

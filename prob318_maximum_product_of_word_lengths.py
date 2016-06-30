@@ -14,16 +14,13 @@ class Solution(object):
         """
         if not words:
             return 0
-        curmax = 0
-        while words:
-            curword = set(words[0])
-            curlen = len(words[0])
-            words = words[1:]
-            for word in words:
-                for char in curword:
-                    if char in word:
-                        break
-                else:
-                    curmax = max(curmax, curlen*len(word))
-        return curmax
-            
+        mask = [0] * len(words)
+        for i in xrange(len(words)):
+            for c in words[i]:
+                mask[i] |= 1 << (ord(c) - ord('a'))
+        res = 0
+        for i in xrange(len(words)):
+            for j in xrange(i+1, len(words)):
+                if mask[i] & mask[j] == 0:
+                    res = max(res, len(words[i]) * len(words[j]))
+        return res

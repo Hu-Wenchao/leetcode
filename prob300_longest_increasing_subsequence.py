@@ -19,6 +19,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        # the val in tails[i] means minimal tail val for
+        # increasing subsequence of length i+1.
         tails = [0] * len(nums)
         size = 0
         for x in nums:

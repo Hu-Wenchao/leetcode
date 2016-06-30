@@ -14,8 +14,4 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        #ret = 0
-        #while ret ** 2 <= n:
-        #    ret += 1
-        #return ret - 1
         return int(sqrt(n))

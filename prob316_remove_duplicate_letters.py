@@ -12,29 +12,24 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        lastAppear, inResult, result =  {c: i for i, c in enumerate(s)}, 0, []
-        for i, c in enumerate(s):
-            mask = 1 << (ord(c) - 97)
-            if not (mask & inResult):
-                while result and c < result[-1] and i < lastAppear[result[-1]]:
-                    inResult ^= 1 << (ord(result.pop()) - 97)  # set to 0
-                result.append(c)
-                inResult |= mask  # set to 1
-        return ''.join(result)
-
-    def removeDuplicateLetters(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        if not s: return ""
-        counts = collections.Counter(list(s))
-        
-        pos = 0
-        for i, x in enumerate(s):
-            if x < s[pos]: pos = i
-            counts[x] -= 1
-            if counts[x] == 0: break
-            
-        return s[pos] + \
-            self.removeDuplicateLetters(s[pos+1:].replace(s[pos], ""))
+        cnt = [0] * 26
+        res = ''
+        used = [False] * 26
+        for c in s:
+            cnt[ord(c) - ord('a')] += 1
+        for c in s:
+            ci = ord(c) - ord('a')
+            cnt[ci] -= 1
+            if used[ci]:
+                continue
+            for j in xrange(len(res)-1, -1, -1):
+                cj = ord(res[j]) - ord('a')
+                if cj > ci and cnt[cj] > 0:
+                    used[cj] = False
+                    res = res[:j] + res[j+1:]
+                    j -= 1
+                else:
+                    break
+            used[ci] = True
+            res += c
+        return res

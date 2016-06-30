@@ -27,14 +27,14 @@ class NumMatrix(object):
         initialize your data structure here.
         :type matrix: List[List[int]]
         """
-        if matrix is None or not matrix:
+        if not matrix:
             return
-        n, m = len(matrix), len(matrix[0])
-        self.sums = [ [0 for j in xrange(m+1)] for i in xrange(n+1) ]
-        for i in xrange(1, n+1):
-            for j in xrange(1, m+1):
-                self.sums[i][j] = matrix[i-1][j-1] + self.sums[i][j-1] + \
-                                  self.sums[i-1][j] - self.sums[i-1][j-1]
+        m, n = len(matrix), len(matrix[0])
+        self.accum = [[0] * (n + 1) for _ in range(m + 1)]
+        for i in xrange(1, m+1):
+            for j in xrange(1, n+1):
+                self.accum[i][j] = self.accum[i-1][j] + self.accum[i][j-1] -
+                self.accum[i-1][j-1] + matrix[i-1][j-1]
 
     def sumRegion(self, row1, col1, row2, col2):
         """
@@ -45,11 +45,10 @@ class NumMatrix(object):
         :type col2: int
         :rtype: int
         """
-        row1, col1, row2, col2 = row1+1, col1+1, row2+1, col2+1
-        return self.sums[row2][col2] - self.sums[row2][col1-1] - \
-            self.sums[row1-1][col2] + self.sums[row1-1][col1-1]
+        return self.accum[row2+1][col2+1] + self.accum[row1][col1] - \
+            self.accum[row1][col2+1] - self.accum[row2+1][col1]
 
-
+        
 # Your NumMatrix object will be instantiated and called as such:
 # numMatrix = NumMatrix(matrix)
 # numMatrix.sumRegion(0, 1, 2, 3)

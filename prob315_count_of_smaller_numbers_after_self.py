@@ -20,51 +20,29 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        def sort(enum):
-            half = len(enum) / 2
-            if half:
-                left, right = sort(enum[:half]), sort(enum[half:])
-                for i in range(len(enum))[::-1]:
-                    if not right or left and left[-1][1] > right[-1][1]:
-                        smaller[left[-1][0]] += len(right)
-                        enum[i] = left.pop()
-                    else:
-                        enum[i] = right.pop()
-            return enum
-        smaller = [0] * len(nums)
-        sort(list(enumerate(nums)))
-        return smaller
+        if not nums:
+            return []
+        n = len(nums)
+        padding = min(nums)
+        if padding <= 0:
+            nums = [a + 1 - padding for a in nums]
+        m = max(nums)
+        T = [0] * (m+1)
+        ans = []
+        t = 0
+        for num in nums[::-1]:
+            ans.append(self.getSum(T, num-1))
+            self.update(T, num, 1)
+        return ans[::-1]
+        
+    def getSum(self, T, idx):
+        ans = 0
+        while idx:
+            ans += T[idx]
+            idx -= idx & (-idx)
+        return ans
 
-    def lowbit(self, i):
-        return i & (-i)
-
-    def add(self, c, n, i, val):
-        while i<=n:
-            c[i] += val
-            i += self.lowbit(i)
-
-    def getSum(self, c, i):
-        res = 0
-        while i>0:
-            res += c[i]
-            i -= self.lowbit(i)
-        return res
-
-    def countSmaller2(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        find_i = {}
-        cnt = 1
-        for n in sorted(nums):
-            if n not in find_i:
-                find_i[n] = cnt
-                cnt += 1
-
-        res = []
-        c = [0 for i in range(cnt+1)]
-        for i in range(len(nums)-1,-1,-1):
-            res += self.getSum(c, find_i[nums[i]]-1),
-            self.add(c, cnt, find_i[nums[i]], 1)
-        return res[::-1]
+    def update(self, T, idx, val):
+        while idx <= len(T)-1:
+            T[idx] += val
+            idx += idx & (-idx)
