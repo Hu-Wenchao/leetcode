@@ -48,31 +48,3 @@ class Solution(object):
                         value2.append(newval)
             value1, value2 = value2, []
         return -1
-
-    def coinChange(self, coins, amount):
-        if len(coins) == 0:
-            return -1
-        if amount == 0:
-            return 0
-        sortedCoins = sorted(coins, reverse=True)
-        upperBound = (amount + sortedCoins[-1] - 1) / sortedCoins[-1] + 1
-        self.bestNCoins = upperBound
-        self.branchAndBoundSearch(sortedCoins, amount, 0)
-        if self.bestNCoins == upperBound:
-            return -1
-        else:
-            return self.bestNCoins
-
-    def branchAndBoundSearch(self, sortedCoins, amount, nCoins):
-        lowerBound = nCoins + (amount + sortedCoins[0] - 1) / sortedCoins[0]
-        if lowerBound > self.bestNCoins:
-            return
-        if len(sortedCoins) == 0:
-            return
-        if amount == sortedCoins[0] and nCoins + 1 < self.bestNCoins:
-            self.bestNCoins = nCoins + 1
-            return
-        if amount > sortedCoins[0]:
-            self.branchAndBoundSearch(sortedCoins, amount - sortedCoins[0], nCoins + 1)
-        if len(sortedCoins) > 1:
-            self.branchAndBoundSearch(sortedCoins[1:], amount, nCoins)

@@ -14,19 +14,21 @@ class Solution(object):
         :type k: int
         :rtype: List[int]
         """
-        def prep(nums, k):
-            drop = len(nums) - k
-            out = []
-            for num in nums:
-                while drop and out and out[-1] < num:
-                    out.pop()
-                    drop -= 1
-                out.append(num)
-            return out[:k]
-
-        def merge(a, b):
-            return [max(a, b).pop(0) for _ in a+b]
-
-        return max(merge(prep(nums1, i), prep(nums2, k-i))
-                   for i in range(k+1)
+        return max(self.merge(self.prepare(nums1, i), self.prepare(nums2, k-i))
+                   for i in xrange(k+1)
                    if i <= len(nums1) and k-i <= len(nums2))
+    
+    def prepare(self, nums, k):
+        # Find the maximum number whith (len(nums) - k) digits
+        # in nums while keep the relative digit position unchanged.
+        drop = len(nums) - k
+        res = []
+        for num in nums:
+            while drop and res and res[-1] < num:
+                res.pop()
+                drop -= 1
+            res.append(num)
+        return res[:k]
+        
+    def merge(self, a, b):
+        return [max(a, b).pop(0) for _ in a + b]

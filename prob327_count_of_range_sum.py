@@ -4,7 +4,24 @@ that lie in [lower, upper] inclusive.
 Range sum S(i, j) is defined as the sum of the elements in nums 
 between indices i and j (i ≤ j), inclusive.
 """
-
+class BinaryIndexedTree(object):
+    def __init__(self, n):
+        self.tree = [0] * (n + 1)
+    
+    
+    def update(self, idx, val):
+        while idx < len(self.tree):
+            self.tree[idx] += val
+            idx += idx & -idx
+    
+    
+    def get(self, idx):
+        s = 0
+        while idx:
+            s += self.tree[idx]
+            idx -= idx & -idx
+        return s
+    
 class Solution(object):
     def countRangeSum(self, nums, lower, upper):
         """
@@ -13,27 +30,29 @@ class Solution(object):
         :type upper: int
         :rtype: int
         """
-        n = len(nums)
-        Sum, BITree = [0] * (n + 1), [0] * (n + 2)
+        T, d, pref = self.build_bit(nums, lower, upper)
+        return self.compute_count(T, d, pref, lower, upper)
 
-        def count(x):
-            s = 0
-            while x:
-                s += BITree[x]
-                x -= (x & -x)
-            return s
-
-        def update(x):
-            while x <= n + 1:
-                BITree[x] += 1
-                x += (x & -x)
-
-        for i in range(n):
-            Sum[i + 1] = Sum[i] + nums[i]
-        sortSum, res = sorted(Sum), 0
-        for sum_j in Sum:
-            sum_i_count = count(bisect.bisect_right(sortSum, sum_j - lower)) -\
-                          count(bisect.bisect_left(sortSum, sum_j - upper))
-            res += sum_i_count
-            update(bisect.bisect_left(sortSum, sum_j) + 1)
+    def build_prefix(self, nums):
+        sums, res = 0, []
+        for elem in nums:
+            sums += elem
+            res.append(sums)
+        res.insert(0, 0)
         return res
+
+    def build_bit(self, nums, low, up):
+        pref, vals = self.build_prefix(nums), set()
+        for e in pref:
+            vals |= set([e + low, e + up, e])
+        d = {v: i for i, v in enumerate(sorted(list(vals)))}
+        T = BinaryIndexedTree(len(d))
+        return T, d, pref
+
+    def compute_count(self, T, d, pref, low, up):
+        count, n = 0, len(T.tree)
+        for elem in pref[::-1]:
+            lb, ub = elem + low, elem + up
+            count += T.get(d[ub] + 1) - T.get(d[lb])
+            T.update(d[elem] + 1, 1)
+        return count
