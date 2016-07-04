@@ -24,14 +24,14 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        res = self.robSub(root)
+        res = self.robsub(root)
         return max(res)
 
-    def robSub(self, root):
+    def robsub(self, root):
         if not root:
             return [0, 0]
-        left = self.robSub(root.left)
-        right = self.robSub(root.right)
+        left = self.robsub(root.left)
+        right = self.robsub(root.right)
         res = [0, 0]
         res[0] = max(left) + max(right)
         res[1] = root.val + left[0] + right[0]

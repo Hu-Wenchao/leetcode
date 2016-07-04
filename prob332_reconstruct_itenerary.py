@@ -39,6 +39,6 @@ class Solution(object):
         
     def visit(self, airport, targets, route):
         while targets[airport]:
-            self.visit(target[airport].pop(), targets, route)
+            self.visit(targets[airport].pop(), targets, route)
         route.append(airport)
         return route
