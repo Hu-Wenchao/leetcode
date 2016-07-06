@@ -19,29 +19,26 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        if len(nums) < 3:
-            return []
         nums.sort()
-        ret = []
-        for i in range(len(nums)-2):
+        res = []
+        for i in xrange(len(nums) - 2):
             if i == 0 or nums[i] > nums[i-1]:
-                negate = -nums[i]
-                start = i + 1
-                end = len(nums) - 1
-                while start < end:
-                    if nums[start] + nums[end] == negate:
-                        ret.append([nums[i], nums[start], nums[end]])
-                        start += 1
-                        end -= 1
-                        while start < end and nums[start] == nums[start-1]:
-                            start += 1
-                        while start < end and nums[end] == nums[end+1]:
-                            end -= 1
-                    elif nums[start] + nums[end] < negate:
-                        start += 1
+                target = -nums[i]
+                b, e = i + 1, len(nums) - 1
+                while b < e:
+                    if nums[b] + nums[e] == target:
+                        res.append([nums[i], nums[b], nums[e]])
+                        b += 1
+                        e -= 1
+                        while b < e and nums[b] == nums[b-1]:
+                            b += 1
+                        while b < e and nums[e] == nums[e+1]:
+                            e -= 1
+                    elif nums[b] + nums[e] < target:
+                        b += 1
                     else:
-                        end -= 1
-        return ret
+                        e -= 1
+        return res
 
     def threeSum2(self, nums):
         """
@@ -51,24 +48,24 @@ class Solution(object):
         if len(nums) < 3:
             return []
         nums.sort()
-        ret = []
+        res = []
         for i in range(len(nums)-2):
             if i == 0 or nums[i] > nums[i-1]:
                 target = -nums[i]
-                temp = self.twoSum(nums[i+1:], target)
-                for term in temp:
-                    if term not in ret:
-                        ret.append(term)
-        return ret
+                tmp = self.twoSum(nums[i+1:], target)
+                for term in tmp:
+                    if term not in res:
+                        res.append(term)
+        return res
         
     def twoSum(self, nums, target):
         d = {}
-        ret = []
+        res = []
         for i, num in enumerate(nums):
             if num in d:
-                temp = [-target, d[num], num]
-                if temp not in ret:
-                    ret.append(temp)
+                tmp = [-target, d[num], num]
+                if tmp not in res:
+                    res.append(tmp)
             else:
                 d[target-num] = num
-        return ret
+        return res

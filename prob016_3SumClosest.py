@@ -16,30 +16,25 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if len(nums) < 3:
-            return
         nums.sort()
-        result = sum(nums[:3])
-        gap = abs(result - target)
-        for i in range(len(nums) - 2):
+        res = sum(nums[:3])
+        gap = abs(res - target)
+        for i in xrange(len(nums) - 2):
             if i == 0 or nums[i] > nums[i-1]:
-                newTarget = target - nums[i]
-                l = i + 1
-                r = len(nums) - 1
-                while l < r:
-                    s = nums[l] + nums[r]
-                    if s == newTarget:
+                new_target = target - nums[i]
+                b, e = i + 1, len(nums) - 1
+                while b < e:
+                    s = nums[b] + nums[e]
+                    if s == new_target:
                         return target
-                    elif s < newTarget:
-                        newGap = abs(s - newTarget)
-                        if newGap < gap:
-                            gap = newGap
-                            result = s + nums[i]
-                        l += 1
+                    elif s < new_target:
+                        if new_target - s < gap:
+                            gap = new_target - s
+                            res = s + nums[i]
+                        b += 1
                     else:
-                        newGap = abs(s - newTarget)
-                        if newGap < gap:
-                            gap = newGap
-                            result = s + nums[i]
-                        r -= 1
-        return result
+                        if s - new_target < gap:
+                            gap = s - new_target
+                            res = s + nums[i]
+                        e -= 1
+        return res
