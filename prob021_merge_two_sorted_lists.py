@@ -28,5 +28,5 @@ class Solution(object):
                 ptr.next = l2
                 ptr = ptr.next
                 l2 = l2.next
-        ptr.next = l1 or l2
+        ptr.next = l1 if l1 else l2
         return dummy.next

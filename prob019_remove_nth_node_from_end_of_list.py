@@ -14,10 +14,10 @@ Try to do this in one pass.
 """
 
 # Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
 class Solution(object):
     def removeNthFromEnd(self, head, n):
@@ -28,15 +28,14 @@ class Solution(object):
         """
         dummy = ListNode(None)
         dummy.next = head
-        pt = head
-        list_len = 0
-        while pt:
-            list_len += 1
-            pt = pt.next
-        pt = dummy
-        i = list_len - n
-        while i > 0:
-            pt = pt.next
-            i -= 1
-        pt.next = pt.next.next
+        ptr = dummy
+        l = 0
+        while ptr.next:
+            l += 1
+            ptr = ptr.next
+        ptr = dummy
+        while l - n > 0:
+            ptr = ptr.next
+            l -= 1
+        ptr.next = ptr.next.next
         return dummy.next

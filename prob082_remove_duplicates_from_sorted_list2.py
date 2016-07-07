@@ -20,7 +20,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head or not head.next:
+        if not head:
             return head
         dummy = ListNode(None)
         dummy.next = head
@@ -30,6 +30,29 @@ class Solution(object):
                 tmpval = ptr.next.val
                 while ptr.next and ptr.next.val == tmpval:
                     ptr.next = ptr.next.next
+            else:
+                ptr = ptr.next
+        return dummy.next
+
+    def deleteDuplicates2(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head:
+            return head
+        dummy = ListNode(None)
+        dummy.next = head
+        ptr = dummy.next
+        dic = {}
+        while ptr.next:
+            if ptr.val == ptr.next.val:
+                dic[ptr.val] = True
+            ptr = ptr.next
+        ptr = dummy
+        while ptr.next:
+            if ptr.next.val in dic:
+                ptr.next = ptr.next.next
             else:
                 ptr = ptr.next
         return dummy.next

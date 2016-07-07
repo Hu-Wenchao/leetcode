@@ -18,13 +18,13 @@ class Solution(object):
         if not lists:
             return None
         while len(lists) > 1:
-            temp = []
+            tmp = []
             for i in range(0, len(lists)-1, 2):
                 merged = self.merge(lists[i], lists[i+1])
-                temp.append(merged)
+                tmp.append(merged)
             if len(lists) % 2 == 1:
-                temp.append(lists[-1])
-            lists = temp
+                tmp.append(lists[-1])
+            lists = tmp
         return lists[0]
 
     def merge(self, l1, l2):
@@ -39,15 +39,13 @@ class Solution(object):
                 ptr.next = l2
                 ptr = ptr.next
                 l2 = l2.next
-        if not l2:
-            ptr.next = l1
-        else:
-            ptr.next = l2
+        ptr.next = l1 if l1 else l2
         return dummy.next
 
     def mergeKLists2(self, lists):
         from heapq import heappop, heapreplace, heapify
-        dummy = node = ListNode(None)
+        dummy = ListNode(None)
+        ptr = dummy
         h = [(n.val, n) for n in lists if n]
         heapify(h)
         while h:
@@ -56,6 +54,6 @@ class Solution(object):
                 heappop(h)
             else:
                 heapreplace(h, (n.next.val, n.next))
-            node.next = n
-            node = node.next
+            ptr.next = n
+            ptr = prt.next
         return dummy.next

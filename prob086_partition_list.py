@@ -23,7 +23,7 @@ class Solution(object):
         :type x: int
         :rtype: ListNode
         """
-        if not head or not head.next:
+        if not head:
             return head
         large = ListNode(None)
         small = ListNode(None)

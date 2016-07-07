@@ -24,18 +24,18 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         nums.sort()
-        results = []
-        self.nSum(nums, target, 4, [], results)
-        return results
-
-    def nSum(self, nums, target, n, result, results):
-        if len(nums) < n or n < 2:
+        res = []
+        self.nsum(nums, target, 4, [], res)
+        return res
+        
+    def nsum(self, nums, target, n, tmp, res):
+        if len(nums) < n:
             return
         if n == 2:
             l, r = 0, len(nums) - 1
             while l < r:
                 if nums[l] + nums[r] == target:
-                    results.append(result + [nums[l], nums[r]])
+                    res.append(tmp + [nums[l], nums[r]])
                     l += 1
                     r -= 1
                     while l < r and nums[l] == nums[l-1]:
@@ -47,12 +47,12 @@ class Solution(object):
                 else:
                     r -= 1
         else:
-            for i in range(len(nums)-n+1):
+            for i in range(len(nums) - n + 1):
                 if target < nums[i] * n or target > nums[-1] * n:
                     break
                 if i == 0 or nums[i] > nums[i-1]:
-                    self.nSum(nums[i+1:], target-nums[i], n-1,
-                              result+[nums[i]], results)
+                    self.nsum(nums[i+1:], target - nums[i], n - 1,
+                              tmp + [nums[i]], res)
 
 
     # Solution 2
