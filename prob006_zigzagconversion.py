@@ -23,11 +23,11 @@ class Solution(object):
         :rtype: str
         """
         step = (numRows == 1) - 1
-        tmp = [''] * numRows
+        stack = [''] * numRows
         i = 0
-        for ch in s:
-            tmp[i] += ch
+        for c in s:
+            stack[i] += c
             if i == 0 or i == numRows - 1:
                 step = -step
             i += step
-        return ''.join(tmp)
+        return ''.join(stack)

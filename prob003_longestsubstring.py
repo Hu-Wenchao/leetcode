@@ -12,24 +12,25 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        ret, tmp = 0, []
-        for i in xrange(len(s)):
-            if s[i] not in tmp:
-                tmp.append(s[i])
+        res = 0
+        stack = []
+        for c in s:
+            if c not in stack:
+                stack.append(c)
             else:
-                if ret < len(tmp):
-                    ret = len(tmp)
-                del tmp[:tmp.index(s[i]) + 1]
-                tmp.append(s[i])
-        if ret < len(tmp):
-            ret = len(tmp)
-        return ret
+                res = max(res, len(stack))
+                stack.append(c)
+                del stack[:stack.index(c)+1]
+        res = max(res, len(stack))
+        return res
 
     def lengthOfLongestSubstring2(self, s):
-        ret, start, d = 0, 0, {}
-        for i, ch in enumerate(s):
-            if ch in d:
-                ret = max(ret, i - start)
-                start = max(start, d[ch] + 1)
-            d[ch] = i
-        return max(ret, len(s) - start)
+        res = 0
+        dic = {}
+        start = 0
+        for i, c in enumerate(s):
+            if c in dic:
+                res = max(res, i - start)
+                start = max(start, dic[c] + 1)
+            dic[c] = i
+        return max(res, len(s) - start)

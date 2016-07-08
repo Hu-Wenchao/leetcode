@@ -16,13 +16,12 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        l, r, c = 0, len(height) - 1, 0
+        l, r = 0, len(height) - 1
+        res = 0
         while l < r:
+            res = max(res, min(height[l], height[r]) * (r - l))
             if height[l] < height[r]:
-                c = max(c, height[l] * (r - l))
                 l += 1
             else:
-                c = max(c, height[r] * (r - l))
                 r -= 1
-        return c
-        
+        return res

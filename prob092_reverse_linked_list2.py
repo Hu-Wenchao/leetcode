@@ -25,25 +25,24 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
-        if m == n:
+        if not head or m == n:
             return head
         dummy = ListNode(None)
         dummy.next = head
-        pre = dummy
-        
-        for i in range(m - 1):
-            pre = pre.next
-        
-        # reverse the [m, n] nodes
-        reverse = None
-        cur = pre.next
-        for i in range(n - m + 1):
-            next = cur.next
-            cur.next = reverse
-            reverse = cur
-            cur = next
-        pre.next.next = cur
-        pre.next = reverse
+        ptr = dummy
+        for i in xrange(m - 1):
+            ptr = ptr.next
+        pre = ptr
+        tail = ptr.next
+        cur = ptr.next
+        while ptr.next and n - m >= 0:
+            tmp = cur.next
+            cur.next = ptr
+            ptr = cur
+            cur = tmp
+            n -= 1
+        pre.next = ptr
+        tail.next = cur
         return dummy.next
             
         

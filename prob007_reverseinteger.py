@@ -13,11 +13,11 @@ class Solution(object):
         """
         sign = 1 if x >= 0 else -1
         x = abs(x)
-        ret = 0
+        res = 0
         while x > 0:
-            ret = 10 * ret + x % 10
-            x //= 10
-        return sign * ret if ret < 2**31 - 1 else 0
+            res = 10 * res + x % 10
+            x /= 10
+        return sign * res if -2**31 <= sign * res <= 2**31 - 1 else 0
 
     def reverse2(self, x):
         """
@@ -25,5 +25,5 @@ class Solution(object):
         :rtype: int
         """
         sign = 1 if x >= 0 else -1
-        ret = int(str(abs(x))[::-1])
-        return sign * ret if ret < 2**31 - 1 else 0
+        res = int(str(abs(x))[::-1])
+        return sign * res if -2**31 <= sign * res <= 2**31 - 1 else 0

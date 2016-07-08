@@ -14,28 +14,30 @@ class Solution(object):
         m, n = len(nums1), len(nums2)
         if m > n:
             nums1, nums2, m, n = nums2, nums1, n, m
-        
         imin, imax, half_len = 0, m, (m + n + 1) / 2
         while imin <= imax:
             i = (imin + imax) / 2
             j = half_len - i
-            if j > 0 and i < m and nums2[j-1] > nums1[i]:
+            if i < m and j > 0 and nums1[i] < nums2[j-1]:
                 imin = i + 1
             elif i > 0 and j < n and nums1[i-1] > nums2[j]:
                 imax = i - 1
             else:
-                if i == 0: max_of_left = nums2[j-1]
-                elif j == 0: max_of_left = nums1[i-1]
-                else: max_of_left = max(nums1[i-1], nums2[j-1])
-                
+                if i == 0:
+                    max_of_left = nums2[j-1]
+                elif j == 0:
+                    max_of_left = nums1[i-1]
+                else:
+                    max_of_left = max(nums1[i-1], nums2[j-1])
                 if (m + n) % 2 == 1:
                     return max_of_left
-
-                if i == m: min_of_right = nums2[j]
-                elif j == n: min_of_right = nums1[i]
-                else: min_of_right = min(nums1[i], nums2[j])
-                
-                return (max_of_left, min_of_right) / 2.0
+                if i == m:
+                    min_of_right = nums2[j]
+                elif j == n:
+                    min_of_right = nums1[i]
+                else:
+                    min_of_right = min(nums1[i], nums2[j])
+                return (max_of_left + min_of_right) / 2.0
 
     def findMedianSortedArrays2(self, nums1, nums2):
         l = len(nums1) + len(nums2)
@@ -51,8 +53,7 @@ class Solution(object):
         if not nums2:
             return nums1[k]
         ia, ib = len(nums1) / 2, len(nums2) / 2
-        ma, mb = nums1[ia], nums2[ib]
-        
+        ma, mb = nums1[ia], nums2[ib]       
         if ia + ib < k:
             if ma > mb:
                 return self.kth(nums1, nums2[ib+1:], k - ib - 1)
