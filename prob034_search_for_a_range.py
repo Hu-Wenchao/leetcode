@@ -38,7 +38,7 @@ class Solution(object):
         return l
 
     def searchRange2(self, nums, target):
-        ret = [-1, -1]
+        res = [-1, -1]
         l, r = 0, len(nums) - 1
         while l < r:
             m = (l + r) / 2
@@ -47,9 +47,9 @@ class Solution(object):
             else:
                 r = m
         if nums[l] != target:
-            return ret
+            return res
         else:
-            ret[0] = l
+            res[0] = l
         r = len(nums) - 1
         while l < r:
             m = (l + r) / 2 + 1
@@ -57,5 +57,5 @@ class Solution(object):
                 r = m - 1
             else:
                 l = m
-        ret[1] = r
-        return ret
+        res[1] = r
+        return res

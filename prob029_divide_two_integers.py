@@ -18,11 +18,11 @@ class Solution(object):
         while dividend >= (divisor << 1):
             divisor <<= 1
             c <<= 1
-        while dividend > 0 and divisor >= 1:
+        while c >= 1:
             if dividend >= divisor:
                 dividend -= divisor
                 res += c
             divisor >>= 1
             c >>= 1
         res *= sign
-        return min(max(-2**31, res), 2**31 - 1)
+        return min(max(res, -2**31), 2**31 - 1)

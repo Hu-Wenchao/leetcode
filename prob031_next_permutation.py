@@ -31,12 +31,12 @@ class Solution(object):
         if i == 0:
             nums.reverse()
             return
-        k = i - 1
+        j = i - 1
         i = len(nums) - 1
-        while nums[i] <= nums[k]:
+        while nums[i] <= nums[j]:
             i -= 1
-        nums[k], nums[i] = nums[i], nums[k]
-        l, r = k+1, len(nums)-1
+        nums[j], nums[i] = nums[i], nums[j]
+        l, r = j + 1, len(nums) - 1
         while l < r:
             nums[l], nums[r] = nums[r], nums[l]
             l += 1

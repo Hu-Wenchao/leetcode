@@ -17,23 +17,23 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        ret = '1'
+        res = '1'
         while n > 1:
-            ret = self.nextStr(ret)
+            res = self.nextStr(res)
             n -= 1
-        return ret
+        return res
 
     def nextStr(self, s):
-        ret = ''
-        prechar = s[0]
-        tmp = 1
+        res = ''
+        pre = s[0]
+        num = 1
         for c in s[1:]:
-            if c == prechar:
-                tmp += 1
-            elif c != prechar:
-                ret += str(tmp) + prechar
-                prechar = c
-                tmp = 1
-        ret += str(tmp) + prechar
-        return ret
+            if c == pre:
+                num += 1
+            else:
+                res += str(num) + pre
+                pre = c
+                num = 1
+        res += str(num) + pre
+        return res
                 

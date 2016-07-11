@@ -12,15 +12,30 @@ class Solution(object):
         :type needle: str
         :rtype: int
         """
-        return haystack.find(needle)
+        i, j, m, n = -1, 0, len(haystack), len(needle)
+        prefix = [-1] * n
+        while j < n - 1:
+            if i == -1 or needle[i] == needle[j]:
+                i, j = i + 1, j + 1
+                prefix[j] = i
+            else:
+                i = prefix[i]
+        i, j = 0, 0
+        while i < m and j < n:
+            if j == -1 or haystack[i] == needle[j]:
+                i, j = i + 1, j + 1
+            else:
+                j = prefix[j]
+        if j == n:
+            return i - j
+        return -1
 
     def strStr2(self, haystack, needle):
-        for i in xrange(len(haystack) + 1):
-            for j in xrange(len(needle) + 1):
-                if j == len(needle):
-                    return i
-                if i + j == len(haystack):
-                    return -1
-                if haystack[i+j] != needle[j]:
-                    break
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        return haystack.find(needle)
+
 

@@ -14,16 +14,16 @@ class Solution(object):
         :rtype: bool
         """
         stack = []
-        for ch in s:
-            if ch in ['(', '[', '{']:
-                stack.append(ch)
+        for c in s:
+            if c in '([{':
+                stack.append(c)
             else:
                 if not stack:
                     return False
-                x = stack.pop()
-                if (ch == ')' and x != '(') or \
-                   (ch == ']' and x != '[') or \
-                   (ch == '}' and x != '{'):
+                tmp = stack.pop()
+                if (c == ')' and tmp != '(') or \
+                   (c == ']' and tmp != '[') or \
+                   (c == '}' and tmp != '{'):
                     return False
         return len(stack) == 0
                     

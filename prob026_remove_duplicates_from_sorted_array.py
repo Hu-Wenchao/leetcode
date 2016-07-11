@@ -19,9 +19,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        length = 0
+        l = 0
         for i in xrange(len(nums)):
             if i == 0 or nums[i] != nums[i-1]:
-                nums[length] = nums[i]
-                length += 1
-        return length
+                nums[l] = nums[i]
+                l += 1
+        return l

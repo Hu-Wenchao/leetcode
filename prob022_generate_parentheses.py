@@ -13,31 +13,15 @@ class Solution(object):
         :type n: int
         :rtype: List[str]
         """
-        result = []
-        self.generate(n, 0, 0, '', result)
-        return result
+        res = []
+        self.generate(n, 0, 0, '', res)
+        return res
 
-    def generate(self, n, l, r, tmp, result):
+    def generate(self, n, l, r, tmp, res):
         if r == n:
-            result.append(tmp)
+            res.append(tmp)
             return
         if l < n:
-            self.generate(n, l+1, r, tmp + '(', result)
+            self.generate(n, l+1, r, tmp + '(', res)
         if r < l:
-            self.generate(n, l, r+1, tmp + ')', result)
-
-    def generateParenthesis2(self, n):
-        return list(self.generate2('', n, n))
-        
-    def generate2(self, p, left, right):
-        if right >= left >= 0:
-            if not right:
-                yield p
-            for q in self.generate2(p + '(', left-1, right):
-                yield q
-            for q in self.generate2(p + ')', left, right-1):
-                yield q
-        
-    
-                
-            
+            self.generate(n, l, r+1, tmp + ')', res)

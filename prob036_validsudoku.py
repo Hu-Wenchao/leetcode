@@ -38,7 +38,7 @@ class Solution(object):
                 n = board[i][j]
                 if n == '.':
                     continue
-                elif n in valid and n != '.' and n not in tmp:
+                elif n in valid and n not in tmp:
                     tmp.append(n)
                 else:
                     return False
@@ -48,7 +48,7 @@ class Solution(object):
                 n = board[i][j]
                 if n == '.':
                     continue
-                elif n in valid and n != '.' and n not in tmp:
+                elif n in valid and n not in tmp:
                     tmp.append(n)
                 else:
                     return False
@@ -59,7 +59,7 @@ class Solution(object):
                     n = board[i+k/3][j+k%3]
                     if n == '.':
                         continue
-                    elif n in valid and n != '.' and n not in tmp:
+                    elif n in valid and n not in tmp:
                         tmp.append(board[i+k/3][j+k%3])
                     else:
                         return False

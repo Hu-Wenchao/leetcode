@@ -15,13 +15,13 @@ class Solution(object):
         if not nums:
             return []
         nums.sort()
-        ret = [[]]
+        res = [[]]
         for n in nums:
-            new_ret = []
-            for seq in ret:
+            tmp = []
+            for seq in res:
                 for i in xrange(len(seq), -1, -1):
                     if i < len(seq) and seq[i] == n:
                         break
-                    new_ret.append(seq[:i] + [n] + seq[i:])
-            ret = new_ret
-        return ret
+                    tmp.append(seq[:i] + [n] + seq[i:])
+            res = tmp
+        return res

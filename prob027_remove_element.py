@@ -13,11 +13,24 @@ class Solution(object):
         :type val: int
         :rtype: int
         """
+        l = 0
+        for i in xrange(len(nums)):
+            if nums[i] != val:
+                nums[l] = nums[i]
+                l += 1
+        return l
+    
+    def removeElement2(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
         while val in nums:
             nums.remove(val)
         return len(nums)
 
-    def removeElement2(self, nums, val):
+    def removeElement3(self, nums, val):
         i = 0
         while i < len(nums):
             if nums[i] != val:

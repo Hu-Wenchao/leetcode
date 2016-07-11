@@ -22,11 +22,11 @@ class Solution(object):
         """
         dummy = ListNode(None)
         dummy.next = head
-        pt = dummy
-        while pt.next and pt.next.next:
-            tmp = pt.next.next
-            pt.next.next = tmp.next
-            tmp.next = pt.next
-            pt.next = tmp
-            pt = pt.next.next
+        ptr = dummy
+        while ptr.next and ptr.next.next:
+            tmp = ptr.next.next
+            ptr.next.next = tmp.next
+            tmp.next = ptr.next
+            ptr.next = tmp
+            ptr = ptr.next.next
         return dummy.next

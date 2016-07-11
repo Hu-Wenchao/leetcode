@@ -13,7 +13,6 @@ We get the following sequence (ie, for n = 3):
 Given n and k, return the kth permutation sequence.
 """
 
-from math import factorial
 class Solution(object):
     def getPermutation(self, n, k):
         """
@@ -21,15 +20,13 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        numbers = list(xrange(1, n+1))
-        ret = ''
+        from math import factorial
+        nums = list(range(1, n + 1))
+        res = ''
         k -= 1
         while n > 0:
             n -= 1
-            # get the index of current digit
-            index, k = divmod(k, factorial(n))
-            ret += str(numbers[index])
-            # remove handled number
-            numbers.remove(numbers[index])
-
-        return ret
+            i, k = divmod(k, factorial(n))
+            res += str(nums[i])
+            nums.remove(nums[i])
+        return res

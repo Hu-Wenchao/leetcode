@@ -20,29 +20,31 @@ class Solution(object):
         :type words: List[str]
         :rtype: List[int]
         """
-        words_dict = {}
-        words_num = len(words)
-        words_len = len(words[0])
-        for word in words:
-            if word not in words_dict:
-                words_dict[word] = 1
+        if not words or not s:
+            return []
+        word_dic = {}
+        word_num = len(words)
+        word_len = len(words[0])
+        for w in words:
+            if w not in word_dic:
+                word_dic[w] = 1
             else:
-                words_dict[word] += 1
-        ret = []
-        for i in xrange(len(s) - words_num * words_len + 1):
+                word_dic[w] += 1
+        res = []
+        for i in xrange(len(s) - word_num * word_len + 1):
             j = 0
-            tmp_dict = {}
-            while j < words_num:
-                word = s[i+j*words_len : i+(j+1)*words_len]
-                if word not in words_dict:
+            tmp_dic = {}
+            while j < word_num:
+                w = s[i+j*word_len : i+(j+1)*word_len]
+                if w not in word_dic:
                     break
-                if word not in tmp_dict:
-                    tmp_dict[word] = 1
+                if w not in tmp_dic:
+                    tmp_dic[w] = 1
                 else:
-                    tmp_dict[word] += 1
-                if tmp_dict[word] > words_dict[word]:
+                    tmp_dic[w] += 1
+                if tmp_dic[w] > word_dic[w]:
                     break
                 j += 1
-            if j == words_num:
-                ret.append(i)
-        return ret
+            if j == word_num:
+                res.append(i)
+        return res

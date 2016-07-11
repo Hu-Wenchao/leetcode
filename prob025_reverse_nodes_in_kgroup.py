@@ -33,19 +33,50 @@ class Solution(object):
         """
         dummy = ListNode(None)
         dummy.next = head
-        pt = dummy
+        ptr = dummy
+        l = 0
+        while ptr.next:
+            l += 1
+            ptr = ptr.next
+        ptr = dummy
+        cur = ptr.next
+        n = l / k
+        while n > 0:
+            pre = ptr
+            tail = cur
+            for i in xrange(k):
+                tmp = cur.next
+                cur.next = ptr
+                ptr = cur
+                cur = tmp
+            pre.next = ptr
+            tail.next = cur
+            ptr = tail
+            cur = ptr.next
+            n -= 1
+        return dummy.next
+    
+    def reverseKGroup2(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(None)
+        dummy.next = head
+        ptr = dummy
         while True:
-            head = pt.next
-            tail = pt
+            head = ptr.next
+            tail = ptr
             for i in range(k):
                 tail = tail.next
                 if tail == None:
                     return dummy.next
             next_group = tail.next
             self.reverse(head, tail)
-            pt.next = tail
+            ptr.next = tail
             head.next = next_group
-            pt = head
+            ptr = head
         
     def reverse(self, head, tail):
         reversed = head
