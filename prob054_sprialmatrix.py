@@ -19,28 +19,28 @@ class Solution(object):
         :type matrix: List[List[int]]
         :rtype: List[int]
         """
-        ret = []
+        res = []
         if not matrix:
-            return ret
+            return res
         rbegin, rend, cbegin, cend = 0, len(matrix)-1, 0, len(matrix[0])-1
 
         while rbegin <= rend and cbegin <= cend:
             for j in xrange(cbegin, cend+1):
-                ret.append(matrix[rbegin][j])
+                res.append(matrix[rbegin][j])
             rbegin += 1
 
             for j in xrange(rbegin, rend+1):
-                ret.append(matrix[j][cend])
+                res.append(matrix[j][cend])
             cend -= 1
 
             if rbegin <= rend:
                 for j in xrange(cend, cbegin-1, -1):
-                    ret.append(matrix[rend][j])
+                    res.append(matrix[rend][j])
             rend -= 1
 
             if cbegin <= cend:
                 for j in xrange(rend, rbegin-1, -1):
-                    ret.append(matrix[j][cbegin])
+                    res.append(matrix[j][cbegin])
             cbegin += 1
 
-        return ret
+        return res

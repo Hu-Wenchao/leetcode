@@ -22,12 +22,12 @@ class Solution(object):
         if not s:
             return 0
         s = s.rstrip()
-        ret = 0
+        res = 0
         for c in s[::-1]:
             if not c.isalpha():
-                return ret
-            ret += 1
-        return ret
+                return res
+            res += 1
+        return res
 
     def lengthOfLastWord2(self, s):
         """

@@ -15,14 +15,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        temp = [0] * len(nums)
-        for num in nums:
-            if num <= 0 or num > len(nums):
-                continue
-            else:
-                temp[num-1] = 1
-        for i in range(len(nums)):
-            if temp[i] != 1:
+        tmp = [0] * len(nums)
+        for n in nums:
+            if 0 < n <= len(nums):
+                tmp[n-1] = 1
+        for i in xrange(len(nums)):
+            if tmp[i] != 1:
                 return i + 1
         return len(nums) + 1
 

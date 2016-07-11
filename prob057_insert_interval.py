@@ -30,15 +30,15 @@ class Solution(object):
         :type newInterval: Interval
         :rtype: List[Interval]
         """
-        ret = []
+        res = []
         if len(intervals) == 0:
-            ret.append(newInterval)
-            return ret
+            res.append(newInterval)
+            return res
         interval = newInterval
         for i in range(len(intervals)):
             interval2 = intervals[i]
             if interval2.end < interval.start:
-                ret.append(interval2)
+                res.append(interval2)
             elif interval2.start < interval.start and \
                  interval2.end >= interval.start and \
                  interval2.end <= interval.end:
@@ -54,10 +54,10 @@ class Solution(object):
                  interval2.end > interval.end:
                 interval.end = interval2.end
             elif interval2.start > interval.end:
-                ret.append(interval2)
-        ret.append(interval)
-        ret = sorted(ret, key = lambda interval:interval.start)
-        return ret
+                res.append(interval2)
+        res.append(interval)
+        res = sorted(res, key = lambda interval:interval.start)
+        return res
 
     def insert2(self, intervals, newInterval):
         """
@@ -70,13 +70,13 @@ class Solution(object):
         if len(intervals) <= 1:
             return intervals
         interval = intervals[0]
-        ret = []
+        res = []
         for interval2 in intervals[1:]:
             if interval.end < interval2.start:
-                ret.append(interval)
+                res.append(interval)
                 interval = interval2
             else:
                 interval.end = max(interval.end, interval2.end)
-        ret.append(interval)
-        return ret
+        res.append(interval)
+        return res
 

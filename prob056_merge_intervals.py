@@ -22,12 +22,12 @@ class Solution(object):
             return intervals
         intervals = sorted(intervals, key = lambda interval:interval.start)
         interval = intervals[0]
-        ret = []
+        res = []
         for interval2 in intervals[1:]:
             if interval.end < interval2.start:
-                ret.append(interval)
+                res.append(interval)
                 interval = interval2
             else:
                 interval.end = max(interval.end, interval2.end)
-        ret.append(interval)
-        return ret
+        res.append(interval)
+        return res

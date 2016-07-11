@@ -28,17 +28,17 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         candidates.sort()
-        ret = []
-        self.rec(candidates, target, 0, 0, [], ret)
-        return ret
+        res = []
+        self.rec(candidates, target, 0, 0, [], res)
+        return res
 
-    def rec(self, candidates, target, idx, tmpsum, tmplist, ret):
-        if tmpsum == target and tmplist not in ret:
-            ret.append(list(tmplist))
+    def rec(self, candidates, target, idx, tmpsum, tmplist, res):
+        if tmpsum == target and tmplist not in res:
+            res.append(list(tmplist))
         for i in xrange(idx, len(candidates)):
             if tmpsum + candidates[i] > target:
                 break
             tmplist.append(candidates[i])
             self.rec(candidates, target, i+1,
-                     tmpsum+candidates[i], tmplist, ret)
+                     tmpsum+candidates[i], tmplist, res)
             tmplist.pop()

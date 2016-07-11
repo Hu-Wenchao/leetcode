@@ -25,7 +25,7 @@ class Solution(object):
         for word in strs:
             key = ''.join(sorted(word))
             dic[key] = [word] if key not in dic else dic[key] + [word]
-        ret = []
+        res = []
         for key in dic.keys():
-            ret.append(sorted(dic[key]))
-        return ret
+            res.append(sorted(dic[key]))
+        return res

@@ -17,15 +17,15 @@ class Solution(object):
         :type n: int
         :rtype: List[List[str]]
         """
-        result = []
-        self.dfs(n, [], [], [], result)
-        return [['.' * i + 'Q' + '.' * (n-i-1) for i in sol] for sol in result]
+        res = []
+        self.dfs(n, [], [], [], res)
+        return [['.' * i + 'Q' + '.' * (n-i-1) for i in sol] for sol in res]
 
-    def dfs(self, n, queens, xy_dif, xy_sum, result):
+    def dfs(self, n, queens, xy_dif, xy_sum, res):
         p = len(queens)
         if p == n:
-            result.append(queens)
+            res.append(queens)
             return
         for q in xrange(n):
             if q not in queens and p-q not in xy_dif and p+q not in xy_sum:
-                self.dfs(n, queens+[q], xy_dif+[p-q], xy_sum+[p+q], result)
+                self.dfs(n, queens+[q], xy_dif+[p-q], xy_sum+[p+q], res)
