@@ -38,13 +38,12 @@ class Solution(object):
         """
         m, n = len(matrix), len(matrix[0])
         l, r = 0, m * n - 1
-        while True:
-            middle = (l + r) / 2
-            if target == matrix[middle/n][middle%n]:
+        while l <= r:
+            m = (l + r) / 2
+            if matrix[m/n][m%n] == target:
                 return True
-            if l >= r:
-                return False
-            if target < matrix[middle/n][middle%n]:
-                r = middle - 1
+            elif matrix[m/n][m%n] > target:
+                r = m - 1
             else:
-                l = middle + 1
+                l = m + 1
+        return False

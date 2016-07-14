@@ -4,11 +4,11 @@ Given n, generate all structurally unique BST's
 """
 
 # Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution(object):
     def generateTrees(self, n):
@@ -20,11 +20,11 @@ class Solution(object):
             return []
         return self.generate(1, n)
         
-    def generate(self, first, last):
+    def generate(self, begin, end):
         trees = []
-        for root in range(first, last+1):
-            for left in self.generate(first, root-1):
-                for right in self.generate(root+1, last):
+        for root in range(begin, end+1):
+            for left in self.generate(begin, root-1):
+                for right in self.generate(root+1, end):
                     node = TreeNode(root)
                     node.left = left
                     node.right = right

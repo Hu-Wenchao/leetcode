@@ -19,9 +19,9 @@ class Solution(object):
         :rtype: void Do not return anything, 
         :modify nums1 in-place instead.
         """
-        temp = nums1[:m] + nums2[:n]
-        temp.sort()
-        nums1[:m+n] = temp
+        tmp = nums1[:m] + nums2[:n]
+        tmp.sort()
+        nums1[:m+n] = tmp
 
     def merge2(self, nums1, m, nums2, n):
         """
@@ -32,19 +32,19 @@ class Solution(object):
         :rtype: void Do not return anything, 
         :modify nums1 in-place instead.
         """
-        # temp = nums1 is wrong because temp will changed when nums1 changed.
-        temp = nums1[:m]
+        # tmp = nums1 is wrong because tmp will changed when nums1 changed.
+        tmp = nums1[:m]
         i = 0
         j = 0
         while i < m and j < n:
-            if temp[i] < nums2[j]:
-                nums1[i + j] = temp[i]
+            if tmp[i] < nums2[j]:
+                nums1[i+j] = tmp[i]
                 i += 1
             else:
-                nums1[i + j] = nums2[j]
+                nums1[i+j] = nums2[j]
                 j += 1
         if i == m:
             nums1[i+j:m+n] = nums2[j:n]
         elif j == n:
-            nums1[i+j:m+n] = temp[i:m]
+            nums1[i+j:m+n] = tmp[i:m]
         return

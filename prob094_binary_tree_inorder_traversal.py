@@ -14,27 +14,27 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        ret = []
-        self.read(root, ret)
-        return ret
+        res = []
+        self.inorder(root, res)
+        return res
 
-    def read(self, root, ret):
+    def inorder(self, root, res):
         if root:
-            self.read(root.left, ret)
-            ret.append(root.val)
-            self.read(root.right, ret)
+            self.inorder(root.left, res)
+            res.append(root.val)
+            self.inorder(root.right, res)
 
     def inorderTraversal2(self, root):
-        ret, stack = [], []
+        res, stack = [], []
         while root or stack:
             if root:
                 stack.append(root)
                 root = root.left
             else:
                 tmp = stack.pop()
-                ret.append(tmp.val)
+                res.append(tmp.val)
                 root = tmp.right
-        return ret
+        return res
 
     def inorderTraversal3(self, root):
         return self.inorderTraversal3(root.left) + \

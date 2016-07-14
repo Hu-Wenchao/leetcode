@@ -22,9 +22,9 @@ class Solution(object):
                 for p in [n+1, n+2, n+3]:
                     if p >= len(s):
                         continue
-                    s1, s2, s3, s4 = s[:m], s[m:n], s[n:p], s[p:]
-                    if self.isValid([s1, s2, s3, s4]):
-                        res.append(s1+'.'+s2+'.'+s3+'.'+s4)
+                    tmp = [s[:m], s[m:n], s[n:p], s[p:]]
+                    if self.isValid(tmp):
+                        res.append('.'.join(tmp))
         return res
 
     def isValid(self, str_list):

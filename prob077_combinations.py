@@ -22,17 +22,15 @@ class Solution(object):
         :type k: int
         :rtype: List[List[int]]
         """
-        candidates = list(range(1, n+1))
-        solution = []
-        self.combineRec(candidates, k, 0, [], solution)
-        return solution
-
-    def combineRec(self, candidates, k, index, templist, solution):
-        if len(templist) == k and templist not in solution:
-            solution.append(list(templist))
-            return
-        for i in range(index, len(candidates)):
-            if len(templist) < k:
-                templist.append(candidates[i])
-                self.combineRec(candidates, k, i+1, templist, solution)
-            templist.pop()
+        if k == 1:
+            return [[i] for i in xrange(1, n+1)]
+        elif k == n:
+            return [[i for i in xrange(1, n+1)]]
+        else:
+            res = []
+            res += self.combine(n-1, k)
+            part = self.combine(n-1, k-1)
+            for tmp in part:
+                tmp.append(n)
+            res += part
+            return res

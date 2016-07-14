@@ -26,17 +26,17 @@ class Solution(object):
         :rtype: bool
         """
         tree = []
-        self.inOrder(root, tree)
+        self.inorder(root, tree)
         for i in xrange(1, len(tree)):
             if tree[i-1] >= tree[i]:
                 return False
         return True
 
-    def inOrder(self, root, tree):
+    def inorder(self, root, tree):
         if not root:
             return
-        self.inOrder(root.left, tree)
+        self.inorder(root.left, tree)
         tree.append(root.val)
-        self.inOrder(root.right, tree)
+        self.inorder(root.right, tree)
         
             

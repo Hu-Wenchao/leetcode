@@ -13,7 +13,6 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         res = [[]]
-        nums.sort()
         for n in nums:
             for i in xrange(len(res)):
                 res.append(res[i] + [n])

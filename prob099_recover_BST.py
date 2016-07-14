@@ -18,7 +18,7 @@ class Solution(object):
         :rtype: void Do not return anything, modify root in-place instead.
         """
         res = []
-        self.helper(root, res)
+        self.inorder(root, res)
         first = None
         second = None
         for i in range(1, len(res)):
@@ -28,8 +28,8 @@ class Solution(object):
                 second = res[i]
         first.val, second.val = second.val, first.val
 
-    def helper(self, root, res):
+    def inorder(self, root, res):
         if root:
-            self.helper(root.left, res)
+            self.inorder(root.left, res)
             res.append(root)
-            self.helper(root.right, res)
+            self.inorder(root.right, res)
