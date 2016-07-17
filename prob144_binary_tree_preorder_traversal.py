@@ -23,26 +23,22 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        ret = []
-        self.helper(root, ret)
-        return ret
+        res = []
+        self.preorder(root, res)
+        return res
 
-    def helper(self, root, ret):
+    def preorder(self, root, res):
         if root:
-            ret.append(root.val)
-            self.helper(root.left, ret)
-            self.helper(root.right, ret)
+            res.append(root.val)
+            self.preorder(root.left, res)
+            self.preorder(root.right, res)
 
     def preorderTraversal2(self, root):
-        ret, stack = [], [root]
+        res, stack = [], [root]
         while stack:
             tmp = stack.pop()
             if tmp:
-                ret.append(tmp.val)
+                res.append(tmp.val)
                 stack.append(tmp.right)
                 stack.append(tmp.left)
-        return ret
-
-    def preorderTraversal3(self, root):
-        return [root.val] + self.preorderTraversal3(root.left) + \
-            self.preorderTraversal3(root.right) if root else []
+        return res

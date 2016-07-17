@@ -19,13 +19,14 @@ class Solution(object):
         :type denominator: int
         :rtype: str
         """
-        quotient, remainder = divmod(abs(numerator), abs(denominator))
         sign = '-' if numerator * denominator < 0 else ''
+        numerator, denominator = abs(numerator), abs(denominator)
+        quotient, remainder = divmod(numerator, denominator)      
         res = [sign+str(quotient), '.']
         stack = []
         while remainder not in stack:
             stack.append(remainder)
-            quotient, remainder = divmod(remainder*10, abs(denominator))
+            quotient, remainder = divmod(remainder*10, denominator)
             res.append(str(quotient))
         index = stack.index(remainder)
         res.insert(index+2, '(')

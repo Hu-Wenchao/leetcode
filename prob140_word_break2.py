@@ -21,19 +21,19 @@ class Solution(object):
         """
         return self.findwords(0, len(s), s, wordDict, {})
 
-    def findwords(self, start, end, s, wordDict, cache):
-        if start in cache:
-            return cache[start]
-        cache[start] = []
+    def findwords(self, start, end, s, wordDict, res):
+        if start in res:
+            return res[start]
+        res[start] = []
         candidate = ''
-        current = start
-        while current < end:
-            candidate += s[current]
-            current += 1
+        cur = start
+        while cur < end:
+            candidate += s[cur]
+            cur += 1
             if candidate in wordDict:
-                if current == end:
-                    cache[start].append(candidate)
+                if cur == end:
+                    res[start].append(candidate)
                 else:
-                    for x in self.findwords(current, end, s, wordDict, cache):
-                        cache[start].append(candidate + ' ' + x)
-        return cache[start]
+                    for x in self.findwords(cur, end, s, wordDict, res):
+                        res[start].append(candidate + ' ' + x)
+        return res[start]

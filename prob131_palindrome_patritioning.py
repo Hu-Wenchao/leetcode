@@ -28,8 +28,5 @@ class Solution(object):
             res.append(path)
             return
         for i in range(1, len(s)+1):
-            if self.isPal(s[:i]):
+            if s[:i] == s[:i][::-1]:
                 self.dfs(s[i:], path+[s[:i]], res)
-        
-    def isPal(self, s):
-        return s == s[::-1]

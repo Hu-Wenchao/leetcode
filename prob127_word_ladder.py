@@ -23,6 +23,7 @@ class Solution(object):
         :type wordList: Set[str]
         :rtype: int
         """
+        import string
         length = 2
         front, back = set([beginWord]), set([endWord])
         wordList.discard(beginWord)
@@ -30,7 +31,7 @@ class Solution(object):
             front = wordList & (set(word[:index] + ch + word[index+1:]
                                     for word in front
                                     for index in range(len(word))
-                                    for ch in 'abcdefghijklmnopqrstuvwxyz'))
+                                    for ch in string.ascii_lowercase))
             if front & back:
                 return length
             length += 1

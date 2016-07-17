@@ -14,10 +14,10 @@ class Solution(object):
         :type s: str
         :rtype: List[str]
         """
-        sequences = {}
+        seq = {}
         for i in range(len(s) - 9):
-            if s[i:i+10] not in sequences:
-                sequences[s[i:i+10]] = 1
+            if s[i:i+10] not in seq:
+                seq[s[i:i+10]] = 1
             else:
-                sequences[s[i:i+10]] += 1
-        return [key for key, value in sequences.iteritems() if value > 1]
+                seq[s[i:i+10]] += 1
+        return [key for key, value in seq.iteritems() if value > 1]

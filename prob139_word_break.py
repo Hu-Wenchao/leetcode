@@ -23,14 +23,3 @@ class Solution(object):
                 if w == s[i-len(w)+1:i+1] and (dp[i-len(w)] or i-len(w) == -1):
                     dp[i]= True
         return dp[-1]
-
-    def wordBreak2(self, s, wordDict):
-        """
-        :type s: str
-        :type wordDict: Set[str]
-        :rtype: bool
-        """
-        ok = [True]
-        for i in range(1, len(s) + 1):
-            ok += any(ok[j] and s[j:i] in words for j in range(i)),
-        return ok[-1]

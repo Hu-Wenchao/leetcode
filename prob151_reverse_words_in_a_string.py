@@ -13,13 +13,7 @@ class Solution(object):
         :rtype: str
         """
         s = s.strip(' ')
-        words = []
-        while ' ' in s:
-            index = s.index(' ')
-            words.append(s[:index])
-            s = s[index:].strip(' ')
-        words.append(s)
-        return ' '.join(words[::-1])
-
-    def reverseWords2(self, s):
-        return ' '.join(reversed(s.split()))
+        s = s.split(' ')
+        while '' in s:
+            s.remove('')
+        return ' '.join(s[::-1])

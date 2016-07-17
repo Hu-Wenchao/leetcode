@@ -18,18 +18,18 @@ class Solution(object):
         """
         if len(nums) < 2 or max(nums) == min(nums):
             return 0
-        maxn, minn, lenn = max(nums), min(nums), len(nums)
-        bsize = (maxn - minn + 1.0) / len(nums)
-        bucket = [[2**31-1, -1] for _ in xrange(lenn+1)]
+        nmax, nmin, nlen = max(nums), min(nums), len(nums)
+        bsize = 1.0 * (nmax - nmin) / nlen
+        bucket = [[2**31-1, -1] for _ in xrange(nlen + 1)]
         for n in nums:
-            index = int((n - minn) // bsize)
-            bucket[index][0] = min(n, bucket[index][0])
-            bucket[index][1] = max(n, bucket[index][1])
-        res, prev = 0, bucket[0][0]
-        for n in bucket:
-            if n != [2**31-1, -1]:
-                res = max(res, n[0] - prev)
-                prev = n[1]
+            index = int((n - nmin) // bsize)
+            bucket[index][0] = min(bucket[index][0], n)
+            bucket[index][1] = max(bucket[index][1], n)
+        res, pre = 0, bucket[0][0]
+        for tmp in bucket:
+            if tmp != [2**31-1, -1]:
+                res = max(res, tmp[0] - pre)
+                pre = tmp[1]
         return res
 
     def maximumGap2(self, nums):

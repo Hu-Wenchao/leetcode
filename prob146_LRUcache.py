@@ -17,22 +17,18 @@ class LRUCache(object):
         """
         :type capacity: int
         """
-        self.capacity = capacity
-        self.key_num = 0
-        self.cache = {}
-        self.usage = []
+        self.dic = collections.OrderedDict()
+        self.remain = capacity
 
     def get(self, key):
         """
         :rtype: int
         """
-        if key in self.cache:
-            key_index = self.usage.index(key)
-            self.usage.remove(key)
-            self.usage.insert(0, key)
-            return self.cache[key]
-        else:
+        if key not in self.dic:
             return -1
+        v = self.dic.pop(key) 
+        self.dic[key] = v
+        return v
 
     def set(self, key, value):
         """
@@ -40,18 +36,11 @@ class LRUCache(object):
         :type value: int
         :rtype: nothing
         """
-        if (self.key_num == self.capacity) and (key not in self.cache):
-            
-            del self.cache[self.usage[-1]]
-            del self.usage[-1]
-            self.key_num -= 1
-        
-        if key in self.cache:
-            self.cache[key] = value
-            self.usage.remove(key)
-            self.usage.insert(0, key)
+        if key in self.dic:    
+            self.dic.pop(key)
         else:
-            self.cache[key] = value
-            self.usage.insert(0, key)
-            self.key_num += 1
-        
+            if self.remain > 0:
+                self.remain -= 1  
+            else:
+                self.dic.popitem(last=False) 
+        self.dic[key] = value

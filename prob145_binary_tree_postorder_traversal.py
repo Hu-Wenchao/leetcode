@@ -23,26 +23,22 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        ret = []
-        self.helper(root, ret)
-        return ret
+        res = []
+        self.postorder(root, res)
+        return res
         
-    def helper(self, root, ret):
+    def postorder(self, root, res):
         if root:
-            self.helper(root.left, ret)
-            self.helper(root.right, ret)
-            ret.append(root.val)
+            self.postorder(root.left, res)
+            self.postorder(root.right, res)
+            res.append(root.val)
 
     def postorderTraversal2(self, root):
-        ret, stack = [], [root]
+        res, stack = [], [root]
         while stack:
             tmp = stack.pop()
             if tmp:
-                ret.append(tmp.val)
+                res.append(tmp.val)
                 stack.append(tmp.left)
                 stack.append(tmp.right)
-        return ret[::-1]
-
-    def postorderTraversal3(self, root):
-        return self.postorderTraversal3(root.left) + \
-            self.postorderTraversal3(root.right) + [root.val] if root else []
+        return res[::-1]

@@ -34,7 +34,8 @@ class Solution(object):
             prelayer = curlayer
 
     def connect2(self, root):
-        cur = dummy = TreeLinkNode(0)
+        dummy = TreeLinkNode(0)
+        cur = dummy
         pre = root
         while pre:
             cur.next = pre.left

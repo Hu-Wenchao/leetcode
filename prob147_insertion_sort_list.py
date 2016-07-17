@@ -24,40 +24,17 @@ class Solution(object):
         cur = head.next
         while cur:
             if cur.val < pre.val:
-                temp = pre
+                tmp = pre
                 pre = dummy
                 while pre.next.val < cur.val:
                     pre = pre.next
-                temp.next = cur.next
+                tmp.next = cur.next
                 cur.next = pre.next
                 pre.next = cur
-                cur = temp.next
-                pre = temp
+                cur = tmp.next
+                pre = tmp
             else:
                 pre = pre.next
                 cur = cur.next
-        return dummy.next
-            
-
-    def insetionSortList2(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        p = dummy = ListNode(None)
-        cur = dummy.next = head
-        while cur and cur.next:
-            val = cur.next.val
-            if cur.val < val:
-                cur = cur.next
-                continue
-            if p.next.val > val:
-                p = dummy
-            while p.next.val < val:
-                p = p.next
-            temp = cur.next
-            cur.next = temp.next
-            temp.next = p.next
-            p.next = temp
         return dummy.next
 

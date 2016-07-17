@@ -15,22 +15,21 @@ class Solution(object):
         :type points: List[Point]
         :rtype: int
         """
-        m = 0
-        for i in range(len(points)):
-            dic = {'i': 1}
+        res = 0
+        for i in xrange(len(points)):
             same = 0
-            for j in range(i+1, len(points)):
-                tx, ty = points[j].x, points[j].y
-                if tx == points[i].x and ty == points[i].y:
+            dic = {'i' : 1}
+            for j in xrange(i + 1, len(points)):
+                x, y = points[j].x, points[j].y
+                if x == points[i].x and y == points[i].y:
                     same += 1
                     continue
-                if points[i].x == tx:
-                    slope = 'i'
+                if x == points[i].x:
+                    slope = i
                 else:
-                    slope = (points[i].y - ty) * 1.0 / (points[i].x - tx)
+                    slope = 1.0 * (points[i].y - y) / (points[i].x - x)
                 if slope not in dic:
                     dic[slope] = 1
                 dic[slope] += 1
-            m = max(m, max(dic.values()) + same)
-        return m
-            
+            res = max(res, max(dic.values()) + same)
+        return res

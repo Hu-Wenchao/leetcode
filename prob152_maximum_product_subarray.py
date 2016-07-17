@@ -12,14 +12,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        maxherepre = nums[0]
-        minherepre = nums[0]
-        maxsofar = nums[0]
-        for i in range(1, len(nums)):
-            maxhere = max(max(maxherepre*nums[i], minherepre*nums[i]), nums[i])
-            minhere = min(min(maxherepre*nums[i], minherepre*nums[i]), nums[i])
-            maxsofar = max(maxsofar, maxhere)
-            maxherepre = maxhere
-            minherepre = minhere
-        return maxsofar
-
+        if not nums:
+            return 0
+        premax = nums[0]
+        premin = nums[0]
+        res = nums[0]
+        for n in nums[1:]:
+            curmax = max(n, max(premax * n, premin * n))
+            curmin = min(n, min(premax * n, premin * n))
+            res = max(res, curmax)
+            premax = curmax
+            premin = curmin
+        return res

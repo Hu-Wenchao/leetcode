@@ -17,17 +17,15 @@ class Solution(object):
         """
         if not head:
             return None
-        hare, turtle = head, head
-        while hare:
-            turtle = turtle.next
-            hare = hare.next
-            if not hare:
+        slow, fast = head, head
+        while fast:
+            slow, fast = slow.next, fast.next
+            if not fast:
                 return None
-            hare = hare.next
-            if hare == turtle:
-                turtle = head
-                while turtle != hare:
-                    turtle = turtle.next
-                    hare = hare.next
-                return hare
+            fast = fast.next
+            if fast == slow:
+                slow = head
+                while slow != fast:
+                    slow, fast = slow.next, fast.next
+                return fast
         return None

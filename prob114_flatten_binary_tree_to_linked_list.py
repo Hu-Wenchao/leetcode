@@ -23,9 +23,9 @@ class Solution(object):
         # p.right -> n.right
         if not root:
             return
-        self.prev = root
-        self.flatten(root.left)        
-        temp = root.right
+        self.pre = root
+        self.flatten(root.left)
+        tmp = root.right
         root.right, root.left = root.left, None
-        self.prev.right = temp        
-        self.flatten(temp)
+        self.pre.right = tmp
+        self.flatten(tmp)

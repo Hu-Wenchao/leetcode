@@ -19,32 +19,23 @@ class Solution(object):
         :type head: ListNode
         :rtype: void Do not return anything, modify head in-place instead.
         """
-        if not head or not head.next:
-            return
-        
-        fast = head
-        slow = head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+        if not head:
+            return head
+        slow, fast = head, head
+        while fast.next and fast.next.next:
+            slow, fast = slow.next, fast.next.next
         middle = slow.next
         slow.next = None
-
-        last = None
-        curnode = middle
-        while curnode:
-            nextnode = curnode.next
-            curnode.next = last
-            last = curnode
-            curnode = nextnode
-
-        first = head
-        second = last
-        while first and second:
-            a = first.next
-            b = second.next
-            first.next = second
-            second.next = a
-            first = a
-            second = b
+        tail = None
+        cur = middle
+        while cur:
+            tmp = cur.next
+            cur.next = tail
+            tail = cur
+            cur = tmp
+        while head and tail:
+            a, b = head.next, tail.next
+            head.next = tail
+            tail.next = a
+            head, tail = a, b
         return
