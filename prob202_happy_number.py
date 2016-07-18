@@ -24,12 +24,12 @@ class Solution(object):
         """
         stack = []
         while n != 1:
-            nn = self.next(n)
-            if nn not in stack:
-                stack.append(nn)
+            tmp = self.next(n)
+            if tmp not in stack:
+                stack.append(tmp)
             else:
                 return False
-            n = nn
+            n = tmp
         return True
                 
     def next(self, n):

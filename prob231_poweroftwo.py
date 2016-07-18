@@ -9,4 +9,4 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        return n > 0 and bin(n).count('1') == 1
+        return n > 0 and 2**31 % n == 0

@@ -17,14 +17,14 @@ class Solution(object):
         """
         if not root:
             return 0
-        leftDepth = self.getDepth(root.left)
-        rightDepth = self.getDepth(root.right)
-        if leftDepth == rightDepth:
-            return 2**leftDepth + self.countNodes(root.right)
+        ld = self.depth(root.left)
+        rd = self.depth(root.right)
+        if ld == rd:
+            return 2**ld + self.countNodes(root.right)
         else:
-            return 2**rightDepth + self.countNodes(root.left)
+            return 2**rd + self.countNodes(root.left)
 
-    def getDepth(self, root):
+    def depth(self, root):
         if not root:
             return 0
-        return 1 + self.getDepth(root.left)
+        return 1 + self.depth(root.left)

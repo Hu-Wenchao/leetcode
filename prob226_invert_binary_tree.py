@@ -27,11 +27,11 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        self.helper(root)
+        self.invert(root)
         return root
         
-    def helper(self, root):
+    def invert(self, root):
         if root:
             root.left, root.right = root.right, root.left
-            self.helper(root.left)
-            self.helper(root.right)
+            self.invert(root.left)
+            self.invert(root.right)

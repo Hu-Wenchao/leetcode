@@ -24,8 +24,7 @@ class Solution(object):
             forward[i] = forward[i-1] * nums[i] 
             backward[-i-1] = backward[-i] * nums[-i-1]
         forward[-1] = forward[-2] * nums[-1]
-        backward[0] = backward[1] * nums[0]
-        
+        backward[0] = backward[1] * nums[0]      
         res = [0] * len(nums)
         res[0] = backward[1]
         res[-1] = forward[-2]

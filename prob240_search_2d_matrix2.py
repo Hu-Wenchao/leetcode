@@ -13,9 +13,9 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        m, n = len(matrix), len(matrix[0])
-        if m == 0 or n == 0:
+        if not matrix:
             return False
+        m, n = len(matrix), len(matrix[0])
         i = 0
         j = n - 1
         while i < m and j >= 0:

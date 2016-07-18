@@ -37,9 +37,9 @@ class Solution(object):
         return True
 
     def dfs(self, i, visit, graph):
-        if visit[i] == 1:
-            returrn False
         if visit[i] == -1:
+            return False
+        if visit[i] == 1:
             return True
         visit[i] = -1
         for j in graph[i]:
@@ -47,3 +47,24 @@ class Solution(object):
                 return False
         visit[i] = 1
         return True
+
+    def canFinish2(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        dic = collections.defaultdict(set)
+        neigh = collections.defaultdict(set)
+        for i, j in prerequisites:
+            dic[i].add(j)
+            neigh[j].add(i)
+        stack = [i for i in xrange(numCourses) if not dic[i]]
+        while stack:
+            node = stack.pop()
+            for i in neigh[node]:
+                dic[i].remove(node)
+                if not dic[i]:
+                    stack.append(i)
+            dic.pop(node)
+        return True if not dic else False

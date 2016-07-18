@@ -20,7 +20,10 @@ class Solution(object):
         rev = ListNode(None)
         while fast and fast.next:
             fast = fast.next.next
-            rev, rev.next, slow = slow, rev, slow.next
+            tmp = slow.next
+            slow.next = rev
+            rev = slow
+            slow = tmp
         if fast:
             slow = slow.next
         while slow:

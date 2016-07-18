@@ -17,7 +17,8 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        tree = self.inorder(root, [])
+        tree = []
+        self.inorder(root, tree)
         return tree[k-1]
         
     def inorder(self, root, res):
@@ -25,4 +26,3 @@ class Solution(object):
             self.inorder(root.left, res)
             res.append(root.val)
             self.inorder(root.right, res)
-        return res

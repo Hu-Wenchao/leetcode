@@ -25,11 +25,8 @@ class Solution(object):
         dummy.next = head
         ptr = dummy
         while ptr.next:
-            if ptr.next.val != val:
-                ptr = ptr.next
+            if ptr.next.val == val:
+                ptr.next = ptr.next.next
             else:
-                if ptr.next.next:
-                    ptr.next = ptr.next.next
-                else:
-                    ptr.next = None
+                ptr = ptr.next
         return dummy.next
