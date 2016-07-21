@@ -32,32 +32,3 @@ class Solution(object):
             ugly += u,
             # ugly.append(u)
         return ugly[-1]
-            
-
-
-    def nthUglyNumber2(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        count = 1
-        num = 1
-        while count <= n:
-            if self.isUgly(num):
-                count += 1
-            num += 1
-        return num - 1
-        
-
-    def isUgly(self, num):
-        if num == 0:
-            return False
-        while num % 2 == 0:
-            num /= 2
-        while num % 3 == 0:
-            num /= 3
-        while num % 5 == 0:
-            num /= 5
-        if num == 1:
-            return True
-        

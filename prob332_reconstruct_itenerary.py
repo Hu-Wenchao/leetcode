@@ -34,11 +34,11 @@ class Solution(object):
         targets = collections.defaultdict(list)
         for a, b in sorted(tickets)[::-1]:
             targets[a] += b,
-        route = self.visit('JFK', targets, [])
+        route = []
+        self.visit('JFK', targets, route)
         return route[::-1]
         
     def visit(self, airport, targets, route):
         while targets[airport]:
             self.visit(targets[airport].pop(), targets, route)
         route.append(airport)
-        return route

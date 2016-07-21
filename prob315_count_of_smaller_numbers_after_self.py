@@ -22,27 +22,26 @@ class Solution(object):
         """
         if not nums:
             return []
-        n = len(nums)
-        padding = min(nums)
-        if padding <= 0:
-            nums = [a + 1 - padding for a in nums]
-        m = max(nums)
-        T = [0] * (m+1)
-        ans = []
-        t = 0
-        for num in nums[::-1]:
-            ans.append(self.getSum(T, num-1))
-            self.update(T, num, 1)
-        return ans[::-1]
+        minimal = min(nums)
+        if minimal <= 0:
+            nums = [n + 1 - minimal for n in nums]
+        tree = [0] * (max(nums) + 1)
+        res = []
+        for n in nums[::-1]:
+            res.append(self.getsum(tree, n - 1))
+            self.update(tree, n, 1)
+        return res[::-1]
         
-    def getSum(self, T, idx):
-        ans = 0
-        while idx:
-            ans += T[idx]
-            idx -= idx & (-idx)
-        return ans
+    def getsum(self, tree, index):
+        res = 0
+        while index:
+            res += tree[index]
+            index -= index & (-index)
+        return res
+    
+    def update(self, tree, index, val):
+        while index <= len(tree) - 1:
+            tree[index] += val
+            index += index & (-index)
 
-    def update(self, T, idx, val):
-        while idx <= len(T)-1:
-            T[idx] += val
-            idx += idx & (-idx)
+    

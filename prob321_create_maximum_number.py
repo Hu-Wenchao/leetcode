@@ -19,7 +19,7 @@ class Solution(object):
                    if i <= len(nums1) and k-i <= len(nums2))
     
     def prepare(self, nums, k):
-        # Find the maximum number whith (len(nums) - k) digits
+        # Find the maximum number with (len(nums) - k) digits
         # in nums while keep the relative digit position unchanged.
         drop = len(nums) - k
         res = []

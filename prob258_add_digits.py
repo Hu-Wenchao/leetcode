@@ -24,12 +24,9 @@ class Solution(object):
         :rtype: int
         """
         while num > 9:
-            num = self.next(num)
+            tmp = 0
+            while num > 0:
+                tmp += num % 10
+                num /= 10
+            num = tmp
         return num
-        
-    def next(self, num):
-        res = 0
-        while num > 0:
-            res += num % 10
-            num /= 10
-        return res

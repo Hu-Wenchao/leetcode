@@ -26,21 +26,14 @@ class Solution:
     def binaryTreePaths(self, root):
         if not root:
             return []
-        self.res = []
-        path = str(root.val)
+        res = []
+        self.path(root, [], res)
+        return res
+
+    def path(self, root, tmplist, res):
         if not root.left and not root.right:
-            self.res.append(path)
+            res.append('->'.join(map(str, tmplist + [root.val])))
         if root.left:
-            self.singlePath(root.left, path)
+            self.path(root.left, tmplist + [root.val], res)
         if root.right:
-            self.singlePath(root.right, path)
-        return self.res
-        
-    def singlePath(self, root, path):
-        path += '->' + str(root.val)
-        if not root.left and not root.right:
-            self.res.append(path)
-        if root.left:
-            self.singlePath(root.left, path)
-        if root.right:
-            self.singlePath(root.right, path)
+            self.path(root.right, tmplist + [root.val], res)

@@ -19,10 +19,10 @@ class Solution(object):
                 res2 = self.diffWaysToCompute(input[i+1:])
                 for j in res1:
                     for k in res2:
-                        res.append(self.helper(j, k, input[i]))
+                        res.append(self.compute(j, k, input[i]))
         return res
 
-    def helper(self, m, n, op):
+    def compute(self, m, n, op):
         if op == '+':
             return m + n
         elif op == '-':

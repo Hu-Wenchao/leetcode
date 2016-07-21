@@ -23,7 +23,7 @@ class Solution(object):
         :type num: int
         :rtype: List[int]
         """
-        ret = [0, 1]
-        while num >= len(ret):
-            ret += [term + 1 for term in ret]
-        return ret[:num+1]
+        res = [0, 1]
+        while num >= len(res):
+            res += [term + 1 for term in res]
+        return res[:num+1]

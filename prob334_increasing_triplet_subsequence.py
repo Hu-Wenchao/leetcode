@@ -26,6 +26,7 @@ class Solution(object):
         x = float('inf')
         y = float('inf')
         for i in range(len(nums)):
+            # x <= y <= z
             z = nums[i]
             if x >= z:
                 x = z

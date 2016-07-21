@@ -23,9 +23,9 @@ class Solution(object):
         :rtype: List[int]
         """
         d = {}
-        for i, num in enumerate(nums):
-            if num in d:
-                return [d[num], i]
+        for i, n in enumerate(nums):
+            if n in d:
+                return [d[n], i]
             else:
-                d[target - num] = i
+                d[target - n] = i
         return [0, 0]

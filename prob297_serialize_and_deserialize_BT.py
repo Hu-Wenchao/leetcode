@@ -51,7 +51,6 @@ class Codec:
             self.tree_to_str(root.right, vals)
         else:
             vals.append('#')
-        return vals
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.

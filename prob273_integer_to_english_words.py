@@ -17,9 +17,9 @@ class Solution(object):
         :rtype: str
         """
         res = ''
-        billion = 1000000000
-        million = 1000000
-        thousand = 1000
+        billion = 10**9
+        million = 10**6
+        thousand = 10**3
         if num == 0:
             res = 'Zero'
         if num >= billion:

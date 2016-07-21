@@ -14,11 +14,7 @@ class Solution(object):
         """
         if n < 2:
             return n
-        squares = []
-        i = 1
-        while i * i <= n:
-            squares.append(i * i)
-            i += 1
+        squares = [i*i for i in xrange(1, 1+int(n**0.5))]
         cnt = 0
         dic = {n}
         while dic:

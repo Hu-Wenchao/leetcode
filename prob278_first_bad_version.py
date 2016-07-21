@@ -26,11 +26,11 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        low, high = 0, n - 1
-        while low <= high:
-            mid = (low + high) / 2
-            if isBadVersion(mid):
-                high = mid - 1
+        l, h = 0, n - 1
+        while l <= h:
+            m = (l + h) / 2
+            if isBadVersion(m):
+                h = m - 1
             else:
-                low = mid + 1
-        return low
+                l = m + 1
+        return l

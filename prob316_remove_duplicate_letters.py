@@ -27,7 +27,6 @@ class Solution(object):
                 if cj > ci and cnt[cj] > 0:
                     used[cj] = False
                     res = res[:j] + res[j+1:]
-                    j -= 1
                 else:
                     break
             used[ci] = True

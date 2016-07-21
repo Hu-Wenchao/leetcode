@@ -23,14 +23,14 @@ class Solution(object):
         # increasing subsequence of length i+1.
         tails = [0] * len(nums)
         size = 0
-        for x in nums:
+        for n in nums:
             i, j = 0, size
             while i != j:
                 m = (i + j) / 2
-                if tails[m] < x:
+                if tails[m] < n:
                     i = m + 1
                 else:
                     j = m
-            tails[i] = x
+            tails[i] = n
             size = max(i + 1, size)
         return size

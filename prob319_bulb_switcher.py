@@ -14,4 +14,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        # num = (a ** m) * (b ** n) * ...
+        # positive factors number(except 1): f = (m + 1) * (n + 1) - 1
+        # if the bulb is on finally, f must be power of another number
         return int(sqrt(n))

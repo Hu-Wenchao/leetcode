@@ -24,19 +24,17 @@ class Solution(object):
         l = len(num)
         for i in range(1, l/2+1):
             for j in range(1, (l-i)/2+1):
-                first, second, others = num[:i], num[i:i+j], num[i+j:]
+                first, second, rest = num[:i], num[i:i+j], num[i+j:]
                 if ((len(first) > 1 and first[0] == "0") or
                         (len(second) > 1 and second[0] == "0")):
                     continue
-
-                while others:
+                while rest:
                     sum_str = str(int(first) + int(second))
-                    if sum_str == others:
+                    if sum_str == rest:
                         return True
-                    elif others.startswith(sum_str):
-                        first, second, others = (
-                            second, sum_str, others[len(sum_str):])
+                    elif rest.startswith(sum_str):
+                        first, second, rest = (
+                            second, sum_str, rest[len(sum_str):])
                     else:
                         break
-
         return False

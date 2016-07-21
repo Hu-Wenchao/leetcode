@@ -33,8 +33,8 @@ class NumMatrix(object):
         self.accum = [[0] * (n + 1) for _ in range(m + 1)]
         for i in xrange(1, m+1):
             for j in xrange(1, n+1):
-                self.accum[i][j] = self.accum[i-1][j] + self.accum[i][j-1] -
-                self.accum[i-1][j-1] + matrix[i-1][j-1]
+                self.accum[i][j] = self.accum[i-1][j] + self.accum[i][j-1] - \
+                                   self.accum[i-1][j-1] + matrix[i-1][j-1]
 
     def sumRegion(self, row1, col1, row2, col2):
         """
