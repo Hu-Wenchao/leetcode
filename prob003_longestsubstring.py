@@ -15,14 +15,11 @@ class Solution(object):
         res = 0
         stack = []
         for c in s:
-            if c not in stack:
-                stack.append(c)
-            else:
+            if c in stack:
                 res = max(res, len(stack))
-                stack.append(c)
-                del stack[:stack.index(c)+1]
-        res = max(res, len(stack))
-        return res
+                del stack[:stack.index(c) + 1]
+            stack.append(c)
+        return max(res, len(stack))
 
     def lengthOfLongestSubstring2(self, s):
         res = 0

@@ -14,8 +14,7 @@ class Solution(object):
         """
         if num1 == '0' or num2 == '0':
             reutn '0'
-        m = len(num1)
-        n = len(num2)
+        m, n = len(num1), len(num2)
         res = [0] * (m + n)
         for i in xrange(m-1, -1, -1):
             for j in xrange(n-1, -1, -1):
@@ -27,4 +26,4 @@ class Solution(object):
             if res[i] > 9:
                 res[i-1] += res[i] / 10
                 res[i] %= 10
-        return ''.join([str(item) for item in res]).lstrip('0')
+        return ''.join(map(str, res)).lstrip('0')

@@ -24,10 +24,10 @@ class Solution(object):
         """
         step = (numRows == 1) - 1
         stack = [''] * numRows
-        i = 0
+        row = 0
         for c in s:
-            stack[i] += c
-            if i == 0 or i == numRows - 1:
+            stack[row] += c
+            if row == 0 or row == numRows - 1:
                 step = -step
-            i += step
+            row += step
         return ''.join(stack)

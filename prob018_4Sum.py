@@ -69,10 +69,10 @@ class Solution(object):
         for i in range(0, len(nums)-3):
             new_target = target - nums[i]
             three_keys = self.threeSum(nums[i+1:len(nums)], new_target)
-            for temp_key in three_keys:
-                temp_key.insert(0, nums[i])
-                if temp_key not in keys:
-                    keys.append(temp_key)
+            for tmp_key in three_keys:
+                tmp_key.insert(0, nums[i])
+                if tmp_key not in keys:
+                    keys.append(tmp_key)
         return keys
     
     def threeSum(self, nums, target):
@@ -88,9 +88,9 @@ class Solution(object):
             end = len(nums) - 1
             while(start < end):
                 if nums[start] + nums[end] == new_target:
-                    temp_key = [nums[i], nums[start], nums[end]]
-                    if temp_key not in three_keys:
-                        three_keys.append(temp_key)
+                    tmp_key = [nums[i], nums[start], nums[end]]
+                    if tmp_key not in three_keys:
+                        three_keys.append(tmp_key)
                     start += 1
                     end -= 1
                 elif nums[start] + nums[end] < new_target:
@@ -108,36 +108,36 @@ class Solution(object):
         """
         if len(nums) < 4:
             return []
-        ret = []
+        res = []
         nums.sort()
         for i in xrange(len(nums)-3):
             newTarget = target - nums[i]
             threeKeys = self.threeSum2(nums[i+1:], newTarget)
-            for temp in threeKeys:
-                temp.insert(0, nums[i])
-                if temp not in ret:
-                    ret.append(temp)
-        return ret
+            for tmp in threeKeys:
+                tmp.insert(0, nums[i])
+                if tmp not in res:
+                    res.append(tmp)
+        return res
         
     def threeSum2(self, nums, target):
-        ret = []
+        res = []
         for i in xrange(len(nums)-2):
             newTarget = target - nums[i]
             twoKeys = self.twoSum(nums[i+1:], newTarget)
-            for temp in twoKeys:
-                temp.insert(0, nums[i])
-                if temp not in ret:
-                    ret.append(temp)
-        return ret
+            for tmp in twoKeys:
+                tmp.insert(0, nums[i])
+                if tmp not in res:
+                    res.append(tmp)
+        return res
         
     def twoSum(self, nums, target):
-        ret = []
-        d = {}
-        for i, num in enumerate(nums):
-            if num in d:
-                temp = [d[num], num]
-                if temp not in ret:
-                    ret.append(temp)
+        res = []
+        dic = {}
+        for i, n in enumerate(nums):
+            if n in dic:
+                tmp = [dic[n], n]
+                if tmp not in res:
+                    res.append(tmp)
             else:
-                d[target-num] = num
-        return ret
+                dic[target-n] = n
+        return res

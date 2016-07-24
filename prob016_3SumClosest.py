@@ -21,20 +21,20 @@ class Solution(object):
         gap = abs(res - target)
         for i in xrange(len(nums) - 2):
             if i == 0 or nums[i] > nums[i-1]:
-                new_target = target - nums[i]
-                b, e = i + 1, len(nums) - 1
-                while b < e:
-                    s = nums[b] + nums[e]
-                    if s == new_target:
+                tmp_target = target - nums[i]
+                l, r = i + 1, len(nums) - 1
+                while l < r:
+                    s = nums[l] + nums[r]
+                    if s == tmp_target:
                         return target
-                    elif s < new_target:
-                        if new_target - s < gap:
-                            gap = new_target - s
+                    elif s < tmp_target:
+                        if tmp_target - s < gap:
+                            gap = tmp_target - s
                             res = s + nums[i]
-                        b += 1
+                        l += 1
                     else:
-                        if s - new_target < gap:
-                            gap = s - new_target
+                        if s - tmp_target < gap:
+                            gap = s - tmp_target
                             res = s + nums[i]
-                        e -= 1
+                        r -= 1
         return res

@@ -45,27 +45,15 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        if len(nums) < 3:
-            return []
         nums.sort()
         res = []
         for i in range(len(nums)-2):
             if i == 0 or nums[i] > nums[i-1]:
                 target = -nums[i]
-                tmp = self.twoSum(nums[i+1:], target)
-                for term in tmp:
-                    if term not in res:
-                        res.append(term)
-        return res
-        
-    def twoSum(self, nums, target):
-        d = {}
-        res = []
-        for i, num in enumerate(nums):
-            if num in d:
-                tmp = [-target, d[num], num]
-                if tmp not in res:
-                    res.append(tmp)
-            else:
-                d[target-num] = num
+                dic = {}
+                for i, n in enumerate(nums[i+1:]):
+                    if n not in dic:
+                        dic[target - n] = i
+                    elif [-target, target - n, n] not in res:
+                        res.append([-target, target - n, n])
         return res
