@@ -19,8 +19,8 @@ class Solution(object):
               '6': 'mno', '7': 'pqrs', '8': 'tuv', '9': 'wxyz'}
         if not digits:
             return []
-        res = list(ph[digits[0]])
-        for d in digits[1:]:
+        res = ['']
+        for d in digits:
             tmp = []
             for c in ph[d]:
                 tmp += [term + c for term in res]

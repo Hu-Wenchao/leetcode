@@ -41,10 +41,10 @@ class Solution(object):
         ptr = dummy
         cur = ptr.next
         n = l / k
-        while n > 0:
+        for i in xrange(n):
             pre = ptr
             tail = cur
-            for i in xrange(k):
+            for j in xrange(k):
                 tmp = cur.next
                 cur.next = ptr
                 ptr = cur
@@ -53,7 +53,6 @@ class Solution(object):
             tail.next = cur
             ptr = tail
             cur = ptr.next
-            n -= 1
         return dummy.next
     
     def reverseKGroup2(self, head, k):

@@ -38,7 +38,5 @@ class Solution(object):
         for i in xrange(idx, len(candidates)):
             if tmpsum + candidates[i] > target:
                 break
-            tmplist.append(candidates[i])
             self.rec(candidates, target, i+1,
-                     tmpsum+candidates[i], tmplist, res)
-            tmplist.pop()
+                     tmpsum+candidates[i], tmplist+[candidates[i]], res)

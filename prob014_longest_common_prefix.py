@@ -9,19 +9,16 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        if len(strs) == 0:
+        if not strs:
             return ''
-        com = strs[0]
-        for i in xrange(1, len(strs)):
-            com = self.helper(com, strs[i])
-        return com
+        res = strs[0]
+        for s in strs[1:]:
+            res = self.compre(res, s)
+        return res
         
-    def helper(self, s1, s2):
+    def compre(self, s1, s2):
         if len(s1) > len(s2):
             s1, s2 = s2, s1
-        i = len(s1)
-        while i > 0:
+        for i in xrange(len(s1), -1, -1):
             if s1[:i] == s2[:i]:
                 return s1[:i]
-            i -= 1
-        return ''

@@ -12,7 +12,7 @@ class Solution(object):
         :type divisor: int
         :rtype: int
         """
-        sign = -1 if ((dividend > 0) ^ (divisor > 0)) else 1
+        sign = -1 if (dividend > 0) ^ (divisor > 0) else 1
         dividend, divisor = abs(dividend), abs(divisor)
         res, c = 0, 1
         while dividend >= (divisor << 1):
@@ -24,5 +24,6 @@ class Solution(object):
                 res += c
             divisor >>= 1
             c >>= 1
-        res *= sign
+        if sign == -1:
+            res = -res
         return min(max(res, -2**31), 2**31 - 1)
