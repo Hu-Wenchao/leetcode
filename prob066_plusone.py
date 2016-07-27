@@ -15,8 +15,9 @@ class Solution(object):
         digits.insert(0, 0)
         digits[-1] += 1
         for i in xrange(len(digits)-1, 0, -1):
-            digits[i-1] += digits[i] / 10
-            digits[i] %= 10
+            if digits[i] > 9:
+                digits[i-1] += digits[i] / 10
+                digits[i] %= 10
         if digits[0] == 0:
             return digits[1:]
         return digits

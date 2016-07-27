@@ -20,7 +20,7 @@ class Solution(object):
         """
         if len(intervals) <= 1:
             return intervals
-        intervals = sorted(intervals, key = lambda interval:interval.start)
+        intervals.sort(key = lambda interval:interval.start)
         interval = intervals[0]
         res = []
         for interval2 in intervals[1:]:

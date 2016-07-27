@@ -40,15 +40,15 @@ class Solution(object):
 
     def sortColors3(self, nums):
         #[0,i)[i,j)[j,k) are 0s, 1s, 2s
-        i = 0
-        j = 0
-        for k in xrange(len(nums)):
-            v = nums[k]
+        i, j, k = 0, 0, 0
+        for n in nums:
             nums[k] = 2
-            if v < 2:
+            k += 1
+            if n < 2:
                 nums[j] = 1
                 j += 1
-            if v == 0:
+            if n == 0:
                 nums[i] = 0
                 i += 1
+        return
     

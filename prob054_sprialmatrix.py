@@ -23,24 +23,19 @@ class Solution(object):
         if not matrix:
             return res
         rbegin, rend, cbegin, cend = 0, len(matrix)-1, 0, len(matrix[0])-1
-
         while rbegin <= rend and cbegin <= cend:
-            for j in xrange(cbegin, cend+1):
-                res.append(matrix[rbegin][j])
+            for i in xrange(cbegin, cend+1):
+                res.append(matrix[rbegin][i])
             rbegin += 1
-
-            for j in xrange(rbegin, rend+1):
-                res.append(matrix[j][cend])
+            for i in xrange(rbegin, rend+1):
+                res.append(matrix[i][cend])
             cend -= 1
-
             if rbegin <= rend:
-                for j in xrange(cend, cbegin-1, -1):
-                    res.append(matrix[rend][j])
+                for i in xrange(cend, cbegin-1, -1):
+                    res.append(matrix[rend][i])
             rend -= 1
-
             if cbegin <= cend:
-                for j in xrange(rend, rbegin-1, -1):
-                    res.append(matrix[j][cbegin])
+                for i in xrange(rend, rbegin-1, -1):
+                    res.append(matrix[i][cbegin])
             cbegin += 1
-
         return res

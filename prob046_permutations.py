@@ -14,6 +14,19 @@ class Solution(object):
         """
         if not nums:
             return []
+        res = [[nums[0]]]
+        for n in nums[1:]:
+            res = [tmp[:i] + [n] + tmp[i:] for tmp in res
+                   for i in xrange(len(tmp) + 1)]
+        return res
+    
+    def permute2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if not nums:
+            return []
         res = [[]]
         for n in nums:
             tmp = []
@@ -23,7 +36,7 @@ class Solution(object):
             res = tmp
         return res
         
-    def permute2(self, nums):
+    def permute3(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
@@ -37,9 +50,3 @@ class Solution(object):
             res.append(seq)
         for i in xrange(len(nums)):
             self.dfs(nums[:i] + nums[i+1:], seq + [nums[i]], res)
-            
-            
-                
-            
-        
-

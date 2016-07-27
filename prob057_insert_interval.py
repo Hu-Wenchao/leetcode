@@ -65,10 +65,10 @@ class Solution(object):
         :type newInterval: Interval
         :rtype: List[Interval]
         """
+        if not intervals:
+            return [newInterval]
         intervals.append(newInterval)
-        intervals = sorted(intervals, key=lambda interval:interval.start)
-        if len(intervals) <= 1:
-            return intervals
+        intervals.sort(key=lambda interval:interval.start)
         interval = intervals[0]
         res = []
         for interval2 in intervals[1:]:

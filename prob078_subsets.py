@@ -14,8 +14,7 @@ class Solution(object):
         """
         res = [[]]
         for n in nums:
-            for i in xrange(len(res)):
-                res.append(res[i] + [n])
+            res += [tmp + [n] for tmp in res]
         return res
 
     def subsets2(self, nums):

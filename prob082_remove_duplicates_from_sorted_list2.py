@@ -20,8 +20,6 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head:
-            return head
         dummy = ListNode(None)
         dummy.next = head
         ptr = dummy
@@ -39,8 +37,6 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head:
-            return head
         dummy = ListNode(None)
         dummy.next = head
         ptr = dummy.next

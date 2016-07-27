@@ -34,5 +34,5 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        return len(s.strip(' ').split(' ')[-1])
+        return len(s.strip().split(' ')[-1])
         

@@ -26,28 +26,22 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        pptr = 0
-        sptr = 0
-        ss = 0
-        star = -1
-        while sptr < len(s):
-            if pptr < len(p) and (s[sptr] == p[pptr] or p[pptr] == '?'):
-                sptr += 1
-                pptr += 1
-                continue
-            if pptr < len(p) and p[pptr] == '*':
-                star = pptr
-                pptr += 1
-                ss = sptr
-                continue
-            if star != -1:
-                pptr = star + 1
-                ss += 1
-                sptr = ss
-                continue
-            return False
-        while pptr < len(p) and p[pptr] == '*':
-            pptr += 1
-        if pptr == len(p):
-            return True
-        return False
+        len_s, len_p = len(s), len(p)
+        i, j, star_match_pos, last_star_pos = 0, 0, 0, -1
+        while i < len_s:
+            if j < len_p and p[j] in (s[i], '?'):
+                i, j = i + 1, j + 1
+            # when meet a '*', first assume it will match 0 character in s
+            elif j < len_p and p[j] = '*':
+                star_match_pos, last_star_pos = i, j
+                j += 1
+            # now p[j] is not ?, not *, can't match s[i], we can only
+            # use the last '*'
+            elif last_star_pos > -1:
+                i, star_match_pos = star_match_pos + 1, star_match_pos + 1
+                j = last_star_pos + 1
+            else:
+                return False
+        while j < len_p and p[j] == '*':
+            j += 1
+        return j == len_p

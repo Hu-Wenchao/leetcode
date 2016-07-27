@@ -28,23 +28,19 @@ class Solution(object):
                 matrix[rbegin][i] = tmp
                 tmp += 1
             rbegin += 1
-
             for i in xrange(rbegin, rend+1):
                 matrix[i][cend] = tmp
                 tmp += 1
             cend -= 1
-
             if rbegin <= rend:
                 for i in xrange(cend, cbegin-1, -1):
                     matrix[rend][i] = tmp
                     tmp += 1
             rend -= 1
-
             if cbegin <= cend:
                 for i in xrange(rend, rbegin-1, -1):
                     matrix[i][cbegin] = tmp
                     tmp += 1
             cbegin += 1
-
         return matrix
                     

@@ -20,7 +20,7 @@ class Solution(object):
         :type k: int
         :rtype: ListNode
         """
-        if not head or not head.next:
+        if not head or k == 0:
             return head
         dummy = ListNode(None)
         dummy.next = head

@@ -33,18 +33,17 @@ class Solution(object):
         return step
 
     def jump2(self, nums):
+        if len(nums) < 2:
+            return 0
         step = 0
         left = 0
         right = 0
-        n = len(nums)
-        if n == 1:
-            return 0
         while left <= right:
             step += 1
             old_right = right
             for i in range(left, old_right+1):
                 new_right = i + nums[i]
-                if new_right >= n -1:
+                if new_right >= len(nums) -1:
                     return step
                 if new_right > right:
                     right = new_right
