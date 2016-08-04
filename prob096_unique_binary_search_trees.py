@@ -14,7 +14,7 @@ class Solution(object):
         res = [0] * (n + 1)
         res[0] = 1
         res[1] = 1
-        for i in xrange(2, n + 1):
-            for j in xrange(i):
+        for i in range(2, n + 1):
+            for j in range(i):
                 res[i] += res[j] * res[i-1-j]
         return res[-1]

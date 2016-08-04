@@ -24,15 +24,18 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: void Do not return anything, modify board in-place instead.
         """
-        if not any(board):
+        if not board:
             return
         m, n = len(board), len(board[0])
-        # all edge points
-        edge = [ij for k in xrange(m) for ij in ((k, 0), (k, n-1))]
-        edge += [ij for k in xrange(n) for ij in ((0, k), (m-1, k))]
-        while edge:
-            i, j = edge.pop()
+        stack = [(i, 0) for i in range(m)] + [(i, n-1) for i in range(m)]
+        stack += [(0, j) for j in range(1, n-1)] + \
+                 [(m-1, j) for j in range(1, n-1)]
+        while stack:
+            i, j = stack.pop()
             if 0 <= i < m and 0 <= j < n and board[i][j] == 'O':
                 board[i][j] = 'S'
-                edge += (i, j-1), (i, j+1), (i-1, j), (i+1, j)
-        board[:] = [['XO'[c == 'S'] for c in row] for row in board]
+                stack.append((i-1, j))
+                stack.append((i+1, j))
+                stack.append((i, j+1))
+                stack.append((i, j-1))
+        board[:] = [['XO'[node=='S'] for node in row] for row in board]

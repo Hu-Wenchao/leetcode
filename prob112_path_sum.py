@@ -20,7 +20,8 @@ class Solution(object):
         """
         if not root:
             return False
-        if not root.left and not root.right:
+        elif not root.left and not root.right:
             return root.val == sum
-        return self.hasPathSum(root.left, sum - root.val) \
-            or self.hasPathSum(root.right, sum - root.val)
+        else:
+            return self.hasPathSum(root.left, sum - root.val) \
+                or self.hasPathSum(root.right, sum - root.val)

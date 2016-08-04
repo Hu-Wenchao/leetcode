@@ -19,13 +19,13 @@ class Solution(object):
         :rtype: RandomListNode
         """
         dic = {}
-        m = head
-        n = head
-        while m:
-            dic[m] = RandomListNode(m.label)
-            m = m.next
-        while n:
-            dic[n].next = dic.get(n.next)
-            dic[n].random = dic.get(n.random)
-            n = n.next
+        ptr = head
+        while ptr:
+            dic[ptr] = RandomListNode(ptr.label)
+            ptr = ptr.next
+        ptr = head
+        while ptr:
+            dic[ptr].next = dic.get(ptr.next)
+            dic[ptr].random = dic.get(ptr.random)
+            ptr = ptr.next
         return dic.get(head)

@@ -38,5 +38,17 @@ class Solution(object):
         self.inorder(root.left, tree)
         tree.append(root.val)
         self.inorder(root.right, tree)
+
+    def isValidBST2(self, root, lessthan=float('inf'),
+                    largerthan=-float('inf')):
+        if not root:
+            return True
+        elif root.val >= lessthan or root.val <= largerthan:
+            return False
+        else:
+            return self.isValidBST2(root.left, min(lessthan, root.val), 
+                                    largerthan) and \
+                                    self.isValidBST2(root.right, lessthan,
+                                                     max(largerthan, root.val))
         
             

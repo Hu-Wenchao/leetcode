@@ -30,6 +30,6 @@ class Solution(object):
                     curlayer.append(node.left)
                 if node.right:
                     curlayer.append(node.right)
-            res.insert(0, tmp)
+            res.append(tmp)
             prelayer = curlayer
-        return res
+        return res[::-1]

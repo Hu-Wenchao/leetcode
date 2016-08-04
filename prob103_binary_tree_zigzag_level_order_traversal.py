@@ -21,7 +21,7 @@ class Solution(object):
             return []
         res = []
         prelayer = [root]
-        flag = 0  # 0 for forward, 1 for backward
+        flag = 1
         while prelayer:
             curlayer = []
             tmp = []
@@ -31,11 +31,7 @@ class Solution(object):
                     curlayer.append(node.left)
                 if node.right:
                     curlayer.append(node.right)
-            if flag % 2 == 0:
-                res.append(tmp)
-                flag = 1
-            else:
-                res.append(tmp[::-1])
-                flag = 0
+            res.append(tmp[::flag])
+            flag = -flag
             prelayer = curlayer
         return res

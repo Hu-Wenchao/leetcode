@@ -12,15 +12,13 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        if len(prices) < 2:
-            return 0
-        profit1 = 0
-        profit2 = 0
         buy1 = float('inf')
         buy2 = -float('inf')
-        for i in xrange(len(prices)):
-            buy1 = min(buy1, prices[i])
-            profit1 = max(profit1, prices[i] - buy1)
-            buy2 = max(buy2, profit1 - prices[i])
-            profit2 = max(profit2, prices[i] + buy2)
+        profit1 = 0
+        profit2 = 0
+        for price in prices:
+            buy1 = min(buy1, price)
+            profit1 = max(profit1, price - buy1)
+            buy2 = max(buy2, profit1 - price)
+            profit2 = max(profit2, price + buy2)
         return profit2
