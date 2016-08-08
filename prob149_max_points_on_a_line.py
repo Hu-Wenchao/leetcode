@@ -19,15 +19,16 @@ class Solution(object):
         for i in xrange(len(points)):
             same = 0
             dic = {'i' : 1}
+            x, y = points[i].x, points[i].y
             for j in xrange(i + 1, len(points)):
-                x, y = points[j].x, points[j].y
-                if x == points[i].x and y == points[i].y:
+                px, py = points[j].x, points[j].y
+                if x == px and y == py:
                     same += 1
                     continue
-                if x == points[i].x:
+                if x == px:
                     slope = i
                 else:
-                    slope = 1.0 * (points[i].y - y) / (points[i].x - x)
+                    slope = 1.0 * (py - y) / (px - x)
                 if slope not in dic:
                     dic[slope] = 1
                 dic[slope] += 1

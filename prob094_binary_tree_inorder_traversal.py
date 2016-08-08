@@ -31,9 +31,9 @@ class Solution(object):
                 stack.append(root)
                 root = root.left
             else:
-                tmp = stack.pop()
-                res.append(tmp.val)
-                root = tmp.right
+                node = stack.pop()
+                res.append(node.val)
+                root = node.right
         return res
 
     def inorderTraversal3(self, root):

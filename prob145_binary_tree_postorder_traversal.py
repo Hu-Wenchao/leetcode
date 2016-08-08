@@ -36,9 +36,9 @@ class Solution(object):
     def postorderTraversal2(self, root):
         res, stack = [], [root]
         while stack:
-            tmp = stack.pop()
-            if tmp:
-                res.append(tmp.val)
-                stack.append(tmp.left)
-                stack.append(tmp.right)
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.left)
+                stack.append(node.right)
         return res[::-1]

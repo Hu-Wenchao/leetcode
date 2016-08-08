@@ -36,9 +36,9 @@ class Solution(object):
     def preorderTraversal2(self, root):
         res, stack = [], [root]
         while stack:
-            tmp = stack.pop()
-            if tmp:
-                res.append(tmp.val)
-                stack.append(tmp.right)
-                stack.append(tmp.left)
+            node = stack.pop()
+            if node:
+                res.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
         return res

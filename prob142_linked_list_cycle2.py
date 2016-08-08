@@ -18,11 +18,8 @@ class Solution(object):
         if not head:
             return None
         slow, fast = head, head
-        while fast:
-            slow, fast = slow.next, fast.next
-            if not fast:
-                return None
-            fast = fast.next
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
             if fast == slow:
                 slow = head
                 while slow != fast:

@@ -12,8 +12,4 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        s = s.strip(' ')
-        s = s.split(' ')
-        while '' in s:
-            s.remove('')
-        return ' '.join(s[::-1])
+        return ' '.join([word for word in s.strip().split(' ') if word][::-1])

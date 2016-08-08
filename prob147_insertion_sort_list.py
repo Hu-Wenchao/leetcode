@@ -20,21 +20,18 @@ class Solution(object):
             return None
         dummy = ListNode(None)
         dummy.next = head
-        pre = head
-        cur = head.next
-        while cur:
-            if cur.val < pre.val:
-                tmp = pre
-                pre = dummy
-                while pre.next.val < cur.val:
-                    pre = pre.next
-                tmp.next = cur.next
-                cur.next = pre.next
-                pre.next = cur
-                cur = tmp.next
-                pre = tmp
+        ptri = dummy.next
+        while ptri:
+            while ptri.next and ptri.next.val > ptri.val:
+                ptri = ptri.next
+            if not ptri.next:
+                return dummy.next
             else:
-                pre = pre.next
-                cur = cur.next
-        return dummy.next
+                tmp = ptri.next
+                ptri.next = ptri.next.next
+            ptrj = dummy
+            while ptrj.next.val < tmp.val:
+                ptrj = ptrj.next
+            tmp.next = ptrj.next
+            ptrj.next = tmp
 
