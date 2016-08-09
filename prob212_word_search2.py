@@ -23,23 +23,27 @@ class Solution(object):
                     t[c] = {}
                 t = t[c]
             t['#'] = '#'
-        self.res = set()
-        self.used = [[False]*len(board[0]) for _ in range(len(board))]
+        res = set()
+        used = [[False] * len(board[0]) for _ in range(len(board))]
         for i in range(len(board)):
             for j in range(len(board[0])):
-                self.find(board,i,j,trie,'')
-        return list(self.res)
-
-    def find(self,board,i,j,trie,pre):
+                self.find(board, i, j, trie, '', used, res)
+        return list(res)
+        
+    def find(self, board, i, j, trie, pre, used, res):
         if '#' in trie:
-            self.res.add(pre)
+            res.add(pre)
         if i < 0 or i >= len(board) or j < 0 or j >= len(board[0]):
             return
-        if not self.used[i][j] and board[i][j] in trie:
-            self.used[i][j] = True
-            self.find(board,i+1,j,trie[board[i][j]],pre+board[i][j])
-            self.find(board,i,j+1,trie[board[i][j]],pre+board[i][j])
-            self.find(board,i-1,j,trie[board[i][j]],pre+board[i][j])
-            self.find(board,i,j-1,trie[board[i][j]],pre+board[i][j])
-            self.used[i][j] = False
-            return False  
+        if not used[i][j] and board[i][j] in trie:
+            used[i][j] = True
+            self.find(board, i+1, j, trie[board[i][j]],
+                      pre+board[i][j], used, res)
+            self.find(board, i-1, j, trie[board[i][j]],
+                      pre+board[i][j], used, res)
+            self.find(board, i, j+1, trie[board[i][j]],
+                      pre+board[i][j], used, res)
+            self.find(board, i, j-1, trie[board[i][j]],
+                      pre+board[i][j], used, res)
+            used[i][j] = False
+            return

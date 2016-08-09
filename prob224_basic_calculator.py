@@ -29,7 +29,7 @@ class Solution(object):
                 total += signs.pop() * int(s[start:i])
                 continue
             if c in '+-(':
-                signs += signs[-1] * (1, -1)[c == '-'],
+                signs.append(signs[-1] * (1, -1)[c == '-'])
             elif c == ')':
                 signs.pop()
             i += 1

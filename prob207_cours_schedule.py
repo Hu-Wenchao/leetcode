@@ -27,33 +27,6 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: bool
         """
-        graph = [[] for _ in xrange(numCourses)]
-        visit = [0 for _ in xrange(numCourses)]
-        for x, y in prerequisites:
-            graph[x].append(y)
-        for i in xrange(numCourses):
-            if not self.dfs(i, visit, graph):
-                return False
-        return True
-
-    def dfs(self, i, visit, graph):
-        if visit[i] == -1:
-            return False
-        if visit[i] == 1:
-            return True
-        visit[i] = -1
-        for j in graph[i]:
-            if not self.dfs(j, visit, graph):
-                return False
-        visit[i] = 1
-        return True
-
-    def canFinish2(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
         dic = collections.defaultdict(set)
         neigh = collections.defaultdict(set)
         for i, j in prerequisites:
