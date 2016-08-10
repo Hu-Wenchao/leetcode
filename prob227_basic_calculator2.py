@@ -25,7 +25,7 @@ class Solution(object):
         for i in xrange(len(s)):
             if s[i].isdigit():
                 num = num*10 + ord(s[i]) - ord('0')
-            if (not s[i].isdigit() and not s[i].isspace()) or i == len(s) - 1:
+            if s[i] in '+-*/' or i == len(s) - 1:
                 if sign == '-':
                     stack.append(-num)
                 elif sign == '+':

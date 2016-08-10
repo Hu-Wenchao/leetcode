@@ -30,3 +30,8 @@ class Solution(object):
                 num /= 10
             num = tmp
         return num
+
+    def addDigit3(self, num):
+        while num > 9:
+            num = sum(map(int, list(str(num))))
+        return num

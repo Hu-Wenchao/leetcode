@@ -29,6 +29,5 @@ class Solution(object):
                 n3 += 1
             if u == u5:
                 n5 += 1
-            ugly += u,
-            # ugly.append(u)
+            ugly.append(u)
         return ugly[-1]

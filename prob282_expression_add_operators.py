@@ -18,21 +18,24 @@ class Solution(object):
         :type target: int
         :rtype: List[str]
         """
-        res, self.target = [], target
-        for i in range(1,len(num)+1):
-            if i == 1 or (i > 1 and num[0] != "0"):
-                self.dfs(num[i:], num[:i], int(num[:i]), int(num[:i]), res) 
+        res = []
+        for i in range(1, len(num)+1):
+            if i == 1 or (i > 1 and num[0] != '0'):
+                self.dfs(num[i:], num[:i], int(num[:i]), int(num[:i]),
+                         res, target)
         return res
-
-    def dfs(self, num, tmp, cur, last, res):
+        
+    def dfs(self, num, tmp, cur, last, res, target):
         if not num:
-            if cur == self.target:
+            if cur == target:
                 res.append(tmp)
             return
-        for i in range(1, len(num)+1):
+        for i in range(1, len(num) + 1):
             val = num[:i]
-            if i == 1 or (i > 1 and num[0] != "0"): 
-                self.dfs(num[i:], tmp + "+" + val, cur+int(val), int(val), res)
-                self.dfs(num[i:], tmp + "-" + val, cur-int(val), -int(val), res)
-                self.dfs(num[i:], tmp + "*" + val, cur-last+last*int(val), 
-                         last*int(val), res)
+            if i == 1 or (i > 1 and num[0] != '0'):
+                self.dfs(num[i:], tmp + '+' + val, cur + int(val),
+                         int(val), res, target)
+                self.dfs(num[i:], tmp + '-' + val, cur - int(val),
+                         -int(val), res, target)
+                self.dfs(num[i:], tmp + '*' + val, cur - last + last * int(val),
+                         last * int(val), res, target)

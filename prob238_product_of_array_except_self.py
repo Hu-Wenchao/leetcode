@@ -20,11 +20,10 @@ class Solution(object):
         backward = [0] * len(nums)
         forward[0] = nums[0]
         backward[-1] = nums[-1]
-        for i in range(1, len(nums)-1):
-            forward[i] = forward[i-1] * nums[i] 
-            backward[-i-1] = backward[-i] * nums[-i-1]
-        forward[-1] = forward[-2] * nums[-1]
-        backward[0] = backward[1] * nums[0]      
+        for i in range(1, len(nums)):
+            forward[i] = forward[i-1] * nums[i]
+        for i in range(len(nums) - 2, -1, -1):
+            backward[i] = backward[i+1] * nums[i]
         res = [0] * len(nums)
         res[0] = backward[1]
         res[-1] = forward[-2]
