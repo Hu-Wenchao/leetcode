@@ -9,6 +9,4 @@ class Solution(object):
         :type str: str
         :rtype: bool
         """
-        p = pattern
-        s = str.split()
-        return map(p.find, p) == map(s.index, s)
+        return map(pattern.find, pattern) == map(str.split().index, str.split())
