@@ -24,7 +24,7 @@ class Solution(object):
             return [-1, -1]
         nums.append(float('inf'))
         e = self.binsearch(nums, target + 0.5)
-        return [s, e+1]
+        return [s, e-1]
 
 
     def binsearch(self, nums, target):

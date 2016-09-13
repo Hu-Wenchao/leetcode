@@ -30,5 +30,5 @@ class Solution(object):
                     dp[left][right] = max(dp[left][right], nums[left] * \
                                           nums[i] * nums[right] + \
                                           dp[left][i] + dp[i][right])
-        return dp[0][len(nums) - 1]        
+        return dp[0][-1]        
             

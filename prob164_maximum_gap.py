@@ -50,5 +50,5 @@ class Solution(object):
             tmp = [[] for _ in xrange(10)]
             for n in nums:
                 tmp[n / (10**i) % 10].append(n)
-            nums = [a for b in tmp for a in b]
+            nums = reduce(lambda a, b: a + b, tmp)
         return nums

@@ -20,7 +20,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        self.maxValue = -float('inf')
+        self.max_value = -float('inf')
         self.maxPathDown(root)
         return self.max_value
 

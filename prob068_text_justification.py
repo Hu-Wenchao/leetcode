@@ -32,11 +32,10 @@ class Solution(object):
                 if len(line) == 1:
                     res.append(line[0] + ' ' * (maxWidth - n))
                 else:
-                    num_spaces = maxWidth - n - len(line) + 1
-                    space, extra_space = divmod(num_spaces, len(line)-1)
+                    space, extra_space = divmod(maxWidth - n, len(line)-1)
                     for i in xrange(extra_space):
                         line[i] += ' '
-                    res.append((' ' * (1+space)).join(line))
+                    res.append((' ' * space).join(line))
                 line, n = [], 0
             line += [w]
             n += len(w)

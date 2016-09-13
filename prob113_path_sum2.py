@@ -19,8 +19,15 @@ class Solution(object):
         """
         if not root:
             return []
-        if not root.left and not root.right and sum == root.val:
-            return [[root.val]]
-        tmp = self.pathSum(root.left, sum-root.val) + \
-              self.pathSum(root.right, sum-root.val)
-        return [[root.val] + i for i in tmp]
+        res = []
+        self.dfs(root, sum, [], res)
+        return res
+
+    def dfs(self, root, sum, tmp, res):
+        if not root.left and not root.right:
+            if root.val == sum:
+                res.append(tmp + [sum])
+        if root.left:
+            self.dfs(root.left, sum - root.val, tmp + [root.val], res)
+        if root.right:
+            self.dfs(root.right, sum - root.val, tmp + [root.val], res)

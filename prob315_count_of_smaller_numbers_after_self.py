@@ -36,12 +36,12 @@ class Solution(object):
         res = 0
         while index:
             res += tree[index]
-            index -= index & (-index)
+            index -= index & -index
         return res
     
     def update(self, tree, index, val):
-        while index <= len(tree) - 1:
+        while index < len(tree):
             tree[index] += val
-            index += index & (-index)
+            index += index & -index
 
     

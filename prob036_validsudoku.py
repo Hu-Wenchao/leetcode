@@ -60,7 +60,7 @@ class Solution(object):
                     if n == '.':
                         continue
                     elif n in valid and n not in tmp:
-                        tmp.append(board[i+k/3][j+k%3])
+                        tmp.append(n)
                     else:
                         return False
         return True

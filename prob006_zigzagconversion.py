@@ -22,7 +22,9 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        step = (numRows == 1) - 1
+        if numRows == 1:
+            return s
+        step = -1
         stack = [''] * numRows
         row = 0
         for c in s:

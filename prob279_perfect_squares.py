@@ -16,7 +16,7 @@ class Solution(object):
             return n
         squares = [i*i for i in xrange(1, 1+int(n**0.5))]
         cnt = 0
-        dic = {n}
+        dic = (n)
         while dic:
             cnt += 1
             tmp = set()

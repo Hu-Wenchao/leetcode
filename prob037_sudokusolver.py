@@ -68,38 +68,37 @@ class Solution(object):
         return None
 
     def solveSudoku2(self, board):
-        self.solveSudokuRec(board,0,0)
-    
-    def solveSudokuRec(self, board,row,col):
-        if row == 9:
+        self.rec(board, 0, 0)
+        
+    def rec(self, board, r, c):
+        if r == 9:
             return True
-        if col == 8:
-            nextRow = row +1
-            nextCol = 0
+        if c == 8:
+            nr = r + 1
+            nc = 0
         else:
-            nextRow = row
-            nextCol = col+1
-        if board[row][col]!='.':
-            return self.solveSudokuRec(board,nextRow,nextCol)
-        for c in range(1,10):
-            if self.canPut(board,str(c),row,col):
-                board[row][col] = str(c)
-                if self.solveSudokuRec(board,nextRow,nextCol):
+            nr = r
+            nc = c + 1
+        if board[r][c] != '.':
+            return self.rec(board, nr, nc)
+        for n in range(1, 10):
+            if self.isValid(board, str(n), r, c):
+                board[r][c] = str(n)
+                if self.rec(board, nr, nc):
                     return True
-                board[row][col] = '.'
+                board[r][c] = '.'
         return False
-    
-    def canPut(self, board, char, row, col):
-        for i in range(0,9):
-            if board[row][i] == char:
+        
+    def isValid(self, board, n, r, c):
+        for i in range(9):
+            if board[i][c] == n:
                 return False
-            if board[i][col] == char:
+            if board[r][i] == n:
                 return False
-        rowGroup = (row//3) * 3
-        colGroup = (col//3) * 3 
-        for i in range(rowGroup, rowGroup+3):
-            for j in range(colGroup, colGroup+3):
-                if board[i][j] == char:
+        rg = (r // 3) * 3
+        cg = (c // 3) * 3
+        for i in range(rg, rg + 3):
+            for j in range(cg, cg + 3):
+                if board[i][j] == n:
                     return False
-        return True   
-    
+        return True

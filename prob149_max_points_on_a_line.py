@@ -16,19 +16,19 @@ class Solution(object):
         :rtype: int
         """
         res = 0
-        for i in xrange(len(points)):
+        for i in range(len(points)):
             same = 0
-            dic = {'i' : 1}
-            x, y = points[i].x, points[i].y
-            for j in xrange(i + 1, len(points)):
-                px, py = points[j].x, points[j].y
-                if x == px and y == py:
+            x0, y0 = points[i].x, points[i].y
+            dic = {x0 : 1}
+            for j in range(i+1, len(points)):
+                x1, y1 = points[j].x, points[j].y
+                if x1 == x0 and y1 == y0:
                     same += 1
                     continue
-                if x == px:
-                    slope = i
+                if x1 == x0:
+                    slope = x0
                 else:
-                    slope = 1.0 * (py - y) / (px - x)
+                    slope = 1.0 * (y1 - y0) / (x1 - x0)
                 if slope not in dic:
                     dic[slope] = 1
                 dic[slope] += 1

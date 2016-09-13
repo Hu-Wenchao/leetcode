@@ -33,9 +33,9 @@ class Solution(object):
             if rbegin <= rend:
                 for i in xrange(cend, cbegin-1, -1):
                     res.append(matrix[rend][i])
-            rend -= 1
+                rend -= 1
             if cbegin <= cend:
                 for i in xrange(rend, rbegin-1, -1):
                     res.append(matrix[i][cbegin])
-            cbegin += 1
+                cbegin += 1
         return res

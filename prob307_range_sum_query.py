@@ -19,11 +19,11 @@ class NumArray(object):
         :type nums: List[int]
         """
         self.n = len(nums)
-        self.a, self.c = nums, [0] * (self.n + 1)
+        self.nums, self.tree = nums, [0] * (self.n + 1)
         for i in range(self.n):
             k = i + 1
             while k <= self.n:
-                self.c[k] += nums[i]
+                self.tree[k] += nums[i]
                 k += (k & -k)
 
     def update(self, i, val):
@@ -32,10 +32,10 @@ class NumArray(object):
         :type val: int
         :rtype: int
         """
-        diff, self.a[i] = val - self.a[i], val
+        diff, self.nums[i] = val - self.nums[i], val
         i += 1
         while i <= self.n:
-            self.c[i] += diff
+            self.tree[i] += diff
             i += (i & -i)
 
     def sumRange(self, i, j):
@@ -47,10 +47,10 @@ class NumArray(object):
         """
         res, j = 0, j + 1
         while j:
-            res += self.c[j]
+            res += self.tree[j]
             j -= (j & -j)
         while i:
-            res -= self.c[i]
+            res -= self.tree[i]
             i -= (i & -i)
         return res
 

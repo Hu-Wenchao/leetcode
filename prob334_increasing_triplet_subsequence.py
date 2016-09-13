@@ -25,13 +25,11 @@ class Solution(object):
             return False
         x = float('inf')
         y = float('inf')
-        for i in range(len(nums)):
-            # x <= y <= z
-            z = nums[i]
-            if x >= z:
-                x = z
-            elif y >= z:
-                y = z
+        for n in nums:
+            if x >= n:
+                x = n
+            elif y >= n:
+                y = n
             else:
                 return True
         return False

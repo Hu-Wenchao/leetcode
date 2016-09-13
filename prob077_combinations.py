@@ -27,8 +27,7 @@ class Solution(object):
         elif k == n:
             return [[i for i in xrange(1, n+1)]]
         else:
-            res = []
-            res += self.combine(n-1, k)
+            res = self.combine(n-1, k)
             part = self.combine(n-1, k-1)
             for tmp in part:
                 tmp.append(n)

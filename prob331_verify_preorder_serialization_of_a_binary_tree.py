@@ -33,9 +33,9 @@ class Solution(object):
         nodes, stack = preorder.split(','), []
         for node in nodes:
             stack.append(node)
-            while len(stack) > 2 and stack[-1] == '#' and stack[-2] == '#':
+            while len(stack) > 2 and stack[-2:] == ['#', '#']:
                 if stack[-3] == '#':
                     return False
                 stack = stack[:-3]
-                stack.append(node)
+                stack.append('#')
         return stack == ['#']

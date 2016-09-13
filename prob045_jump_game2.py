@@ -42,9 +42,7 @@ class Solution(object):
             step += 1
             old_right = right
             for i in range(left, old_right+1):
-                new_right = i + nums[i]
-                if new_right >= len(nums) -1:
+                right = max(right, i + nums[i])
+                if right >= len(nums) - 1:
                     return step
-                if new_right > right:
-                    right = new_right
             left = old_right + 1

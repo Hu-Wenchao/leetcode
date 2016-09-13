@@ -32,7 +32,7 @@ class Solution(object):
             if j < len_p and p[j] in (s[i], '?'):
                 i, j = i + 1, j + 1
             # when meet a '*', first assume it will match 0 character in s
-            elif j < len_p and p[j] = '*':
+            elif j < len_p and p[j] == '*':
                 star_match_pos, last_star_pos = i, j
                 j += 1
             # now p[j] is not ?, not *, can't match s[i], we can only

@@ -25,7 +25,17 @@ class Solution(object):
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        if not headA or not headB:
+        dummyA = ListNode(None)
+        dummyA.next = headA
+        pa = dummyA
+        dummyB = ListNode(None)
+        dummyB.next = headB
+        pb = dummyB
+        while pa.next:
+            pa = pa.next
+        while pb.next:
+            pb = pb.next
+        if pa != pb:
             return None
         pa = headA
         pb = headB

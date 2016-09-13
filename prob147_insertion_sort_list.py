@@ -16,22 +16,22 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        if not head:
-            return None
+        if not head or not head.next:
+            return head
         dummy = ListNode(None)
         dummy.next = head
-        ptri = dummy.next
-        while ptri:
-            while ptri.next and ptri.next.val > ptri.val:
-                ptri = ptri.next
-            if not ptri.next:
-                return dummy.next
+        i = dummy.next
+        while i.next:
+            if i.val <= i.next.val:
+                i = i.next
+                continue
             else:
-                tmp = ptri.next
-                ptri.next = ptri.next.next
-            ptrj = dummy
-            while ptrj.next.val < tmp.val:
-                ptrj = ptrj.next
-            tmp.next = ptrj.next
-            ptrj.next = tmp
+                j = dummy
+                while j.next.val < i.next.val:
+                    j = j.next
+                tmp = j.next
+                j.next = i.next
+                i.next = i.next.next
+                j.next.next = tmp
+        return dummy.next
 
